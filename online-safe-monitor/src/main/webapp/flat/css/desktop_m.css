@@ -1,0 +1,19 @@
+@charset "utf-8";
+/* CSS Document */
+.desktop{ padding:8px;}
+.desktop .pretty{ border:none;}
+.desktop .pretty thead tr th{ font-size:16px; padding:8px 10px;}
+.desktop .title_desktop{height:36px; line-height:36px; text-indent:15px; font-size:16px; color:#1596ad; background:#fafafa;}
+.desktop .title_desktop .check{ float:right;}
+.title_desktop .check .radio {color: #333; margin-right: 20px;}
+.title_desktop .check .radio input {margin-right: 5px;margin-top: -3px;vertical-align: middle;}
+.desktop .cont_desktop{border-top:1px solid #ececec; overflow:hidden; background:#FFF; border:1px solid #f0f0f0; border-top:none;}
+.cont_desktop li{ height:40px; line-height:40px; padding:0 85px 0 15px; color:#333; position:relative; text-overflow:ellipsis;}
+.cont_desktop li.gray{ background:#fbfbfb}
+.cont_desktop li a{color:#333;}
+.cont_desktop li a:hover{color:#0591aa;}
+.cont_desktop li span{ position:absolute; right:10px; height:40px; line-height:40px;  top:0;}
+.cont_desktop li .time{ color:#999999;}
+.cont_desktop li .price{ text-align:right;}
+
+.cont_desktop .news li{ background:url(../images/icon/dian_icon.png) no-repeat 15px center; padding-left:28px}

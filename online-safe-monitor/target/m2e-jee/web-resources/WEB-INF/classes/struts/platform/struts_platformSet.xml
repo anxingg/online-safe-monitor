@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <!-- 菜单 -->
+    <package name="platform" namespace="/platform" extends="struts-default">
+     
+     
+      <!-- 坐席功能初始化设置 -->
+      <action name="initSeatFunction" class="cn.com.qytx.platform.action.PlatformSettingAction" method="initSeatFunction">
+      </action>
+      
+      <!-- 坐席功能设置 -->
+      <action name="saveSeatFunction" class="cn.com.qytx.platform.action.PlatformSettingAction" method="saveSeatFunction">
+      </action> 
+      
+      <!-- IVR和ACD初始化设置 -->
+      <action name="initIVRSet" class="cn.com.qytx.platform.action.PlatformSettingAction" method="initIVRSet">
+      </action> 
+      
+      <!-- IVR和ACD设置 -->
+      <action name="saveIVRSet" class="cn.com.qytx.platform.action.PlatformSettingAction" method="saveIVRSet">
+      </action> 
+      
+       <!-- 外呼功能初始化设置 -->
+      <action name="initOutcallFunction" class="cn.com.qytx.platform.action.PlatformSettingAction" method="initOutcallFunction">
+      </action> 
+      <!-- 外呼功能设置 -->
+      <action name="saveOutcallFunction" class="cn.com.qytx.platform.action.PlatformSettingAction" method="saveOutcallFunction">
+      </action> 
+      <!-- 黑名单设置和黑名单初始化 -->
+      <action name="blacklist_*" class="cn.com.qytx.platform.action.PlatformSettingAction" method="{1}">
+      </action>
+      
+    </package>
+</struts>

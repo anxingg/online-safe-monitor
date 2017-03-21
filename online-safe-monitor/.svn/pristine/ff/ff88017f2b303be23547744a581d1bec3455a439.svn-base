@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+    
+<struts>
+  <package name="databaseSet"  namespace="/databaseSet" extends="struts-default">
+  <action name="dataBaseSetSave" class="cn.com.qytx.platform.action.DataBaseSetAction" method="dataBaseSetSave">
+   <result name="success">/platform/jsp/dataBaseSet.jsp</result>
+  </action>
+   <action name="dataBaseSetView" class="cn.com.qytx.platform.action.DataBaseSetAction" method="dataBaseSetView">
+   <result name="success">/platform/jsp/dataBaseSet.jsp</result>
+  </action>
+   <action name="testMyParm" class="cn.com.qytx.platform.action.DataBaseSetAction" method="testMyParm">
+   <result name="success">/platform/jsp/dataBaseSet.jsp</result>
+  </action>
+  </package>
+
+  
+</struts>

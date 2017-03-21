@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<!-- 每天凌晨1点和下午12：00执行任务   知识库定时任务-->
+	<bean id="quartzJob" class="cn.com.qytx.hotline.knowledge.action.KnowledgeIndex"></bean>
+	<!-- 定义调用对象和调用对象的方法 -->
+	<bean id="jobtask" lazy-init="true" autowire="no" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 调用的类 -->
+		<property name="targetObject">
+			<ref bean="quartzJob" />
+		</property>
+		<!-- 调用类中的方法 -->
+		<property name="targetMethod">
+			<value>initKnowledge</value>
+		</property>
+	</bean>
+	<!-- 定义触发时间 -->
+	<bean id="doTime" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="jobtask" />
+		</property>
+		<!-- cron表达式 -->
+		<property name="cronExpression">
+			<value>0 0 1 * * ?</value>
+		</property>
+	</bean>
+	
+
+
+	
+	
+	<!-- 每小时的第0分0秒开始，每隔一分钟执行任务 -->
+	<bean id="seatQuartz" class="cn.com.qytx.hotline.ivr.action.SeatAttendanceAction"></bean>
+	<!-- 定义调用对象和调用对象的方法 -->
+	<bean id="seatJobtask" lazy-init="true" autowire="no" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 调用的类 -->
+		<property name="targetObject">
+			<ref bean="seatQuartz" />
+		</property>
+		<!-- 调用类中的方法 -->
+		<property name="targetMethod">
+			<value>insertLoginMsiUserInfo</value>
+		</property>
+	</bean>
+	<!-- 定义触发时间 -->
+	<bean id="seatDoTime" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="seatJobtask" />
+		</property>
+		<!-- cron表达式 -->
+		<property name="cronExpression">
+			<value>0 0/3 * * * ?</value>
+		</property>
+	</bean>
+
+
+	
+	
+	
+	<!-- 总管理类 如果将lazy-init='false'那么容器启动就会执行调度程序 -->
+	<bean id="startQuertz" lazy-init="false" autowire="no"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<!-- <ref bean="doTime"/>
+				<ref bean="seatDoTime"/> -->
+			</list>
+		</property>
+	</bean>
+	
+	
+</beans>

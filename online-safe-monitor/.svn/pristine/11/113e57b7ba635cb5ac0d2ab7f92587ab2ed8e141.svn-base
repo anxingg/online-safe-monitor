@@ -1,0 +1,930 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+-<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:intf="http://server.wei.com" xmlns:impl="http://server.wei.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" targetNamespace="http://server.wei.com">
+
+<!--WSDL created by Apache Axis version: 1.4 Built on Apr 22, 2006 (06:55:48 PDT)-->
+
+
+
+-<wsdl:types>
+
+
+-<schema targetNamespace="http://server.wei.com" xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+
+-<element name="getCard">
+
+
+-<complexType>
+
+
+-<sequence>
+
+<element name="user" type="xsd:string"/>
+
+<element name="pass" type="xsd:string"/>
+
+<element name="aaz500" type="xsd:string"/>
+
+<element name="aac002" type="xsd:string"/>
+
+<element name="aac003" type="xsd:string"/>
+
+<element name="aab301" type="xsd:string"/>
+
+</sequence>
+
+</complexType>
+
+</element>
+
+
+-<element name="getCardResponse">
+
+
+-<complexType>
+
+
+-<sequence>
+
+<element name="getCardReturn" type="xsd:string"/>
+
+</sequence>
+
+</complexType>
+
+</element>
+
+
+-<element name="getBank">
+
+
+-<complexType>
+
+
+-<sequence>
+
+<element name="user" type="xsd:string"/>
+
+<element name="pass" type="xsd:string"/>
+
+<element name="aac002" type="xsd:string"/>
+
+<element name="aac003" type="xsd:string"/>
+
+<element name="aab301" type="xsd:string"/>
+
+</sequence>
+
+</complexType>
+
+</element>
+
+
+-<element name="getBankResponse">
+
+
+-<complexType>
+
+
+-<sequence>
+
+<element name="getBankReturn" type="xsd:string"/>
+
+</sequence>
+
+</complexType>
+
+</element>
+
+
+-<element name="getAZ03">
+
+
+-<complexType>
+
+
+-<sequence>
+
+<element name="user" type="xsd:string"/>
+
+<element name="pass" type="xsd:string"/>
+
+<element name="aac002" type="xsd:string"/>
+
+<element name="aac003" type="xsd:string"/>
+
+<element name="aab301" type="xsd:string"/>
+
+</sequence>
+
+</complexType>
+
+</element>
+
+
+-<element name="getAZ03Response">
+
+
+-<complexType>
+
+
+-<sequence>
+
+<element name="getAZ03Return" type="xsd:string"/>
+
+</sequence>
+
+</complexType>
+
+</element>
+
+
+-<element name="getAC01">
+
+
+-<complexType>
+
+
+-<sequence>
+
+<element name="user" type="xsd:string"/>
+
+<element name="pass" type="xsd:string"/>
+
+<element name="aac002" type="xsd:string"/>
+
+<element name="aac003" type="xsd:string"/>
+
+<element name="aab301" type="xsd:string"/>
+
+</sequence>
+
+</complexType>
+
+</element>
+
+
+-<element name="getAC01Response">
+
+
+-<complexType>
+
+
+-<sequence>
+
+<element name="getAC01Return" type="xsd:string"/>
+
+</sequence>
+
+</complexType>
+
+</element>
+
+
+-<element name="checkTAC">
+
+
+-<complexType>
+
+
+-<sequence>
+
+<element name="user" type="xsd:string"/>
+
+<element name="pass" type="xsd:string"/>
+
+<element name="dodebit" type="xsd:string"/>
+
+<element name="aab301a" type="xsd:string"/>
+
+</sequence>
+
+</complexType>
+
+</element>
+
+
+-<element name="checkTACResponse">
+
+
+-<complexType>
+
+
+-<sequence>
+
+<element name="checkTACReturn" type="xsd:string"/>
+
+</sequence>
+
+</complexType>
+
+</element>
+
+
+-<element name="readCard">
+
+
+-<complexType>
+
+
+-<sequence>
+
+<element name="user" type="xsd:string"/>
+
+<element name="pass" type="xsd:string"/>
+
+<element name="id" type="xsd:string"/>
+
+<element name="aab301" type="xsd:string"/>
+
+</sequence>
+
+</complexType>
+
+</element>
+
+
+-<element name="readCardResponse">
+
+
+-<complexType>
+
+
+-<sequence>
+
+<element name="readCardReturn" type="xsd:string"/>
+
+</sequence>
+
+</complexType>
+
+</element>
+
+
+-<element name="allDsjk">
+
+
+-<complexType>
+
+
+-<sequence>
+
+<element name="xml" type="xsd:string"/>
+
+</sequence>
+
+</complexType>
+
+</element>
+
+
+-<element name="allDsjkResponse">
+
+
+-<complexType>
+
+
+-<sequence>
+
+<element name="allDsjkReturn" type="xsd:string"/>
+
+</sequence>
+
+</complexType>
+
+</element>
+
+
+-<element name="getCardInfo">
+
+<complexType/>
+
+</element>
+
+
+-<element name="getCardInfoResponse">
+
+
+-<complexType>
+
+
+-<sequence>
+
+<element name="getCardInfoReturn" type="xsd:string"/>
+
+</sequence>
+
+</complexType>
+
+</element>
+
+
+-<element name="getSockInfo">
+
+<complexType/>
+
+</element>
+
+
+-<element name="getSockInfoResponse">
+
+
+-<complexType>
+
+
+-<sequence>
+
+<element name="getSockInfoReturn" type="xsd:string"/>
+
+</sequence>
+
+</complexType>
+
+</element>
+
+
+-<element name="checkTAC1">
+
+
+-<complexType>
+
+
+-<sequence>
+
+<element name="user" type="xsd:string"/>
+
+<element name="pass" type="xsd:string"/>
+
+<element name="dodebit" type="xsd:string"/>
+
+<element name="aab301a" type="xsd:string"/>
+
+</sequence>
+
+</complexType>
+
+</element>
+
+
+-<element name="checkTAC1Response">
+
+<complexType/>
+
+</element>
+
+
+-<element name="getData">
+
+
+-<complexType>
+
+
+-<sequence>
+
+<element name="user" type="xsd:string"/>
+
+<element name="pass" type="xsd:string"/>
+
+<element name="aac002" type="xsd:string"/>
+
+<element name="aac003" type="xsd:string"/>
+
+<element name="aab301" type="xsd:string"/>
+
+</sequence>
+
+</complexType>
+
+</element>
+
+
+-<element name="getDataResponse">
+
+
+-<complexType>
+
+
+-<sequence>
+
+<element name="getDataReturn" type="xsd:string"/>
+
+</sequence>
+
+</complexType>
+
+</element>
+
+</schema>
+
+</wsdl:types>
+
+
+-<wsdl:message name="getSockInfoResponse">
+
+<wsdl:part name="parameters" element="impl:getSockInfoResponse"/>
+
+</wsdl:message>
+
+
+-<wsdl:message name="getBankRequest">
+
+<wsdl:part name="parameters" element="impl:getBank"/>
+
+</wsdl:message>
+
+
+-<wsdl:message name="getCardInfoRequest">
+
+<wsdl:part name="parameters" element="impl:getCardInfo"/>
+
+</wsdl:message>
+
+
+-<wsdl:message name="getAC01Response">
+
+<wsdl:part name="parameters" element="impl:getAC01Response"/>
+
+</wsdl:message>
+
+
+-<wsdl:message name="getAC01Request">
+
+<wsdl:part name="parameters" element="impl:getAC01"/>
+
+</wsdl:message>
+
+
+-<wsdl:message name="readCardResponse">
+
+<wsdl:part name="parameters" element="impl:readCardResponse"/>
+
+</wsdl:message>
+
+
+-<wsdl:message name="readCardRequest">
+
+<wsdl:part name="parameters" element="impl:readCard"/>
+
+</wsdl:message>
+
+
+-<wsdl:message name="getBankResponse">
+
+<wsdl:part name="parameters" element="impl:getBankResponse"/>
+
+</wsdl:message>
+
+
+-<wsdl:message name="checkTACRequest">
+
+<wsdl:part name="parameters" element="impl:checkTAC"/>
+
+</wsdl:message>
+
+
+-<wsdl:message name="checkTACResponse">
+
+<wsdl:part name="parameters" element="impl:checkTACResponse"/>
+
+</wsdl:message>
+
+
+-<wsdl:message name="getAZ03Request">
+
+<wsdl:part name="parameters" element="impl:getAZ03"/>
+
+</wsdl:message>
+
+
+-<wsdl:message name="getCardRequest">
+
+<wsdl:part name="parameters" element="impl:getCard"/>
+
+</wsdl:message>
+
+
+-<wsdl:message name="getDataResponse">
+
+<wsdl:part name="parameters" element="impl:getDataResponse"/>
+
+</wsdl:message>
+
+
+-<wsdl:message name="getDataRequest">
+
+<wsdl:part name="parameters" element="impl:getData"/>
+
+</wsdl:message>
+
+
+-<wsdl:message name="checkTAC1Response">
+
+<wsdl:part name="parameters" element="impl:checkTAC1Response"/>
+
+</wsdl:message>
+
+
+-<wsdl:message name="getAZ03Response">
+
+<wsdl:part name="parameters" element="impl:getAZ03Response"/>
+
+</wsdl:message>
+
+
+-<wsdl:message name="allDsjkRequest">
+
+<wsdl:part name="parameters" element="impl:allDsjk"/>
+
+</wsdl:message>
+
+
+-<wsdl:message name="checkTAC1Request">
+
+<wsdl:part name="parameters" element="impl:checkTAC1"/>
+
+</wsdl:message>
+
+
+-<wsdl:message name="getSockInfoRequest">
+
+<wsdl:part name="parameters" element="impl:getSockInfo"/>
+
+</wsdl:message>
+
+
+-<wsdl:message name="getCardResponse">
+
+<wsdl:part name="parameters" element="impl:getCardResponse"/>
+
+</wsdl:message>
+
+
+-<wsdl:message name="getCardInfoResponse">
+
+<wsdl:part name="parameters" element="impl:getCardInfoResponse"/>
+
+</wsdl:message>
+
+
+-<wsdl:message name="allDsjkResponse">
+
+<wsdl:part name="parameters" element="impl:allDsjkResponse"/>
+
+</wsdl:message>
+
+
+-<wsdl:portType name="CardService">
+
+
+-<wsdl:operation name="getCard">
+
+<wsdl:input name="getCardRequest" message="impl:getCardRequest"/>
+
+<wsdl:output name="getCardResponse" message="impl:getCardResponse"/>
+
+</wsdl:operation>
+
+
+-<wsdl:operation name="getBank">
+
+<wsdl:input name="getBankRequest" message="impl:getBankRequest"/>
+
+<wsdl:output name="getBankResponse" message="impl:getBankResponse"/>
+
+</wsdl:operation>
+
+
+-<wsdl:operation name="getAZ03">
+
+<wsdl:input name="getAZ03Request" message="impl:getAZ03Request"/>
+
+<wsdl:output name="getAZ03Response" message="impl:getAZ03Response"/>
+
+</wsdl:operation>
+
+
+-<wsdl:operation name="getAC01">
+
+<wsdl:input name="getAC01Request" message="impl:getAC01Request"/>
+
+<wsdl:output name="getAC01Response" message="impl:getAC01Response"/>
+
+</wsdl:operation>
+
+
+-<wsdl:operation name="checkTAC">
+
+<wsdl:input name="checkTACRequest" message="impl:checkTACRequest"/>
+
+<wsdl:output name="checkTACResponse" message="impl:checkTACResponse"/>
+
+</wsdl:operation>
+
+
+-<wsdl:operation name="readCard">
+
+<wsdl:input name="readCardRequest" message="impl:readCardRequest"/>
+
+<wsdl:output name="readCardResponse" message="impl:readCardResponse"/>
+
+</wsdl:operation>
+
+
+-<wsdl:operation name="allDsjk">
+
+<wsdl:input name="allDsjkRequest" message="impl:allDsjkRequest"/>
+
+<wsdl:output name="allDsjkResponse" message="impl:allDsjkResponse"/>
+
+</wsdl:operation>
+
+
+-<wsdl:operation name="getCardInfo">
+
+<wsdl:input name="getCardInfoRequest" message="impl:getCardInfoRequest"/>
+
+<wsdl:output name="getCardInfoResponse" message="impl:getCardInfoResponse"/>
+
+</wsdl:operation>
+
+
+-<wsdl:operation name="getSockInfo">
+
+<wsdl:input name="getSockInfoRequest" message="impl:getSockInfoRequest"/>
+
+<wsdl:output name="getSockInfoResponse" message="impl:getSockInfoResponse"/>
+
+</wsdl:operation>
+
+
+-<wsdl:operation name="checkTAC1">
+
+<wsdl:input name="checkTAC1Request" message="impl:checkTAC1Request"/>
+
+<wsdl:output name="checkTAC1Response" message="impl:checkTAC1Response"/>
+
+</wsdl:operation>
+
+
+-<wsdl:operation name="getData">
+
+<wsdl:input name="getDataRequest" message="impl:getDataRequest"/>
+
+<wsdl:output name="getDataResponse" message="impl:getDataResponse"/>
+
+</wsdl:operation>
+
+</wsdl:portType>
+
+
+-<wsdl:binding name="CardServiceSoapBinding" type="impl:CardService">
+
+<wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+
+
+-<wsdl:operation name="getCard">
+
+<wsdlsoap:operation soapAction=""/>
+
+
+-<wsdl:input name="getCardRequest">
+
+<wsdlsoap:body use="literal"/>
+
+</wsdl:input>
+
+
+-<wsdl:output name="getCardResponse">
+
+<wsdlsoap:body use="literal"/>
+
+</wsdl:output>
+
+</wsdl:operation>
+
+
+-<wsdl:operation name="getBank">
+
+<wsdlsoap:operation soapAction=""/>
+
+
+-<wsdl:input name="getBankRequest">
+
+<wsdlsoap:body use="literal"/>
+
+</wsdl:input>
+
+
+-<wsdl:output name="getBankResponse">
+
+<wsdlsoap:body use="literal"/>
+
+</wsdl:output>
+
+</wsdl:operation>
+
+
+-<wsdl:operation name="getAZ03">
+
+<wsdlsoap:operation soapAction=""/>
+
+
+-<wsdl:input name="getAZ03Request">
+
+<wsdlsoap:body use="literal"/>
+
+</wsdl:input>
+
+
+-<wsdl:output name="getAZ03Response">
+
+<wsdlsoap:body use="literal"/>
+
+</wsdl:output>
+
+</wsdl:operation>
+
+
+-<wsdl:operation name="getAC01">
+
+<wsdlsoap:operation soapAction=""/>
+
+
+-<wsdl:input name="getAC01Request">
+
+<wsdlsoap:body use="literal"/>
+
+</wsdl:input>
+
+
+-<wsdl:output name="getAC01Response">
+
+<wsdlsoap:body use="literal"/>
+
+</wsdl:output>
+
+</wsdl:operation>
+
+
+-<wsdl:operation name="checkTAC">
+
+<wsdlsoap:operation soapAction=""/>
+
+
+-<wsdl:input name="checkTACRequest">
+
+<wsdlsoap:body use="literal"/>
+
+</wsdl:input>
+
+
+-<wsdl:output name="checkTACResponse">
+
+<wsdlsoap:body use="literal"/>
+
+</wsdl:output>
+
+</wsdl:operation>
+
+
+-<wsdl:operation name="readCard">
+
+<wsdlsoap:operation soapAction=""/>
+
+
+-<wsdl:input name="readCardRequest">
+
+<wsdlsoap:body use="literal"/>
+
+</wsdl:input>
+
+
+-<wsdl:output name="readCardResponse">
+
+<wsdlsoap:body use="literal"/>
+
+</wsdl:output>
+
+</wsdl:operation>
+
+
+-<wsdl:operation name="allDsjk">
+
+<wsdlsoap:operation soapAction=""/>
+
+
+-<wsdl:input name="allDsjkRequest">
+
+<wsdlsoap:body use="literal"/>
+
+</wsdl:input>
+
+
+-<wsdl:output name="allDsjkResponse">
+
+<wsdlsoap:body use="literal"/>
+
+</wsdl:output>
+
+</wsdl:operation>
+
+
+-<wsdl:operation name="getCardInfo">
+
+<wsdlsoap:operation soapAction=""/>
+
+
+-<wsdl:input name="getCardInfoRequest">
+
+<wsdlsoap:body use="literal"/>
+
+</wsdl:input>
+
+
+-<wsdl:output name="getCardInfoResponse">
+
+<wsdlsoap:body use="literal"/>
+
+</wsdl:output>
+
+</wsdl:operation>
+
+
+-<wsdl:operation name="getSockInfo">
+
+<wsdlsoap:operation soapAction=""/>
+
+
+-<wsdl:input name="getSockInfoRequest">
+
+<wsdlsoap:body use="literal"/>
+
+</wsdl:input>
+
+
+-<wsdl:output name="getSockInfoResponse">
+
+<wsdlsoap:body use="literal"/>
+
+</wsdl:output>
+
+</wsdl:operation>
+
+
+-<wsdl:operation name="checkTAC1">
+
+<wsdlsoap:operation soapAction=""/>
+
+
+-<wsdl:input name="checkTAC1Request">
+
+<wsdlsoap:body use="literal"/>
+
+</wsdl:input>
+
+
+-<wsdl:output name="checkTAC1Response">
+
+<wsdlsoap:body use="literal"/>
+
+</wsdl:output>
+
+</wsdl:operation>
+
+
+-<wsdl:operation name="getData">
+
+<wsdlsoap:operation soapAction=""/>
+
+
+-<wsdl:input name="getDataRequest">
+
+<wsdlsoap:body use="literal"/>
+
+</wsdl:input>
+
+
+-<wsdl:output name="getDataResponse">
+
+<wsdlsoap:body use="literal"/>
+
+</wsdl:output>
+
+</wsdl:operation>
+
+</wsdl:binding>
+
+
+-<wsdl:service name="CardServiceService">
+
+
+-<wsdl:port name="CardService" binding="impl:CardServiceSoapBinding">
+
+<wsdlsoap:address location="http://10.120.1.18:7001/hnCardService/services/CardService"/>
+
+</wsdl:port>
+
+</wsdl:service>
+
+</wsdl:definitions>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">    
+<struts>
+
+   <!-- 通话记录action -->
+	<package name="msicalllog" namespace="/msi/calllog" extends="struts-default">		
+		<action name="setup_*" class="cn.com.qytx.hotline.ivr.action.MsiCalllogAction" method="{1}"></action>
+		<!-- 地市坐席监控和省级管理员坐席监控 -->
+		<action name="seatMonitor_*" class="cn.com.qytx.hotline.ivr.action.SeatMonitorAction" method="{1}">
+		</action>
+		<action name="toMonitorList" class="cn.com.qytx.hotline.ivr.action.SeatMonitorAction" method="toMonitorList">
+			<!-- 监控列表页面 -->
+			<result name="seat">/hotline/seat/jsp/seatMonitorAndList.jsp</result>
+			<result name="back">/hotline/seat/jsp/seatMonitorOfBackForAreaAndList.jsp</result>
+		</action>
+	</package>
+	<package name="callLog" namespace="/callLog" extends="struts-default">
+		<!--通话记录查询 -->
+		<action name="getCallLogList" class="cn.com.qytx.hotline.ivr.action.CallLogManagerAction" method="getCallLogList"></action>
+	</package>
+</struts>

@@ -1,0 +1,74 @@
+@charset "utf-8";
+/*header*/
+.indexHeader{background:url("images/head_bj.png") repeat-x;}
+.headbg{background:url("images/head_bj2.png") no-repeat scroll left top;}
+.index_nav .index_menu{background:url("images/nav_menu.png") no-repeat}
+#div_tab LI{background:url("images/t_tab_uselectbg.png");}
+#div_tab LI SPAN{background:url("images/t_tab_uselectbg.png") no-repeat scroll right bottom;}
+#div_tab LI.crent{background:url("images/t_tab_selectbg.png");}
+#div_tab LI.crent SPAN{background:url("images/t_tab_selectbg.png") no-repeat scroll right bottom;}
+.s_tab{background:url("images/s_tab.png");}
+/*个人桌面*/
+.home{background:url("images/homebg.png") repeat-x #fff3dd;}
+.bottom{background:#ff6600;}
+.icon-text{background:url("images/icon_text_l.png") no-repeat;}
+.icon-text span{background:url("images/icon_text_r.png") no-repeat scroll right;}
+
+/*---内容样式----*/
+.contentTitle{color:#ff6600; border-bottom:2px solid #ff6600}
+.contentTitle_con{color:#ff6600;}
+.m_left li.current a{background:url("images/menu_ahover_bg.png") no-repeat scroll 1px 0;}
+.m_right li.current{background:url("images/menu_ahover_bg.png") no-repeat scroll 0 -42px;}
+.detailsPage h2{color:#ff6600;}
+.detailsPage h3{border-bottom:2px solid #3EA54D}
+
+.file_top_list{background:#fefaee;border-bottom:1px solid #ffac30;}
+.leftMenu ul.menuList li.current{background:#D4E5D6;}
+
+/*左侧菜单样式*/
+.BlockTop TD , .BlockBot TD{background:url("images/left_menu_bj.png"); height:31px!important; line-height:31px;}
+.BlockTop TD.center{border-left:1px solid #ffac30;border-right:1px solid #ffac30; background-position:0 0;border-top:1px solid #ffac30;}
+.BlockBot TD.center{border-left:1px solid #ffac30;border-right:1px solid #ffac30; background-position:0 0;border-bottom:1px solid #ffac30; color:#333}
+.service-menu .menu-on{background:#faf3e5;}
+.blockBox{border:1px solid #ffac30;}
+
+/*邮件左侧菜单样式*/
+.leftMenu .Meil_wrap , .leftMenu .Meil_wrap , .leftMenu .Meil_wrap .blockBox{background:#fdfaee;}
+.Meil_box{background:#fdfaee;border-right:1px solid #d7c8bb}
+.leftMenu .Meil_wrap ul.menuList li.current{background:#f9f2e5;}
+.leftMenu .Meil_wrap ul.menuList li a , .leftMenu .Meil_wrap .blockBox h4 , .leftMenu .Meil_wrap ul.menuList li i{ color:#000;}
+.leftMenu .Meil_wrap ul.menuList li a:hover{background:#f9f2e5;}
+.leftMenu .Meil_wrap{border-right:1px solid #d7c8bb}
+
+.MeilTitle{background:url("images/meil_top_bg.png") no-repeat;}
+.MeilTitle td{ background:none;}
+.noread_meil, .write_meil{  background:none; height:32px; line-height:29px;}
+/*事务提醒*/
+.news_pop{background:url("images/msgPop.png") no-repeat;}
+.news_pop .btnShowMsg input{background:url("images/btnShowMsg.png") no-repeat; color:#3DA34C;}
+
+/*及时消息*/
+.dialog .head-left{background:url("images/smsbox_bg.png") no-repeat scroll left top;}
+.dialog .head-center{background:url("images/smsbox_bg.png") repeat-x scroll left -30px;}
+.dialog .head-right{background:url("images/smsbox_bg.png")  no-repeat scroll left -60px;}
+
+/*组织结构*/
+#org_pannel{border:1px solid #FFAC30;background:#fffbf5;}
+#org_pannel .pannelTab{background:url("images/org_panel_bg.png") repeat-x;}
+#org_pannel .orgListbox{border:1px solid #FFAC30;  }
+#org_pannel .pannelTab span.current{background:url("images/org_panel_bg_current.png");}
+#org_pannel .pannelDot{background:url("images/org_panel_dot.png") no-repeat scroll center bottom rgba(0, 0, 0, 0);}
+
+/*表格样式*/
+table.pretty thead{border-bottom:0px; border-right:#ddd 1px solid;background:url(images/t_head_bg.png) #ddeadc repeat-x;}
+
+/*按钮样式*/
+.buttonArea .formButton_green{width:120px;height:40px!important;line-height:40px; text-align:center;outline:0;cursor:pointer;color:#fff;font-size:18px;border:0;background:url(../images/public/button_orange.png) no-repeat;}
+
+/*listTitle*/
+.listTitle{width: 100%; border: none; table-layout: fixed;}
+.listTitle td.left{width: 5px; height:31px; background: url(images/block_top02.png) no-repeat 0 0;}
+.listTitle td.right{width: 5px; height: 31px; background: url(images/block_top02.png) no-repeat 0 -64px;}
+.listTitle td.center{height: 31px; text-align:center; color: #333;font-size:16px; font-weight: bold; padding: 0 10px; background: url(images/block_top02.png) repeat-x 0 -32px;}
+.td_center{text-align: center !important;}
+

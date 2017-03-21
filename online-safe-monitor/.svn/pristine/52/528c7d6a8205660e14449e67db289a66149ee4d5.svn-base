@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <!-- 应急预案模块 -->
+    <package name="plans" namespace="/plans" extends="struts-default">
+        <!-- 没有返回页面 -->
+        <action name="plans_*" class="cn.com.wh.plans.action.PlansAction" method="{1}">
+        </action>
+    
+    	<!-- 有返回页面 -->
+        <action name="plansload_*_*" class="cn.com.wh.plans.action.PlansLoadAction" method="{1}">
+        	<result name="success">/wh/logined/safeAccident/{2}.jsp</result>
+        </action>
+    </package>
+    
+</struts>

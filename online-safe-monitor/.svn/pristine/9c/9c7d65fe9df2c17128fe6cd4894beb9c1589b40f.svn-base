@@ -1,0 +1,12 @@
+@charset "utf-8";
+.steps{ overflow:auto; width:98%}
+.steps table{table-layout:auto;clear:both;padding-top:5px;}
+.steps table td{ padding:0; line-height:20px;vertical-align:top;}
+.steps table td p{ padding:0; width:120px;line-height:20px;vertical-align:top;}
+.steps table td em {display:inline-block;vertical-align:middle; margin-right:10px;}
+.steps table td .icon_green{ background:url(../images/icon/icon_green.png); width:17px; height:17px; }
+.steps table td .arrow_green{ background:url(../images/icon/icon_jiantougreen.png); width:80px; height:12px; }
+.steps table td .icon_orange{ background:url(../images/icon/icon_orange.png); width:17px; height:17px; }
+.steps table td .arrow_gray{ background:url(../images/icon/icon_jiantougray.png); width:80px; height:12px;}
+.steps table td .icon_gray{ background:url(../images/icon/icon_gray.png); width:17px; height:17px; }
+.steps table td .txtgray { color:#adadad;}

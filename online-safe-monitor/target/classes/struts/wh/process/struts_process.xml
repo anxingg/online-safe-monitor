@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <!-- 工艺流程 -->
+    <package name="technologicalProcess" namespace="/technologicalProcess" extends="struts-default">
+        <!--添加或者修改工艺流程-->
+        <action name="saveOrUpdateProcess" class="cn.com.wh.process.action.TechnologicalProcessAction" method="saveOrUpdateProcess">
+        </action>
+        <!-- 工艺流程列表 -->
+        <action name="findProcessList" class="cn.com.wh.process.action.TechnologicalProcessAction" method="findProcessList">
+        </action>
+        <!-- 工艺流程详情 -->
+        <action name="loadProcess" class="cn.com.wh.process.action.TechnologicalProcessAction" method="loadProcess">
+        </action>
+        <!-- 删除工艺流程 -->
+        <action name="deleteProcess" class="cn.com.wh.process.action.TechnologicalProcessAction" method="deleteProcess">
+        </action>
+    </package>
+    
+</struts>

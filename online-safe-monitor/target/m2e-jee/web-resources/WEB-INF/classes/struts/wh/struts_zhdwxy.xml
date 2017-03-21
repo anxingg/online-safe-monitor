@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <!-- 企业基本信息模块 -->
+    <package name="zhdwxy" namespace="/zhdwxy" extends="struts-default">
+        <!--获取 安全隐患列表-->
+        <action name="query" class="cn.com.wh.zhdwxy.action.ZhdwxyAction" method="query">
+        </action>
+     	<!--获取 安全隐患详情-->
+        <action name="queryDetail" class="cn.com.wh.zhdwxy.action.ZhdwxyAction" method="queryDetail">
+        	<result name="detail">/wh/zhdwxy/detail.jsp</result>
+        	<result name="update">/wh/zhdwxy/update.jsp</result>
+        </action>
+        
+        <!--新增修改-->
+        <action name="saveorup" class="cn.com.wh.zhdwxy.action.ZhdwxyAction" method="saveorup">
+        </action>
+        
+        <!--删除-->
+        <action name="del" class="cn.com.wh.zhdwxy.action.ZhdwxyAction" method="del">
+        </action>
+        
+        <!--查询重大危险源等级-->
+        <action name="queryGrade" class="cn.com.wh.zhdwxy.action.ZhdwxyAction" method="queryGrade">
+        </action>
+    </package>
+    
+</struts>

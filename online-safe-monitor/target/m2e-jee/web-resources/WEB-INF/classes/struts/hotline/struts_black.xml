@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">    
+<struts>
+   <!-- 黑名单 -->
+	<package name="msi" namespace="/msi/blackList" extends="struts-default">		
+		<action name="setup_*" class="cn.com.qytx.hotline.balck.action.BlacklistAction" method="{1}"></action>
+		<!-- 黑名单导入 -->
+		<action name="import_*" class="cn.com.qytx.hotline.balck.action.BlacklistImportAction" method="{1}">
+		</action>
+	</package>
+</struts>

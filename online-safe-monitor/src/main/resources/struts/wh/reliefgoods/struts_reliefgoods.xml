@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <!-- 救援物资-->
+    <package name="reliefGoods" namespace="/reliefGoods" extends="struts-default">
+        <!--添加或者修改救援物资-->
+        <action name="saveOrUpdateGoods" class="cn.com.wh.reliefgoods.action.ReliefGoodsAction" method="saveOrUpdateGoods">
+        </action>
+        <!-- 救援物资列表 -->
+        <action name="findGoodsList" class="cn.com.wh.reliefgoods.action.ReliefGoodsAction" method="findGoodsList">
+        </action>
+        <!-- 救援物资详情 -->
+        <action name="loadGoodsDetail" class="cn.com.wh.reliefgoods.action.ReliefGoodsAction" method="loadGoodsDetail">
+        	<result name="update">/wh/logined/reliefGoods/addReliefGoods.jsp</result>
+        </action>
+        <!-- 删除救援物资 -->
+        <action name="deleteGoods" class="cn.com.wh.reliefgoods.action.ReliefGoodsAction" method="deleteGoods">
+        </action>
+    </package>
+    
+</struts>

@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="seatuser" namespace="/seat/user" extends="struts-default">
+		<action name="login" class="cn.com.qytx.hotline.user.action.LoginAction"
+			method="login">
+			<result name="success" type="redirect">/seat/jsp/index.jsp</result>
+			<result name="login">/seatLogin.jsp?passerror=true</result>
+			<result name="input">/seatLogin.jsp</result>
+		</action>
+		<action name="loginAjax" class="cn.com.qytx.hotline.user.action.LoginAction"
+			method="loginAjax">
+		</action>
+		<!-- 张东领添加查询来电号码/外呼号码的归属地 -->
+		<action name="getPhoneArea" class="cn.com.qytx.hotline.user.action.LoginAction" method="getPhoneArea">
+		</action>
+	</package>
+
+	<package name="msiUser" namespace="/seat/msiUser" extends="struts-default">
+		<action name="msiUserList" class="cn.com.qytx.callcenter.action.user.MsiUserAction"
+			method="findMsiUserList">
+		</action>
+		<action name="msiUserReset" class="cn.com.qytx.hotline.ivr.action.MsiUserAction"
+			method="resetMsiUser">
+		</action>
+	</package>
+
+	<!-- 坐席监控 -->
+	<package name="msiworkload" namespace="/msi/msiworkload"
+		extends="struts-default">
+		<action name="setup_*"
+			class="cn.com.qytx.callcenter.action.msiworkload.MsiWorkloadAction" method="{1}"></action>
+	</package>
+
+	<package name="callLog" namespace="/callLog" extends="struts-default">
+		<!--通话记录查询 -->
+		<action name="getCallLogList"
+			class="cn.com.qytx.callcenter.action.calllog.CallLogManagerAction" method="getCallLogList">
+		</action>
+
+	</package>
+	<package name="coodinate" namespace="/coodinate" extends="struts-default">
+		<!--通话记录查询 -->
+		<action name="coodinate"
+			class="cn.com.qytx.callcenter.coordinate.gps.GpsAction">
+		</action>
+
+
+        <action name="getPoint"
+			class="cn.com.qytx.callcenter.coordinate.gps.GpsAction" method="getPoint">
+			<result name="success">/seat/jsp/customercall/location.jsp</result>
+		</action>
+	</package>
+	
+	<package name="contacts"  namespace="/contacts" extends="struts-default">
+		<!-- 通讯录的action -->
+		<action name="contacts_*" class="cn.com.qytx.hotline.user.action.GetGroupAndUserTreeAction" method="{1}">
+		</action>
+	</package>
+</struts>

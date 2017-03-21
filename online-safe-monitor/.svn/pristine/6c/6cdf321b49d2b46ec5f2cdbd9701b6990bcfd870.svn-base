@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+		  http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5">
+
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath*:applicationContext*.xml
+        </param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>
+            org.springframework.web.context.ContextLoaderListener
+        </listener-class>
+    </listener>
+    
+	 <listener>
+		  <listener-class>
+		   org.springframework.web.context.request.RequestContextListener
+		  </listener-class>
+	 </listener>
+	<!-- 编码过滤 --> 
+	<filter>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
+     <!--  验证码拦截器 -->
+      <filter>
+    <filter-name>checkCodeFilter</filter-name>
+    <filter-class>cn.com.qytx.platform.security.CheckCodeFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>checkCodeFilter</filter-name>
+    <url-pattern>/j_spring_security_check</url-pattern>
+  </filter-mapping>
+  
+   
+     
+     <filter>
+	    <filter-name>sessionFilter</filter-name>
+	    <filter-class>cn.com.qytx.platform.security.SessionFilter</filter-class>
+	  	</filter>
+	  	<filter-mapping>
+	    <filter-name>sessionFilter</filter-name>
+	    <url-pattern>*.jsp</url-pattern>
+	  </filter-mapping>
+	  <filter-mapping>
+	    <filter-name>sessionFilter</filter-name>
+	    <url-pattern>*.action</url-pattern>
+	  </filter-mapping>
+	 <!-- session过滤器 end--> 
+	 
+  <filter>
+    <filter-name>springSecurityFilterChain</filter-name>
+    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>springSecurityFilterChain</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+<!-- 安全过滤器  end-->
+ 
+    <!-- open db session for controller begin -->
+    <filter>
+        <filter-name>Spring OpenEntityManagerInViewFilter</filter-name>
+        <filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Spring OpenEntityManagerInViewFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <!-- open db session for controller end -->
+	
+	<!-- 将当前登录用户放在线程变量中 -->
+ 	<filter>
+	    <filter-name>transportUser</filter-name>
+	    <filter-class>cn.com.qytx.platform.base.application.TransportUserFilter</filter-class>
+   </filter>
+ 	<filter-mapping>
+	    <filter-name>transportUser</filter-name>
+	    <url-pattern>/*</url-pattern>
+	  </filter-mapping>
+
+    <filter>
+        <filter-name>struts2</filter-name>
+        <filter-class>
+            cn.com.qytx.platform.base.filter.StrutsFilter
+        </filter-class>
+        <init-param>
+            <param-name>patternPathConfig</param-name>
+            <param-value>struts/*/</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>struts2</filter-name>
+        <url-pattern>*.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>struts2</filter-name>
+        <url-pattern>*.action</url-pattern>
+    </filter-mapping>
+    <!-- wangxj  add begin -->
+    <!-- 应用启动加载项  -->
+	<listener>
+		<listener-class>cn.com.wh.listener.PortalStartListener</listener-class>
+	</listener>
+	<!-- gzip压缩开始 -->
+	<!-- filter>
+	    <filter-name>gzipfilter</filter-name>
+	    <filter-class>cn.com.wh.common.GZIPFilter</filter-class>
+	  </filter>
+	  <filter-mapping>
+	    <filter-name>gzipfilter</filter-name>
+	    <url-pattern>*.action</url-pattern>
+	  </filter-mapping>
+	  <filter-mapping>
+	    <filter-name>gzipfilter</filter-name>
+	    <url-pattern>*.js</url-pattern>
+	  </filter-mapping>
+	  <filter-mapping>
+	    <filter-name>gzipfilter</filter-name>
+	    <url-pattern>*.css</url-pattern>
+	  </filter-mapping-->
+	<!-- gzip压缩结束-->
+	<!-- common error begin -->
+	<error-page>
+		<exception-type>java.lang.Throwable</exception-type>
+		<location>/common/500.jsp</location>
+	</error-page>
+	<error-page>
+		<exception-type>java.lang.NullPointerException</exception-type>
+		<location>/common/500.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>503</error-code>
+		<location>/common/500.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/common/500.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/common/404.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>403</error-code>
+		<location>/common/403.jsp</location>
+	</error-page>
+	<!-- common error end -->
+	<!-- wangxj  add end 20150821 -->
+	
+	
+	
+	
+	
+	
+	
+    <!-- 访问 http://locahost:8080/showcase/druid/index.html -->
+    <servlet>
+        <servlet-name>DruidStatView</servlet-name>
+        <servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DruidStatView</servlet-name>
+        <url-pattern>/druid/*</url-pattern>
+    </servlet-mapping>
+
+    <filter>
+        <filter-name>DruidWebStatFilter</filter-name>
+        <filter-class>com.alibaba.druid.support.http.WebStatFilter</filter-class>
+        <init-param>
+            <param-name>exclusions</param-name>
+            <param-value>*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*</param-value>
+        </init-param>
+        <init-param>
+            <param-name>sessionStatEnable</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <init-param>
+            <param-name>profileEnable</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <init-param>
+            <param-name>principalSessionName</param-name>
+            <param-value>userInfo</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>DruidWebStatFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+	<!-- OA系统启动的时候加载单位表的设置，初始化LOGO和系统名称 -->
+	 <servlet>
+	    <servlet-name>logoInit</servlet-name>
+	    <servlet-class>cn.com.qytx.cbb.login.action.LogoInitServlet</servlet-class>
+	    <load-on-startup>1</load-on-startup>
+  	</servlet>
+
+  	<welcome-file-list>
+ 		<welcome-file>/login.jsp</welcome-file> 		
+  	</welcome-file-list>
+	
+	<distributable/>
+	 
+	 <session-config>
+        <session-timeout>10</session-timeout>
+    </session-config>
+	 
+</web-app>

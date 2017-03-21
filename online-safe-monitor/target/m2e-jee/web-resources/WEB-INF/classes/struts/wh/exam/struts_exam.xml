@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <!-- 考试 -->
+    <package name="exam" namespace="/exam" extends="struts-default">
+        <!--添加试题-->
+        <action name="addQuestion" class="cn.com.wh.exam.action.ExamQuestionAction" method="addQuestion">
+        </action>
+        <!-- 试题列表 -->
+        <action name="listExamQuestion" class="cn.com.wh.exam.action.ExamQuestionAction" method="listExamQuestion">
+        </action>
+        <!-- 查询试题 -->
+         <action name="findQuestion" class="cn.com.wh.exam.action.ExamQuestionAction" method="findQuestion">
+        </action>
+        <!-- 删除试题 -->
+          <action name="deleteQuestion" class="cn.com.wh.exam.action.ExamQuestionAction" method="deleteQuestion">
+        </action>
+        <!-- 是否生效 -->
+          <action name="updateQuestionState" class="cn.com.wh.exam.action.ExamQuestionAction" method="updateQuestionState">
+        </action>
+        <!-- 考试列表 -->
+          <action name="listExamTest" class="cn.com.wh.exam.action.ExamTestAction" method="listExamTest">
+        </action>
+        <!-- 增加考试 -->
+          <action name="addExamTest" class="cn.com.wh.exam.action.ExamTestAction" method="addExamTest">
+        </action>
+        <!-- 删除考试 -->
+          <action name="deleteExamTest" class="cn.com.wh.exam.action.ExamTestAction" method="deleteExamTest">
+        </action>
+        <!-- 更改考试是否生效 -->
+          <action name="updateTestState" class="cn.com.wh.exam.action.ExamTestAction" method="updateTestState">
+        </action>
+        <!-- 查询考试 -->
+          <action name="findExamTest" class="cn.com.wh.exam.action.ExamTestAction" method="findExamTest">
+        </action>
+        <!-- 试卷分页 -->
+        <action name="findPaperList" class="cn.com.wh.exam.action.ExamPaperAction" method="findPaperList">
+        </action>
+        <!-- 新增试卷 -->
+        <action name="addPaper" class="cn.com.wh.exam.action.ExamPaperAction" method="addPaper">
+        </action>
+        <!-- 删除试卷 -->
+        <action name="deletePaper" class="cn.com.wh.exam.action.ExamPaperAction" method="deletePaper">
+        </action>
+        <!-- 更新试卷状态 -->
+        <action name="updateState" class="cn.com.wh.exam.action.ExamPaperAction" method="updateState">
+        </action>
+        <!-- 试卷详情 -->
+        <action name="loadPaperDetail" class="cn.com.wh.exam.action.ExamPaperAction" method="loadPaperDetail">
+        	<result name="detail">/wh/logined/exam/examPaperDetail.jsp</result>
+        </action>
+        <!-- 获得试卷的试题分页 -->
+        <action name="findPaperQuestion" class="cn.com.wh.exam.action.ExamPaperAction" method="findPaperQuestion">
+        </action>
+        <!-- 获取试卷 -->
+        <action name="getPaper" class="cn.com.wh.exam.action.ExamTestAction" method="getPaper">
+        </action>
+        <!-- 获取考试时间 -->
+        <action name="getTestTime" class="cn.com.wh.exam.action.ExamTestDetailAction" method="getTestTime">
+        </action>
+        <!-- 获取考试 -->
+        <action name="getExam" class="cn.com.wh.exam.action.ExamTestDetailAction" method="getExam">
+        </action>
+        <!--交卷 -->
+        <action name="submitExam" class="cn.com.wh.exam.action.ExamTestDetailAction" method="submitExam">
+        </action>
+        <!-- 进入考试 -->
+        <action name="joinExam" class="cn.com.wh.exam.action.UserExamAction" method="joinExam">
+        	<result name="detail">/wh/logined/exam/userExam.jsp</result>
+        </action>
+        <!-- 验证用户是否已经参加过考试 -->
+        <action name="checkUser" class="cn.com.wh.exam.action.UserExamAction" method="checkUser">
+        </action>
+        <!-- 查询考试成绩 -->
+        <action name="findUserExamScore" class="cn.com.wh.exam.action.UserExamAction" method="findUserExamScore">
+        </action>
+        <!-- 查询考试成绩 -->
+        <action name="exportUserScore" class="cn.com.wh.exam.action.UserExamAction" method="exportUserScore">
+        </action>
+        <!-- 考卷详情 -->
+        <action name="examTestView" class="cn.com.wh.exam.action.ExamTestDetailViewAction" method="examTestView">
+             <result name="success">/wh/logined/exam/viewExamTestDetail.jsp</result>
+        </action> 
+    </package>
+    
+</struts>

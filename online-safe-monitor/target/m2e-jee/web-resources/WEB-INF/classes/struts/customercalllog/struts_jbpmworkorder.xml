@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="jbpmworkorder" namespace="/jbpmworkorder" extends="struts-default">
+	
+	<!-- 根据用户的来电号码决定跳转到那个来电弹屏页面 -->
+        <action  name="getProductByPhoneDecideForward" class="cn.com.qytx.hotline.customercall.action.WorkorderAction" method="getProductByPhoneDecideForward">
+        	<result name="success">/logined/workorderflow/jsp/caller.jsp</result>
+		</action>
+		
+		<!-- 来电弹屏之后获取相关联的工单 -->
+        <action  name="getRelatedCustomerCallByPhone" class="cn.com.qytx.hotline.customercall.action.WorkorderAction" method="getRelatedCustomerCallByPhone">
+		</action>
+		
+		<!-- 来电弹屏之后获取相关联的工单详情 -->
+        <action  name="customerCallView" class="cn.com.qytx.hotline.customercall.action.WorkorderAction" method="customerCallView">
+        <result name="success">
+		    /logined/workorderflow/jsp/customerCallDetail.jsp
+		   </result>
+		</action>
+		
+		<!-- 来电弹屏之后的工单保存 -->
+        <action  name="saveCustomercallLog" class="cn.com.qytx.hotline.customercall.action.WorkorderAction" method="saveCustomercallLog">
+		</action>
+		
+		<!-- 获取工单列表 -->
+        <action  name="list" class="cn.com.qytx.hotline.customercall.action.WorkorderAction" method="list">
+		</action>
+		<!-- 前台统计待回访的个数 -->
+        <action  name="listCount" class="cn.com.qytx.hotline.customercall.action.WorkorderAction" method="listCount">
+		</action>
+		
+		<!-- 前台工单回访  -->
+		<action name="customerCallBack" class="cn.com.qytx.hotline.customercall.action.WorkorderAction" method="customerCallBack">
+		<result name="success">/logined/workorderflow/jsp/customerCallBack.jsp</result>
+		</action>
+		
+		<!-- 前台工单回访结果提交  -->
+		<action name="saveCustomerCallBack" class="cn.com.qytx.hotline.customercall.action.WorkorderAction" method="saveCustomerCallBack">
+		</action>
+	
+	
+	<!-- 后台工单处理 -->
+		<action name="backdealCustomerCallLog" class="cn.com.qytx.hotline.customercall.action.WorkorderAction" method="backdealCustomerCallLog">
+		<result name="success">/logined/workorderflow/jsp/customerCallDeal.jsp</result>
+		</action>
+	
+	<!-- 后台工单处理 提交-->
+		<action name="saveCustomerCallDeal" class="cn.com.qytx.hotline.customercall.action.WorkorderAction" method="saveCustomerCallDeal">
+		</action>
+		
+		<!-- 后台工单删除-->
+		<action name="delCustomerCallLog" class="cn.com.qytx.hotline.customercall.action.WorkorderAction" method="delCustomerCallLog">
+		</action>
+		
+		<!-- 查看后台工单详情 -->
+		<action name="customerCallViewBack" class="cn.com.qytx.hotline.customercall.action.WorkorderAction" method="customerCallView">
+		<result name="success">/logined/workorderflow/jsp/customerCallDetail_back.jsp</result>
+		</action>
+		
+		<!-- 后台来电人信息 详情-->
+		<action name="callNameInfo" class="cn.com.qytx.hotline.customercall.action.WorkorderAction" method="callNameInfo">
+			<result name="success">/logined/workorderflow/jsp/callNameInfo.jsp</result>
+		</action>
+		
+		<!-- 选择客户信息-->
+		<action name="selectCrms" class="cn.com.qytx.hotline.customercall.action.WorkorderAction" method="selectCrms">
+		</action>
+	  	
+	  	
+		<!-- 获取邻村信息 -->
+		<action name="getTempSaveInfo" class="cn.com.qytx.hotline.customercall.action.WorkorderAction" method="getTempSaveInfo">
+		</action>
+		
+		<!-- 获取坐席信息 -->
+	  	<action name="getTheSeat" class="cn.com.qytx.hotline.customercall.action.WorkorderAction" method="getTheSeat"></action>
+	  	
+	  	<!-- 来电弹屏/工单回访发送短信 -->
+	  	<action name="sendMessage" class="cn.com.qytx.hotline.customercall.action.SendMessageAction" method="sendMessage">
+	  	</action>
+	</package>
+</struts>

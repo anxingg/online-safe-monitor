@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+    
+<struts>
+	<package name="msgmanagent"  namespace="/msgmanagent" extends="struts-default">
+		<!-- 跳转到处理页面 -->
+		<action name="toDealMessage" class="cn.com.qytx.hotline.messagemanagement.action.MsgManagenmentAction" method="toDealMessage">
+			<result name="success">/logined/workorderflow/jsp/newcaller.jsp?processId=${processId}</result>
+		</action>
+		<!-- 后台留言管理列表 -->
+		<action name="getSeatMsgTable" class="cn.com.qytx.hotline.messagemanagement.action.MsgManagenmentAction" method="getSeatMsgTable">
+		</action>
+		<!-- 后台留言管理列表 -->
+		<action name="updataVoxMail" class="cn.com.qytx.hotline.messagemanagement.action.MsgManagenmentAction" method="updataVoxMail">
+		</action>
+		<!-- 下载录音-->
+		<action name="downLoadFile" class="cn.com.qytx.hotline.messagemanagement.action.MsgManagenmentAction" method="downLoadFile">
+		</action>
+		<!--得所属地市-->
+		<action name="getGroupName" class="cn.com.qytx.hotline.messagemanagement.action.MsgManagenmentAction" method="getGroupName">
+		</action>
+	</package>
+</struts>

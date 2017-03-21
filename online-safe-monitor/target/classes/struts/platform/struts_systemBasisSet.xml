@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+    
+<struts>
+  <package name="systemBasisSet"  namespace="/systemBasisSet" extends="struts-default">
+  <action name="systemBasisSetSave" class="cn.com.qytx.platform.action.SystemBasisSetAction" method="systemBasisSetSave">
+  </action>
+   <action name="systemBasisSetView" class="cn.com.qytx.platform.action.SystemBasisSetAction" method="systemBasisSetView">
+   <result name="success">/platform/jsp/systemBasisSet.jsp</result>
+  </action>
+  </package>
+
+  
+</struts>

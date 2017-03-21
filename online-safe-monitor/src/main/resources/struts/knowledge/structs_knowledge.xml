@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+    
+<struts>
+    <package name="knowledge" namespace="/knowledge" extends="struts-default">
+		<!--获取知识库类型列表-->
+		<action name="knowledgeType_*" class="cn.com.qytx.hotline.knowledge.action.KnowledgeActionType" method="{1}">
+		 <result name="success">
+		    /hotline/knowledge/jsp/updateKnowledgeType.jsp
+		 </result>	
+		</action>
+	
+		<!--修改知识库类型 -->
+		<!-- <action name="updateType" class="cn.com.qytx.hotline.knowledge.action.KnowledgeActionType" method="updateType">
+		</action>	 -->
+		<!-- 删除知识库类型 -->
+	<!-- 	<action name="deleteType" class="cn.com.qytx.hotline.knowledge.action.KnowledgeActionType" method="deleteType">
+		</action> -->
+		
+		<!--按条件获取知识库类型 -->	
+		<!-- <action name="getTable" class="cn.com.qytx.hotline.knowledge.action.KnowledgeAction" method="getTable"></action>	 -->
+		<!-- 初始化索引 -->
+		<action name="initIndex" class="cn.com.qytx.hotline.knowledge.action.KnowledgeAction" method="initIndex"></action>	
+		<!-- 删除        索引 -->
+		<action name="delIndex" class="cn.com.qytx.hotline.knowledge.action.KnowledgeAction" method="delIndex"></action>	
+	
+		<!-- 后台添加修改知识库 -->
+	<!-- 	<action name="addOrUpdate" class="cn.com.qytx.hotline.knowledge.action.KnowledgeAction" method="addOrUpdate"></action>
+		 -->
+		<!-- 前台添加修改知识库 -->
+		<!-- <action name="addOrUpdateBefore" class="cn.com.qytx.hotline.knowledge.action.KnowledgeAction" method="addOrUpdateBefore"></action>
+		 -->
+		<!--跳转到查看，编辑页面 -->
+		<action name="knowledge_*" class="cn.com.qytx.hotline.knowledge.action.KnowledgeAction" method="{1}">
+		  <result name="toAdd">
+		    /hotline/knowledge/jsp/viewKnowledge.jsp
+		  </result>
+		  <result name="toUpdate">
+		   /hotline/knowledge/jsp/addKnowledge.jsp
+		 </result>
+		  <result name="toUpdateBefore">
+		   /hotline/seat/jsp/knowledge/addKnowledgeBefore.jsp
+		 </result>
+		  <result name="toShenhe">
+		   /hotline/knowledge/jsp/shenheKnowledge.jsp
+		 </result>
+		 </action>
+		 <!-- 删除delete -->
+		<!-- <action name="delete" class="cn.com.qytx.hotline.knowledge.action.KnowledgeAction" method="delete"></action> -->
+		<!-- 关键字查询 -->
+		<!-- <action name="findByPageDetail" class="cn.com.qytx.hotline.knowledge.action.KnowledgeAction" method="findByPageDetail">
+		</action> -->
+		 <!-- 审核 -->
+		<!-- <action name="shenhe" class="cn.com.qytx.hotline.knowledge.action.KnowledgeAction" method="shenhe"></action>
+		 -->
+		<!-- <action name="toUpdateKnowledgeType" class="cn.com.qytx.hotline.knowledge.action.KnowledgeActionType" method="toUpdateKnowledgeType">
+			
+		</action> -->
+		
+			<!-- 根据文件路径初始化知识库-->
+		<action name="initIndexByDirect" class="cn.com.qytx.hotline.knowledge.action.ScanUploadKnowledge" method="initIndex"></action>	
+		
+		<!-- 收藏知识库 -->
+		<!-- <action name="collectKnowledge" class="cn.com.qytx.hotline.knowledge.action.KnowledgeCollectAction" method="collectKnowledge">
+		</action> -->
+		<!-- 收藏知识库的列表 -->
+		<action name="collect_*" class="cn.com.qytx.hotline.knowledge.action.KnowledgeCollectAction" method="{1}">
+		</action>
+		<!-- 删除收藏的知识库 -->
+		<!-- <action name="deleteCollect" class="cn.com.qytx.hotline.knowledge.action.KnowledgeCollectAction" method="deleteCollect">
+		</action> -->
+		
+		<!-- 上传知识库 -->
+		<action name="uploadKnowledge_*" class="cn.com.qytx.hotline.knowledge.action.UploadKnowledge" method="{1}">
+		</action>
+		<!-- 把上传的知识库保存到数据库中 -->
+		<!-- <action name="saveUploadKnowledge" class="cn.com.qytx.hotline.knowledge.action.UploadKnowledge" method="saveUploadKnowledge">
+		</action> -->
+	</package>
+</struts>

@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <!-- 系统登录 -->
+    <package name="loginwh" namespace="/loginwh" extends="struts-default">
+        <!--登陆成功后跳转的页面-->
+        <action name="loginForwardwh" class="cn.com.wh.login.action.LoginAction" method="loginForward">
+            <result name="success" type="redirect">/wh/logined/welcome.jsp</result>
+        </action>
+        <!--外部平台调用登陆-->
+        <action name="loginAjax" class="cn.com.wh.login.action.LoginAction" method="loginAjax">
+            <result name="success" type="redirect">/wh/logined/welcome.jsp</result>
+        </action>
+        <!-- 刷新缓存 -->
+        <action name="flushCache" class="cn.com.wh.login.action.LoginAction" method="flushCache">
+        </action>
+    </package>
+    
+</struts>

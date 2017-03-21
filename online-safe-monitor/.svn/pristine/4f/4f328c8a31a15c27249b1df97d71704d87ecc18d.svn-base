@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<constant name="struts.devMode" value="false" />
+	<!-- 上传文件大小限制20M 单位是字节 -->
+	<constant name="struts.multipart.maxSize" value="20485760" />
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+	<package name="default" extends="struts-default">
+		<!-- 定义一个拦截器 -->
+		<interceptors>
+
+			<!-- 拦截器栈 -->
+			<interceptor-stack name="mydefault">
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+
+	</package>
+
+
+	<!-- CBB -->
+	<include file="struts/affaires/struts_affairs.xml"></include>
+	<include file="struts/affaires/struts_affairSetting.xml"></include>
+	<include file="struts/dict/struts_dict.xml"></include>
+	<include file="struts/filemanager/struts_file.xml"></include>
+	<include file="struts/jpush/struts_jpush.xml"></include>
+	<include file="struts/log/struts_log.xml"></include>
+	<include file="struts/login/struts_login_wap.xml"></include>
+	<include file="struts/login/struts_login.xml"></include>
+	<include file="struts/org/struts_authority.xml"></include>
+	<include file="struts/module/struts_module.xml"></include>
+	<include file="struts/org/struts_company.xml"></include>
+	<include file="struts/org/struts_group.xml"></include>
+	<include file="struts/org/struts_menu.xml"></include>
+	<include file="struts/org/struts_user.xml"></include>
+	<include file="struts/org/struts_userUpload.xml"></include>
+	<include file="struts/org/struts-mobile.xml"></include>
+	<include file="struts/systemset/struts_systemset.xml"></include>
+	<include file="struts/weather/struts_weather.xml"></include>
+	<include file="struts/myapply/struts_myapply.xml"></include>
+	<include file="struts/ivr/struts_msi.xml"></include>
+	<include file="struts/notify/struts_notify.xml"></include>
+	<!-- 个人公积金查询 -->
+    <include file="struts/gjjsearch/struts_personalGjj.xml"></include>
+    <!-- 公司公积金查询 -->
+    <include file="struts/gjjsearch/struts_companyGjj.xml"></include> 
+	
+	<!-- 呼叫中心 -->
+	<include file="struts/struts_init.xml"></include>
+	<include file="struts/org/struts_hotlineuser.xml"></include>
+	<include file="struts/org/struts_callcenter.xml"></include>
+	<include file="struts/hotline/struts_black.xml"></include>	
+	<include file="struts/customercalllog/struts_jbpmworkorder.xml"></include>
+	<include file="struts/customercalllog/struts_customercalllog.xml"></include>
+	<include file="struts/customercalllog/struts_callDetails.xml"></include>
+	<include file="struts/statistics/struts_statistics.xml"></include>
+  	<include file="struts/workflow/struts_workflow.xml"></include>
+  	<include file="struts/knowledge/structs_knowledge.xml"></include>
+  	<include file="struts/struts_outCallSegment.xml"></include>
+  	
+  	
+  	
+  	<!-- 外呼任务 -->
+    <include file="struts/struts_phoneTask.xml"/>
+    <include file="struts/dhsf/struts_dhsf.xml"></include>
+  	<include file="struts/webyygh/struts_pcyygh.xml"></include>
+  	<include file="struts/webyygh/struts_reservation.xml"></include>
+  	<include file="struts/webyygh/struts_webyygh.xml"></include>
+    <!-- 坐席队列 -->
+    <include file="struts/ivr/struts_queue.xml"/>
+    <!-- 行政区域管理 -->
+    <include file="struts/area/struts_fiveGradeArea.xml"/>
+    <!-- 短信明细 -->
+    <include file="struts/ivr/struts_smsRecord.xml"/>
+    <!-- 用户档案 -->
+    <include file="struts/crm/struts_crm.xml"/>
+    <!-- 报表 -->
+    <include file="struts/report/struts_report.xml"/>
+    <!-- 张东领添加系统设置 -->
+    <!-- 平台化 -->
+    <include file="struts/platform/struts_platformSet.xml"/>
+    <!-- 数据库参数平台化 -->
+    <include file="struts/platform/struts_databaseSet.xml"/>
+    <!-- 系统基础参数设置平台化 -->
+    <include file="struts/platform/struts_systemBasisSet.xml"/>
+    <!-- 语音服务器参数平台化 -->
+    <!-- 张东领添加结束 -->
+    <include file="struts/platform/struts_voxFileSet.xml"/>
+    <!-- 知识库文件配置 -->
+    <include file="struts/platform/struts_knowledgeFileSet.xml"/>
+    <!-- 李立泼添加，用来获取系统时间 -->
+    <include file="struts/systemtime/struts_systemtime.xml"/>
+    <!-- 留言管理 -->
+    <include file="struts/messagemanagement/struts_msgMange.xml"/>
+    <!-- 节假日 -->
+    <include file="struts/holiday/struts_holiday.xml"/>
+    <!-- 工作时间 -->
+    <include file="struts/workingtime/struts_workingTime.xml"/>
+    <!-- 一卡通接口 -->
+    <include file="struts/card/struts_commonCard.xml"/>
+    <!-- 短信通 -->
+    <include file="struts/sms/struts_sms.xml"/>
+    <!-- 号码段维护 -->
+    <include file="struts/phoneattribution/struts_phoneattribution.xml"/>
+    <!-- 坐席端问题上报 -->
+    <include file="struts/projectquestion/struts_projectquestion.xml"/>
+    
+    <!-- 乌海项目 -->
+    <!-- 乌海登录 -->
+    <include file="struts/wh/login/struts_login.xml"/>
+    <include file="struts/wh/login/struts_menu_wh.xml"/>
+    <include file="struts/wh/company/struts_company.xml"/>
+    <include file="struts/wh/exam/struts_exam.xml"/>
+    <include file="struts/wh/safeaccident/struts_safeaccident.xml"/>
+    <include file="struts/wh/dangerchemicals/struts_dangerchemicals.xml"/>
+    <include file="struts/wh/aqyh/struts_aqyh.xml"/>
+    <include file="struts/wh/struts_zhdwxy.xml"/>
+    <include file="struts/wh/training/struts_training.xml"/>
+    <include file="struts/wh/plans/struts_plans.xml"/>
+    <include file="struts/wh/struts_yjyl.xml"/>
+    <include file="struts/wh/professor/struts_professor.xml"/>
+    <include file="struts/wh/emergencydepart/struts_emergency.xml"/>
+    <include file="struts/wh/reliefgoods/struts_reliefgoods.xml"/>
+    <include file="struts/wh/process/struts_process.xml"/>
+    <include file="struts/wh/zhdwxy/struts_dangersourcesgood.xml"/>
+    <include file="struts/wh/fee/struts_fee.xml"/>
+
+</struts>

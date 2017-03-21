@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+    
+<struts>
+	<package name="phoneTask"  namespace="/phoneTask" extends="struts-default">
+		<!-- 外呼任务的action -->
+		<action name="phonetask_*" class="cn.com.qytx.hotline.phonetask.action.PhoneTaskAction" method="{1}">
+		<result name="success">/logined/outCallTask/outCallTaskEditItem.jsp</result>
+		<result name="{1}">/logined/outCallTask/outCallTaskDetial.jsp</result>
+		</action>
+		<action name="question_*" class="cn.com.qytx.hotline.phonetask.action.QuestionAction" method="{1}">
+	    </action>
+		<!-- 任务详细结果的Action -->
+		<action name="detailResult_*" class="cn.com.qytx.hotline.phonetask.action.PhoneTaskDetailResultAction" method="{1}">
+			<result name="success">/logined/outCallTask/outCallTaskResultView.jsp</result>
+		</action>
+		<!-- 坐席端跳转到外呼任务执行页面 -->
+		<action name="phoneTaskSeat_*" class="cn.com.qytx.hotline.phonetask.action.PhoneTaskSeatAction" method="{1}">
+			<result name="success">/logined/outCallTask/outCallTaskCall.jsp</result>
+		</action>
+	
+		<!-- 导入外呼对象 的验证-->
+		<action name="checkBeforeImporting" class="cn.com.qytx.hotline.phonetask.action.ImportPhoneTaskUserAction" method="checkBeforeImporting">
+		</action>
+		<!-- 导入外呼对象-->
+		<action name="importPhoneTaskUser" class="cn.com.qytx.hotline.phonetask.action.ImportPhoneTaskUserAction" method="importPhoneTaskUser">
+		</action>
+		
+		
+		
+	</package>
+</struts>

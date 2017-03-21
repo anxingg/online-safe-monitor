@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+    
+<struts>
+  <package name="outcall"  namespace="/outcall" extends="struts-default">
+  <!-- 获得要维护的本地号段 -->
+  <action name="getHaoduanList" class="cn.com.qytx.hotline.outcall.action.OutCallSegmentAction" method="getHaoduanList">
+  </action>
+  
+  <!-- 导入本地号段-->
+  <!-- <action name="importPhone" class="cn.com.qytx.hotline.outcall.action.OutCallSegmentAction" method="importPhone">
+  </action> -->
+  <action name="importPhone_*" class="cn.com.qytx.hotline.outcall.action.OutCallSegmentImportAction" method="{1}">
+  </action>
+  
+  <!-- 导出本地号段-->
+  <action name="exportPhone" class="cn.com.qytx.hotline.outcall.action.OutCallSegmentAction" method="exportPhone">
+  </action>
+  
+   <!-- 删除本地号段-->
+  <action name="deletePhone" class="cn.com.qytx.hotline.outcall.action.OutCallSegmentAction" method="deletePhone">
+  </action>
+  
+  <!-- 增加本地号段-->
+  <action name="phoneAdd" class="cn.com.qytx.hotline.outcall.action.OutCallSegmentAction" method="phoneAdd">
+  </action>
+  
+ </package>
+
+  
+</struts>

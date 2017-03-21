@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <!-- 用户管理所有action -->
+    <package name="hotlineuser" namespace="/hotlineuser" extends="default">
+        <!--配置用户登录信息-->
+        <action name="updateLoginUser" class="cn.com.qytx.hotline.org.action.UserUpdateAction" method="updateLoginUser">
+        	<interceptor-ref name="mydefault" /> 
+        </action>   
+        
+        <!--获取用户配置登录信息-->
+        <action name="detailLoginUser" class="cn.com.qytx.hotline.org.action.UserUpdateAction" method="detailLoginUser">
+            <result name="update">/logined/user/loginUserAddOrUpdate.jsp</result>
+            <result name="detail">/logined/user/loginUserDetail.jsp</result>
+        </action>   
+         <!--选择人员人员信息-->
+        <action name="selectUser" class="cn.com.qytx.hotline.org.action.UserSelectAction" method="selectUserByType">
+        </action>
+         <!--选择人员人员信息,获得手机号不为空的人员json-->
+        <action name="selectUserNew" class="cn.com.qytx.hotline.org.action.UserSelectAction" method="selectUserByTypeNew">
+        </action>
+         <!--删除用户登录信息-->
+        <action name="deleteLoginUser" class="cn.com.qytx.hotline.org.action.UserUpdateAction" method="deleteLoginUser"></action>   
+        
+         <!--删除管理人员信息-->
+        <action name="deleteUser" class="cn.com.qytx.hotline.org.action.UserUpdateAction" method="deleteUser"></action>
+        
+        
+        <action name="onlyUpdateMsiUserName" class="cn.com.qytx.hotline.org.action.UserUpdateAction" method="onlyUpdateMsiUserName" >
+        </action>
+        <!-- 张东领添加更新部门is_fork_group字段 -->
+        <action name="updateGroupIsforkgroup" class="cn.com.qytx.hotline.org.action.UpdateGroupAction" method="updateGroupIsforkgroup">
+        </action>
+        <!-- 张东领添加更新人员is_fork_group字段 -->
+        <action name="updateUserIsforkgroup" class="cn.com.qytx.hotline.org.action.UserUpdateAction" method="updateUserIsforkgroup">
+        </action>
+        <!-- 更具角色id查询角色code -->
+        <action name="getRoleCodeById" class="cn.com.qytx.hotline.org.action.UserUpdateAction" method="getRoleCodeById">
+        </action>
+    </package>
+</struts>

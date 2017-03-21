@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+    
+<struts>
+	<package name="crm"  namespace="/crm" extends="struts-default">
+		<!-- 坐席队列列表的action -->
+		<action name="list_*" class="cn.com.qytx.hotline.crm.action.CRMAction" method="{1}">
+		</action>
+		
+		<!-- 跳详情 -->
+		<action name="detail" class="cn.com.qytx.hotline.crm.action.CRMAction" method="detail">
+			<result name="detail">/hotline/crm/jsp/crm_detail.jsp</result>
+			<result name="edit">/hotline/crm/jsp/crm_edit.jsp</result>
+		</action>
+		<action name="crmDetail" class="cn.com.qytx.hotline.crm.action.CRMAction" method="crmDetail">
+			<result name="detail">/hotline/crm/jsp/crmView_detail.jsp</result>
+		</action>
+		<!-- 根据联系电话查询客户信息 -->
+		<action name="getCrmInfoByPhone" class="cn.com.qytx.hotline.crm.action.CRMAction" method="getCrmInfoByPhone">
+		</action>
+		
+		<!-- 导入 -->
+		<action name="import_*" class="cn.com.qytx.hotline.crm.action.CRMImportAction" method="{1}">
+		</action>
+		
+		<!-- CRM树 -->
+		<action name="getCRMtree" class="cn.com.qytx.hotline.crm.action.CRMAction" method="getCRMtree">
+		</action>
+
+	</package>
+</struts>

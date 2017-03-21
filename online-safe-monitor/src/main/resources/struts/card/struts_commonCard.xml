@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+    
+<struts>
+	<package name="commonCard"  namespace="/commonCard" extends="struts-default">
+		<!-- 通过身份证卡号获取信息。 -->
+		<action name="selectMsg" class="cn.com.qytx.hotline.commonCard.action.SelectMsgByCommonCard" method="selectMsg">
+		</action>
+	</package>
+</struts>

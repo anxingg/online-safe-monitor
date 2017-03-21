@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+    
+<struts>
+  <package name="voxSet"  namespace="/voxSet" extends="struts-default">
+  <action name="voxFileSetSave" class="cn.com.qytx.platform.action.VoxFileSetAction" method="voxFileSetSave">
+  </action>
+   <action name="voxFileSetView" class="cn.com.qytx.platform.action.VoxFileSetAction" method="voxFileSetView">
+   <result name="success">/platform/jsp/voxFileSet.jsp</result>
+  </action>
+  </package>
+
+  
+</struts>
