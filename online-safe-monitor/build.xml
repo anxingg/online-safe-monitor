@@ -1,0 +1,9 @@
+<project name="c" >
+
+	<target name="osm">
+		<copy overwrite="true" todir="C:\Program Files (x86)\apache-tomcat-7.0.68\webapps\osm">
+			<fileset dir="H:\prog\JAVA\Java.Prog6\wyg\trunk\wuhai\程序\online-safe-monitor\online-safe-monitor\target\online-safe-monitor-1.0.0"></fileset>
+		</copy>	
+	</target>	
+
+</project>	
