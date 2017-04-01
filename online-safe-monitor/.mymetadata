@@ -3,7 +3,7 @@
   type="WEB"
   name="online-safe-monitor-1.0.0"
   id="myeclipse.1409132700809"
-  context-root="/osm"
+  context-root="/online-safe-monitor"
   j2ee-spec="6.0"
   archive="online-safe-monitor-1.0.0.war">
   <attributes>

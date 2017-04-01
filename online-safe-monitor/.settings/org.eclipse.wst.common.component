@@ -21,6 +21,6 @@
             <dependency-type>consumes</dependency-type>
         </dependent-module>
         <property name="java-output-path" value="/online-safe-monitor-1.0.0/src/main/webapp/src/main/java"/>
-        <property name="context-root" value="/osm"/>
+        <property name="context-root" value="/online-safe-monitor"/>
     </wb-module>
 </project-modules>

@@ -65,8 +65,11 @@
  	
    	</div>		
 	<div data-options="region:'center'" class="mainbd">
-		
-
+		<iframe id="mainIframe" 
+			src="" 
+			style="overflow-x:hidden;" class="mainIframe"  
+			frameborder="no" scrolling="auto"  name="mainIframe">
+		</iframe>
 	</div>
 </body>
 <script src="${ctx}wh/js/safeOnline.js" type="text/javascript" charset="utf-8"></script>

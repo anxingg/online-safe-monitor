@@ -186,9 +186,12 @@ a {
 .l_menu ul li.current h2{ color:#fff; background-image:url(../images/icon_show.png);}
 .l_menu ul li.current h2 a{ color:#fff}
 .l_menu ul li.current h2:Hover{ background-color:transparent}
+
 .mainbd{ 
 	background:#f5f7f6; border:none
 }
+
+.mainIframe{ width:100%;}
 
 .check_right {
 	margin-left: 200px;
