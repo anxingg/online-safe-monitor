@@ -22,6 +22,7 @@ import cn.com.wh.emergencydepartment.domain.EmergencyDepartment;
 import cn.com.wh.emergencydepartment.domain.SearchVo;
 import cn.com.wh.emergencydepartment.service.IEmergencyDepartment;
 import cn.com.wh.safeaccident.util.Tool;
+import cn.com.wh.support.SessionSupport;
 
 import com.google.gson.Gson;
 /**
@@ -134,7 +135,7 @@ public class EmergencyDepartmentAction extends BaseActionSupport{
 				info.setIsDelete(0);
 				info.setIsForkGroup(getLoginUser().getIsForkGroup());
 				info.setGroupId(getLoginUser().getIsForkGroup());
-				info.setGroupName(getSession().getAttribute("companyName").toString());
+				info.setGroupName(((SessionSupport)(this.getSessionSupport())).getCurrentCompanyName());
 				info.setCreateUserId(getLoginUser().getUserId());
 				emergencyDepartmentService.saveEmergency(info);
 				ajax("1");

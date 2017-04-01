@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
 import cn.com.qytx.platform.org.domain.UserInfo;
+import cn.com.qytx.platform.session.Constants;
 
 
 /**
@@ -37,7 +38,7 @@ public class OnlineUserListener implements HttpSessionListener {
 		HttpSession session = event.getSession();
 //		ServletContext application = session.getServletContext();
 		// 取得登录的用户名
-		Object userObject = session.getAttribute("adminUser");
+		Object userObject = session.getAttribute(Constants.CURRENT_LOGIN_USER);
 		UserInfo userInfo = (UserInfo) userObject;
 
 		//-----

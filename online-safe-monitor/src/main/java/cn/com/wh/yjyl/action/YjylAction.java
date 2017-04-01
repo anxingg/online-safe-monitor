@@ -30,6 +30,7 @@ import cn.com.qytx.platform.org.domain.UserInfo;
 import cn.com.wh.plans.domain.Plans;
 import cn.com.wh.plans.service.IPlans;
 import cn.com.wh.safeaccident.util.Tool;
+import cn.com.wh.support.SessionSupport;
 import cn.com.wh.util.DataInitUtil;
 import cn.com.wh.util.DateUtil;
 import cn.com.wh.yjyl.domain.WHContingencyPlansExe;
@@ -77,12 +78,12 @@ public class YjylAction extends BaseActionSupport{
 	private List<Attachment> fileList = new ArrayList<Attachment>();
 	
 	public void query(){
-		UserInfo userInfo = (UserInfo) getSession().getAttribute("adminUser");
+		UserInfo userInfo = this.getSessionSupport().getCurrentLoginUser();
 		String groupId = null==this.getRequest().getParameter("group_id")?String.valueOf(userInfo.getGroupId()):this.getRequest().getParameter("group_id");//从用户信息中获取,政府端查看的时候，输入的是此信息
 		String exercise_name = null==this.getRequest().getParameter("exercise_name")?"":this.getRequest().getParameter("exercise_name");
 		int plan_type = null==this.getRequest().getParameter("plan_type")?-1:Integer.parseInt(this.getRequest().getParameter("plan_type"));
 		//int plan_id = null==this.getRequest().getParameter("plan_no")?-1:Integer.parseInt(this.getRequest().getParameter("plan_no"));
-		int whroletype = null==this.getSession().getAttribute("whroletype")?-1:(Integer)this.getSession().getAttribute("whroletype");
+		int whroletype = ((SessionSupport)this.getSessionSupport()).getCurrentWHRoleType();
 		if(whroletype==2){
 			groupId = String.valueOf(userInfo.getGroupId());
 		}else{
@@ -193,7 +194,7 @@ public class YjylAction extends BaseActionSupport{
 	
 	
 	public void saveorup(){
-		UserInfo userInfo = (UserInfo) getSession().getAttribute("adminUser");
+		UserInfo userInfo = this.getSessionSupport().getCurrentLoginUser();
 		String groupId = null==this.getRequest().getParameter("group_id")?String.valueOf(userInfo.getGroupId()):this.getRequest().getParameter("group_id");
 		String exercise_name =  fetchFromRequest("exercise_name");
 		int plan_type = "".equals(fetchFromRequest("plan_type"))?-1:Integer.parseInt(fetchFromRequest("plan_type"));

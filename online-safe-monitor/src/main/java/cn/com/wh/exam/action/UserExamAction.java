@@ -28,6 +28,7 @@ import cn.com.wh.exam.domain.SearchVo;
 import cn.com.wh.exam.service.ExamTestService;
 import cn.com.wh.exam.service.IExamPaper;
 import cn.com.wh.exam.service.IExamUserTest;
+import cn.com.wh.support.SessionSupport;
 import cn.com.wh.util.DataInitUtil;
 import cn.com.wh.util.ExportExcelUtils;
 
@@ -273,7 +274,7 @@ public class UserExamAction extends BaseActionSupport{
 				}
 				response.addHeader("Content-Disposition", "attachment;filename=" + fileName);
 		        OutputStream out = response.getOutputStream();		
-		        Integer userType = (Integer)getSession().getAttribute("whroletype");
+		        Integer userType = ((SessionSupport)this.getSessionSupport()).getCurrentWHRoleType();
 		        if (userType==1) {//政府
 		        	String[] headerArr = { "序号", "试卷名称", "试卷类型","公司名称","考试月份","考试人员","成绩"};
 					String[] columnArr = { "no", "paperTitle","testType","companyName","examTime","userName","score"};

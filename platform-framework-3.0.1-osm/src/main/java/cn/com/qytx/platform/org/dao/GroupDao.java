@@ -456,7 +456,7 @@ public class GroupDao <T extends GroupInfo>  extends BaseDao<GroupInfo,Integer> 
 	 */
 	public Map<Integer,Integer> getCompanyGroupCountMap(Integer companyId){
 		Map<Integer,Integer> map=new HashMap<Integer, Integer>();
-		String sql="select group_id,count(*) as num from view_user_info where  is_delete=0 and  company_id="+companyId+"   group by group_id";
+		String sql="select group_id,count(*) as num from tb_user_info where  is_delete=0 and  company_id="+companyId+"   group by group_id";
 		Query query=super.entityManager.createNativeQuery(sql);
 		List list=query.getResultList();
 		if(list!=null&&list.size()>0){
@@ -492,7 +492,7 @@ public class GroupDao <T extends GroupInfo>  extends BaseDao<GroupInfo,Integer> 
 	 * @param ids 人员ID集合，用","隔开
 	 */
 	public void updateGroupsByUserIds(int companyId, String ids) {
-		String sql="update tb_group_info set last_update_time='"+ DateTimeUtil.getCurrentTime()+"' where group_type in (1,2) and company_id="+companyId+" and group_id in (select group_id from view_user_info where company_id="+companyId+" and user_id in ("+ids+"));";
+		String sql="update tb_group_info set last_update_time='"+ DateTimeUtil.getCurrentTime()+"' where group_type in (1,2) and company_id="+companyId+" and group_id in (select group_id from tb_user_info where company_id="+companyId+" and user_id in ("+ids+"));";
 		this.entityManager.createNativeQuery(sql).executeUpdate();
 	}
 	

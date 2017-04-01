@@ -180,7 +180,7 @@ public class ImportUserAction extends BaseActionSupport {
         String result = "";
         try {
             Integer companyId=0;
-            Object obj=getSession().getAttribute("adminUser");
+            Object obj=this.getSessionSupport().getCurrentLoginUser();
             if(obj!=null){
             	UserInfo loginUser=(UserInfo)obj;
             	companyId=loginUser.getCompanyId();
@@ -360,7 +360,7 @@ public class ImportUserAction extends BaseActionSupport {
      */
     @SuppressWarnings("unchecked")
 	private String startImportUser(String excel) throws Exception {
-        UserInfo adminUser = (UserInfo) this.getSession().getAttribute("adminUser");
+        UserInfo adminUser = this.getSessionSupport().getCurrentLoginUser();
         int companyId = adminUser.getCompanyId();
         int maxOrder = userService.getMaxOrderIndex(adminUser.getCompanyId());
         //从excel中提取部门信息

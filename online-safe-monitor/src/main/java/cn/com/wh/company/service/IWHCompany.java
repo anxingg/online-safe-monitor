@@ -15,13 +15,6 @@ public interface IWHCompany extends BaseService<WHCompany>{
 	 */
 	public Page<WHCompany> findWHCompanyByPage(Pageable pageable,Integer groupId);
 
-	/**
-	 * 根据分组id 查询所属公司的公司名
-	 * @param groupId
-	 * @return 公司名
-	 */
-	public String getCompanyName(Integer groupId);
-	
 	
 	/**
 	 * 根据分组id 查询所属公司信息

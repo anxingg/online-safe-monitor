@@ -24,7 +24,7 @@ import cn.com.qytx.platform.service.IPlatformParameterService;
  */
 public class DataBaseSetAction extends BaseActionSupport{
 	
-	  /**
+	/**
 	 * 描述含义
 	 */
 	private static final long serialVersionUID = -617216072235064027L;
@@ -32,53 +32,38 @@ public class DataBaseSetAction extends BaseActionSupport{
      * 参数平台化service
      */
 	@Autowired
-   private transient IPlatformParameterService paramsService;
+	private transient IPlatformParameterService paramsService;
    
-public IPlatformParameterService getParamsService() {
-	return paramsService;
-}
-
-
-
-
-public void setParamsService(IPlatformParameterService paramsService) {
-	this.paramsService = paramsService;
-}
-
-
-
-
-public void setParamsService(IPlatformParameterServiceImpl paramsService) {
-	this.paramsService = paramsService;
-}
-
-
-/**
- * 数据库参数的实体
- */
-
-	private DataBaseSet dbset;
+	public IPlatformParameterService getParamsService() {
+		return paramsService;
+	}
 	
-	  public DataBaseSet getDbset() {
-		return dbset;
+	public void setParamsService(IPlatformParameterService paramsService) {
+		this.paramsService = paramsService;
+	}
+	
+	public void setParamsService(IPlatformParameterServiceImpl paramsService) {
+		this.paramsService = paramsService;
 	}
 
-
-
+	/**
+	 * 数据库参数的实体
+	 */
+	private DataBaseSet dbset;
+	
+	public DataBaseSet getDbset() {
+		return dbset;
+	}
+	
 	public void setDbset(DataBaseSet dbset) {
 		this.dbset = dbset;
 	}
-
-
-
-
-
+	
 	/**
 	 * @return 保存数据库参数的实体
 	 * 操作config.properties，输入输出流操作properties文件
 	 */
-	public String dataBaseSetSave(){
-		
+	public String dataBaseSetSave(){	
 		PrintWriter out = null;
 		InputStream fis = null;
 		FileOutputStream fos =null;
@@ -88,26 +73,25 @@ public void setParamsService(IPlatformParameterServiceImpl paramsService) {
 //			String fileSt=DataBaseSetAction.class.getClassLoader().getResource("config.properties").getPath();
 			String fileSt=Thread.currentThread().getContextClassLoader().getResource("config.properties").getPath();
 			File fileTem= new File(fileSt);
-			  fis = new FileInputStream(fileTem);   
-		   Properties properties = new Properties();
-		   //加载
+			fis = new FileInputStream(fileTem);   
+			Properties properties = new Properties();
+			//加载
 			properties.load(fis);
-		//设置properties属性
+			//设置properties属性
 			properties.setProperty("ip", dbset.getDbHostIp());
 			properties.setProperty("port", dbset.getDbPort());
 			properties.setProperty("database", dbset.getDbName());
 			properties.setProperty("username", dbset.getDbUsername());
 			properties.setProperty("password", dbset.getDbPsw());
 			//关闭输入流 
-			 fis.close();  
+			fis.close();  
 			// 文件输出流 
-						File file=new File(fileSt);
-						 fos = new FileOutputStream(file); 
-						// 将Properties集合保存到流中 
-						properties.store(fos, "Copyright (c) "); 
-						fos.close();// 关闭流 
-			
-						out.print(1);
+			File file=new File(fileSt);
+			fos = new FileOutputStream(file); 
+			// 将Properties集合保存到流中 
+			properties.store(fos, "Copyright (c) "); 
+			fos.close();// 关闭流 
+			out.print(1);
 		} catch (IOException e) {
 			LOGGER.error(e.getMessage());
 		}finally{
@@ -130,8 +114,8 @@ public void setParamsService(IPlatformParameterServiceImpl paramsService) {
 				}
 			}
 		}
-		   return null;
-	  }
+		return null;
+	}
 	
 	/**
 	 * @return  从config.properties取出内容并展示
@@ -143,11 +127,11 @@ public void setParamsService(IPlatformParameterServiceImpl paramsService) {
 //			String fileSt=DataBaseSetAction.class.getClassLoader().getResource("config.properties").getPath();
 			String fileSt=Thread.currentThread().getContextClassLoader().getResource("config.properties").getPath();
 			File file= new File(fileSt);
-			  fis = new FileInputStream(file);   
+			fis = new FileInputStream(file);   
 
 			Properties properties = new Properties();
 			//加载文件
-				properties.load(fis);
+			properties.load(fis);
 			//取出属性
 			String ip=	properties.getProperty("ip");
 			String port=	properties.getProperty("port");
@@ -162,23 +146,24 @@ public void setParamsService(IPlatformParameterServiceImpl paramsService) {
 			dbs.setDbUsername(username);
 			
 			this.getRequest().setAttribute("dbset", dbs);
-			} catch (IOException e) {
-				LOGGER.error(e.getMessage());
-			}finally{
-				if(fis!=null){
-					try {
-						fis.close();
-					} catch (IOException e) {
-						LOGGER.error(e.getMessage());
-					}
+		} 
+		catch (IOException e) {
+			LOGGER.error(e.getMessage());
+		}
+		finally{
+			if(fis!=null){
+				try {
+					fis.close();
+				} catch (IOException e) {
+					LOGGER.error(e.getMessage());
 				}
 			}
-		
+		}
 		return SUCCESS;
 	}
 	
 	public String testMyParm(){
-		ApplicationContext ac1 = WebApplicationContextUtils.getRequiredWebApplicationContext(this.getSession().getServletContext());
+		ApplicationContext ac1 = WebApplicationContextUtils.getRequiredWebApplicationContext(this.getSessionSupport().getSession().getServletContext());
 		IPlatformParameterService paramsService=	(IPlatformParameterService) ac1.getBean("parmsService");
 		DataBaseSet dbs=new DataBaseSet();
 		dbs.setParItems("cn.com.qytx.platform.domain.DataBaseSet");

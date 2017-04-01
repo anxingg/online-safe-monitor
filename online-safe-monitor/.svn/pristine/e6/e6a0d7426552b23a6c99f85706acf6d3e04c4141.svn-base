@@ -1,2 +1,0 @@
-   <end name="${name}" />
-</process>

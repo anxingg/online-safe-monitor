@@ -48,7 +48,7 @@ public class PushListAction extends BaseActionSupport {
 	 */
 	public String findPushList() {
 		try {
-			Object userObject = getSession().getAttribute("adminUser");
+			Object userObject = this.getSessionSupport().getCurrentLoginUser();
 			if (userObject != null) {
 				UserInfo user = (UserInfo) userObject;
 				// pageInfo = new Page<PushInfo>();
@@ -88,7 +88,7 @@ public class PushListAction extends BaseActionSupport {
 	public String deletePush() {
 		try {
 			// 得到登陆用户
-			Object userObject = this.getSession().getAttribute("adminUser");
+			Object userObject = this.getSessionSupport().getCurrentLoginUser();
 			if (userObject != null) {
 				int res = pushInfoService.deletePushs(ids);
 				ajax(res);

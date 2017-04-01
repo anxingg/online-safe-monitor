@@ -65,8 +65,8 @@ public class NotifyImpl extends BaseServiceImpl<Notify> implements INotify {
 	}
 
 	@Transactional(readOnly = true)
-	public Page<Notify> list(Pageable pageable, Integer notifyType,String subject, Date beginDate, Date endDate, UserInfo userInfo,Integer columnId,Integer status,Integer whroletype) {
-		return notifyDao.list(pageable, notifyType, subject, beginDate,endDate, userInfo, columnId,status, whroletype);
+	public Page<Notify> list(Pageable pageable, Integer notifyType,String subject, Date beginDate, Date endDate, UserInfo userInfo,Integer columnId,Integer status) {
+		return notifyDao.list(pageable, notifyType, subject, beginDate,endDate, userInfo, columnId,status);
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED)

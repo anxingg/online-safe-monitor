@@ -36,25 +36,27 @@ public class SecurityMetadataSource implements FilterInvocationSecurityMetadataS
      * 加载方法，从数据库中读取资源
      */
     public void loadResourceDefine(){
-        moduleMap=new HashMap<String, Collection<ConfigAttribute>>();
-        List<ModuleInfo> moduleList=moduleService.getAllModule();
-        for (ModuleInfo module : moduleList) {
-            String moduleUrl=module.getUrl();
-            String moduleFlag=module.getModuleCode();//模块编码
-            if(StringUtils.isNotEmpty(moduleUrl)&&StringUtils.isNotEmpty(moduleFlag)){
-                //处理url
-                if(!moduleUrl.startsWith("/")){
-                    moduleUrl="/"+moduleUrl;
-                }
-                
-                Collection<ConfigAttribute> list = moduleMap.get(moduleUrl);
-                if(list==null){
-	                list =new ArrayList<ConfigAttribute>();
-                }
-                list.add(new SecurityConfig(moduleFlag));
-                moduleMap.put(moduleUrl,list);
-            }
-        }
+    	if(moduleMap!=null){
+	        moduleMap=new HashMap<String, Collection<ConfigAttribute>>();
+	        List<ModuleInfo> moduleList=moduleService.getModuleByRole(null,null);
+	        for (ModuleInfo module : moduleList) {
+	            String moduleUrl=module.getUrl();
+	            String moduleFlag=module.getModuleCode();//模块编码
+	            if(StringUtils.isNotEmpty(moduleUrl)&&StringUtils.isNotEmpty(moduleFlag)){
+	                //处理url
+	                if(!moduleUrl.startsWith("/")){
+	                    moduleUrl="/"+moduleUrl;
+	                }
+	                
+	                Collection<ConfigAttribute> list = moduleMap.get(moduleUrl);
+	                if(list==null){
+		                list =new ArrayList<ConfigAttribute>();
+	                }
+	                list.add(new SecurityConfig(moduleFlag));
+	                moduleMap.put(moduleUrl,list);
+	            }
+	        }
+    	}
     }
 
     @Override
@@ -83,6 +85,7 @@ public class SecurityMetadataSource implements FilterInvocationSecurityMetadataS
      */
     @Override
     public Collection<ConfigAttribute> getAllConfigAttributes() {
+    	loadResourceDefine();
         Set<ConfigAttribute> allAttribute=new HashSet<ConfigAttribute>();
         if(moduleMap!=null){
             for(Map.Entry<String,Collection<ConfigAttribute>> entry:moduleMap.entrySet())

@@ -142,7 +142,7 @@ public class PlansAction extends BaseActionSupport {
 	public String add(){
 		try {
 			LOGGER.info("应急预案新增开始。。。");
-			UserInfo userInfo = (UserInfo) getSession().getAttribute("adminUser");
+			UserInfo userInfo = this.getSessionSupport().getCurrentLoginUser();
 			groupId = userInfo.getGroupId();
 			plans.setPrepareTime(Timestamp.valueOf(prepareTime));
 			plans.setPrepareEndTime(Timestamp.valueOf(prepareEndTime));

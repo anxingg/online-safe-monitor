@@ -471,8 +471,7 @@ public class NotifyAction extends BaseActionSupport {
 	 */
 	public String list(){
 		Sort sort = new Sort(new Sort.Order(Direction.DESC,"isTop"),new Sort.Order(Direction.DESC,"createDate"));
-		Integer whroletype = (Integer) this.getSession().getAttribute("whroletype");
-		Page<Notify> pageInfo = notifyService.list(getPageable(sort),notifyType,subject,beginDate,endDate,getLoginUser(),columnId,status, whroletype);
+		Page<Notify> pageInfo = notifyService.list(getPageable(sort),notifyType,subject,beginDate,endDate,getLoginUser(),columnId,status);
 		List<Notify> list = pageInfo.getContent();
 		List<Map<String,Object>> resultList = new ArrayList<Map<String,Object>>();
 		if(list != null && !list.isEmpty()){

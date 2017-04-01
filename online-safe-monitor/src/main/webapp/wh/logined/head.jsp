@@ -6,12 +6,11 @@
             + path+"/" ;
     request.setAttribute("ctx", basePath);
     request.setAttribute("version", "3.0.1");
-    
     request.setAttribute("workflowName", "工单流转new-1");
 %>
 <link rel="stylesheet" type="text/css" href="${ctx}wh/jquery-easyui-1.4.3/themes/default/easyui.css?version=${version}"/>
 <link rel="stylesheet" type="text/css" href="${ctx}wh/jquery-easyui-1.4.3/themes/icon.css?version=${version}"/>
-<link rel="stylesheet" type="text/css" href="${ctx}wh/css/style.css?version=${version}"/>
+<link rel="stylesheet" type="text/css" href="${ctx}wh/css/safe.css?version=${version}"/>
 <link href="${ctx}wh/plugins/datatable/skins/datatable_default.css?version=${version}" rel="stylesheet" type="text/css"/>
 <link href="${ctx}wh/plugins/form/skins/form_default.css?version=${version}" rel="stylesheet" type="text/css"/>
 <link id="skinCss" href="${ctx}skins/green/green.css" rel="stylesheet" type="text/css" />

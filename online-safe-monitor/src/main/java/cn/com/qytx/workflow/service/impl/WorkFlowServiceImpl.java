@@ -42,6 +42,7 @@ import cn.com.qytx.platform.org.domain.RoleInfo;
 import cn.com.qytx.platform.org.domain.UserInfo;
 import cn.com.qytx.platform.org.service.IRole;
 import cn.com.qytx.platform.org.service.IUser;
+import cn.com.qytx.platform.session.Constants;
 import cn.com.qytx.workflow.constans.WorkflowConstans;
 import cn.com.qytx.workflow.dao.HotNodeFormAttributeDao;
 import cn.com.qytx.workflow.dao.HotProcessAttributeDao;
@@ -392,7 +393,7 @@ public class WorkFlowServiceImpl implements WorkflowService,WorkflowConstans,Ser
         ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder
                 .currentRequestAttributes();
         HttpServletRequest request = attr.getRequest();
-        return (UserInfo)request.getSession().getAttribute("adminUser");
+        return (UserInfo)request.getSession().getAttribute(Constants.CURRENT_LOGIN_USER);
     }
 
    @SuppressWarnings("serial")

@@ -83,7 +83,7 @@ public interface INotify extends BaseService<Notify> {
 	 */
 	public Page<Notify> list(Pageable pageable, Integer notifyType,
 			String subject, Date beginDate, Date endDate, UserInfo userInfo,
-			Integer columnId, Integer status, Integer whroletype);
+			Integer columnId, Integer status);
 
 	/**
 	 * 保存

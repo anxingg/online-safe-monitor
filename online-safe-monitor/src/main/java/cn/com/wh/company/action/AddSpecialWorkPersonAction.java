@@ -68,7 +68,7 @@ public class AddSpecialWorkPersonAction extends BaseActionSupport{
 	public String addSpecialWorkPerson(){
 		
 		try {
-			UserInfo userInfo = (UserInfo) getSession().getAttribute("adminUser");
+			UserInfo userInfo = this.getSessionSupport().getCurrentLoginUser();
 			if(group_id==null || group_id == -1){				
 				group_id = userInfo.getGroupId();
 			}

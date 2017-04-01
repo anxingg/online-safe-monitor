@@ -125,7 +125,7 @@ public class ProfessorAction extends BaseActionSupport {
 		//int logType = LogType.LOG_ZJ_ADD;
 		int logType = getLogType( 1, professor.getProfessorType());
 		try {
-			UserInfo userInfo = (UserInfo) getSession().getAttribute("adminUser");
+			UserInfo userInfo = this.getSessionSupport().getCurrentLoginUser();
 			if(professor.getVid()==null){//新增
 				professor.setIsForkGroup(userInfo.getGroupId());
 				professor.setCreateTime(new Timestamp(System.currentTimeMillis()));

@@ -249,18 +249,18 @@ public class PlatformParameterDao extends BaseDao<PlatformParameter, Integer> im
 				//try catch如果在获取某一个对象出现异常的时不影响其他对象的加载
 				try {
 					PlatformParameter pp=ppList.get(i);
-					 String className=pp.getParItems();
-					 Class cl=Class.forName(className);
-					 Object clObj= cl.newInstance();
-					 Gson gson = new Gson();
-					 //将jason格式的字符串转化成对应的对象
-					 Object obj = gson.fromJson(pp.getParValueColl(), cl);
-				//	 Object ot=ctrateParEntity(clObj,pp);
-					 objList.add(obj);
-				} catch (Exception e) {
+					String className=pp.getParItems();
+					Class cl=Class.forName(className);
+					Object clObj= cl.newInstance();
+					Gson gson = new Gson();
+					//将jason格式的字符串转化成对应的对象
+					Object obj = gson.fromJson(pp.getParValueColl(), cl);
+				//	Object ot=ctrateParEntity(clObj,pp);
+					objList.add(obj);
+				} 
+				catch (Exception e) {
 					logger.error(e.getMessage());
 				}
-			
 			}
 		}	
 		return objList;

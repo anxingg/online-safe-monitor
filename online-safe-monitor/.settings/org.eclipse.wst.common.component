@@ -1,25 +1,26 @@
-<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId" project-version="1.5.0">
     <wb-module deploy-name="qytxhotline">
-        <wb-resource deploy-path="/" source-path="/target/m2e-jee/web-resources"/>
-        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
-        <dependent-module archiveName="cbb-notify-2.0.2-wh.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/cbb-notify-wh/cbb-notify-wh">
+        <wb-resource deploy-path="/" source-path="/target/m2e-jee/web-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/webapp"/>
+        <dependent-module archiveName="cbb-notify-2.0.2-osm.war" deploy-path="/WEB-INF/lib" handle="module:/resource/cbb-notify-2.0.2-osm/cbb-notify-2.0.2-osm">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="platform-cbb-3.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/platform-cbb-3.0.1-wh/platform-cbb-3.0.1-wh">
+        <dependent-module archiveName="platform-cbb-3.0.1-osm.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/platform-cbb-3.0.1-osm/platform-cbb-3.0.1-osm">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="platform-framework-3.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/platform-framework-3.0.1-wh/platform-framework-3.0.1-wh">
+        <dependent-module archiveName="platform-framework-3.0.1-osm.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/platform-framework-3.0.1-osm/platform-framework-3.0.1-osm">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module deploy-path="/" handle="module:/overlay/prj/cbb-notify-wh?includes=**/**&amp;excludes=META-INF/MANIFEST.MF">
+        <dependent-module deploy-path="/" handle="module:/overlay/prj/cbb-notify-2.0.2-osm?includes=**/**&amp;excludes=META-INF/MANIFEST.MF">
             <dependency-type>consumes</dependency-type>
         </dependent-module>
         <dependent-module deploy-path="/" handle="module:/overlay/slf/?includes=**/**&amp;excludes=META-INF/MANIFEST.MF">
             <dependency-type>consumes</dependency-type>
         </dependent-module>
-        <property name="java-output-path" value="/qytxhotline/src/main/webapp/WEB-INF/classes"/>
-        <property name="context-root" value="wuhaisafety"/>
+        <property name="java-output-path" value="/online-safe-monitor-1.0.0/src/main/webapp/src/main/java"/>
+        <property name="context-root" value="/osm"/>
     </wb-module>
 </project-modules>

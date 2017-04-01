@@ -22,6 +22,7 @@ import cn.com.qytx.platform.org.service.IUser;
 import cn.com.qytx.platform.security.SessionVariable;
 import cn.com.qytx.platform.security.SystemContextHolder;
 import cn.com.qytx.platform.security.UserDetailServiceImpl;
+import cn.com.qytx.platform.session.Constants;
 import cn.com.qytx.platform.utils.spring.SpringUtil;
 
 /**
@@ -43,12 +44,12 @@ public class TransportUserFilter implements Filter {
 	public void doFilter(ServletRequest arg0, ServletResponse arg1,
 			FilterChain arg2) throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest)arg0;
-		UserInfo userInfo =(UserInfo) request.getSession().getAttribute("adminUser");
+		UserInfo userInfo =(UserInfo) request.getSession().getAttribute(Constants.CURRENT_LOGIN_USER);
 		//保存在ThreadLocal中
 		if(userInfo!=null){
 			TransportUser.set(userInfo);
-			GroupInfo groupInfo = (GroupInfo) request.getSession().getAttribute(UserDetailServiceImpl.USER_GROUP);
-			List<RoleInfo> roles = (List<RoleInfo>) request.getSession().getAttribute(UserDetailServiceImpl.USER_ROLES);
+			GroupInfo groupInfo = (GroupInfo) request.getSession().getAttribute(Constants.CURRENT_USER_GROUP);
+			List<RoleInfo> roles = (List<RoleInfo>) request.getSession().getAttribute(Constants.CURRENT_USER_ROLES);
 			setDataPowerForPC(userInfo,groupInfo,roles);
 		}else{
 			//兼容手机服务

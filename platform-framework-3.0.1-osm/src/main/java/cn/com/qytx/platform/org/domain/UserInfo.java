@@ -22,7 +22,7 @@ import com.google.gson.annotations.Expose;
  * 修改列表：
  */
 @Entity
-@Table(name="view_user_info")
+@Table(name="tb_user_info")
 public class UserInfo  extends BaseUserInfo{
 	
     /**

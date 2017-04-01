@@ -17,7 +17,7 @@
 		<repository>
 			<id>nexus-qytx</id>
 			<name>qytx repository</name>
-			<url>http://218.206.243.34:8081/nexus/content/groups/public/</url>
+			<url>http://192.168.10.139:8081/nexus/content/groups/public/</url>
 		</repository>
 	</repositories>
 	<build>
@@ -70,13 +70,10 @@
 	</build>
 
 	<dependencies>
-
-
 		<dependency>
 		  <groupId>cn.com.qytx</groupId>
 		  <artifactId>cbb-notify</artifactId>
 		  <version>2.0.2-osm</version>
-		  <scope>provided</scope>
 		</dependency>
 
 		<dependency>

@@ -16,7 +16,7 @@ public class LogoInitServlet extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 	    
 		LogoConfig.getInstance().setLogoUrl("");
-		LogoConfig.getInstance().setSysName("OA办公系统");
+		LogoConfig.getInstance().setSysName("安监在线平台");
 		
 	}
 }

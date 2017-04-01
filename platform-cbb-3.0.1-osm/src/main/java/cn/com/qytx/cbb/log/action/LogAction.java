@@ -91,7 +91,7 @@ public class LogAction  extends BaseActionSupport {
 	 * @return
 	 */
 	public String getLogList(){
-			UserInfo userInfo = (UserInfo) getSession().getAttribute("adminUser");
+			UserInfo userInfo = this.getSessionSupport().getCurrentLoginUser();
 			if(userIds!=null&&!userIds.equals("")){
 				userIds = userIds.substring(1, userIds.length()-1);
 			}
@@ -588,7 +588,7 @@ public class LogAction  extends BaseActionSupport {
         
         try{
             // 首先获取登录人基本信息
-            UserInfo user = (UserInfo) this.getSession().getAttribute("adminUser");
+            UserInfo user = this.getSessionSupport().getCurrentLoginUser();
 			
 			// 处理导出时,人员前后的,
 	        if(userIds!=null&&!userIds.equals("")){
@@ -617,7 +617,7 @@ public class LogAction  extends BaseActionSupport {
 	 * @throws   
 	 */
 	private String getGroupIds(int userId){
-		UserInfo userInfo = (UserInfo) getSession().getAttribute("adminUser");
+		UserInfo userInfo = this.getSessionSupport().getCurrentLoginUser();
 		GroupInfo forkGroup = groupService.getForkGroup(userInfo.getCompanyId(),userId);
 		List<GroupInfo> groupList = null;
 		if(forkGroup != null){

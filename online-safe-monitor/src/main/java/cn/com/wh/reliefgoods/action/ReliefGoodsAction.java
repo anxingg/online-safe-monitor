@@ -23,6 +23,7 @@ import cn.com.wh.reliefgoods.domain.ReliefGoods;
 import cn.com.wh.reliefgoods.domain.SearchVo;
 import cn.com.wh.reliefgoods.service.IReliefGoods;
 import cn.com.wh.safeaccident.util.Tool;
+import cn.com.wh.support.SessionSupport;
 
 import com.google.gson.Gson;
 /**
@@ -153,7 +154,7 @@ public class ReliefGoodsAction extends BaseActionSupport{
 				info.setIsDelete(0);
 				info.setIsForkGroup(getLoginUser().getIsForkGroup());
 				info.setGroupId(getLoginUser().getIsForkGroup());
-				info.setGroupName(getSession().getAttribute("companyName").toString());
+				info.setGroupName(((SessionSupport)(this.getSessionSupport())).getCurrentCompanyName());
 				info.setCreateUserId(getLoginUser().getUserId());
 				reliefGoodsService.saveGoods(info);
 				ajax("1");

@@ -1,9 +1,0 @@
-﻿/* 由开发人员工具生成。它可能不是原始源文件的准确表示形式。*/
-.print_form { margin:0px auto; margin-top:20px; }
-.print_form table { width:100%;border-right:1px solid #000; table-layout:fixed; }
-.print_form table  th { text-align:center;}
-.print_form table td { padding:5px; line-height:26px;border-top:1px solid #000;font-size:16px; border-left:1px solid #000; word-break:break-all; font-weight:bold}
-.print_form table td strong { font-family:"黑体"; font-size:18px; display:block; color:#000;}
-.td_shu {FONT-SIZE: 16px; FONT-WEIGHT: bold;width:40px; text-align:center;}
-.title {LINE-HEIGHT: 40px; FONT-FAMILY: "黑体"; FONT-SIZE: 28px; FONT-WEIGHT: bold; text-align:center;}
-.longTxt { line-height:26px; overflow:hidden; text-align:left; text-overflow:ellipsis; white-space:nowrap; word-break:keep-all;}

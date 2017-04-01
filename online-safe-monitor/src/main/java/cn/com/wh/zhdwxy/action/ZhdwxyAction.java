@@ -25,6 +25,7 @@ import cn.com.qytx.platform.log.service.ILog;
 import cn.com.qytx.platform.log.service.LogType;
 import cn.com.qytx.platform.org.domain.UserInfo;
 import cn.com.wh.safeaccident.util.Tool;
+import cn.com.wh.support.SessionSupport;
 import cn.com.wh.util.DataInitUtil;
 import cn.com.wh.util.DateUtil;
 import cn.com.wh.zhdwxy.domain.WhDangerSources;
@@ -75,8 +76,8 @@ public class ZhdwxyAction extends BaseActionSupport{
 	 * 
 	 */
 	public void query(){
-		UserInfo userInfo = (UserInfo) getSession().getAttribute("adminUser");
-		int whroletype = null==this.getSession().getAttribute("whroletype")?-1:(Integer)this.getSession().getAttribute("whroletype");
+		UserInfo userInfo = this.getSessionSupport().getCurrentLoginUser();
+		int whroletype = ((SessionSupport)this.getSessionSupport()).getCurrentWHRoleType();
 		if(whroletype==2){
 			groupId = String.valueOf(userInfo.getGroupId());
 		}else{
@@ -200,7 +201,7 @@ public class ZhdwxyAction extends BaseActionSupport{
 	 * 
 	 */
 	public void saveorup(){
-		UserInfo userInfo = (UserInfo) getSession().getAttribute("adminUser");
+		UserInfo userInfo = this.getSessionSupport().getCurrentLoginUser();
 		groupId = null==groupId?String.valueOf(userInfo.getGroupId()):groupId;//从用户信息中获取,政府端查看的时候，输入的是此信息
 		dangerSourcesName = null==dangerSourcesName?"":dangerSourcesName;
 		//safetyMeasures = null==safetyMeasures?"":safetyMeasures;

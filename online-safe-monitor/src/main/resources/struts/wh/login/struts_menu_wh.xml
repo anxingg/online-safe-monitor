@@ -4,8 +4,11 @@
 <struts>
      <!-- 获取菜单 -->
     <package name="whmenu" namespace="/whmenu" extends="struts-default">
-        <action name="fetchMenu" class="cn.com.wh.login.action.MenuAction" method="fetchMenu">
-            <result name="menu">/wh/logined/menu.jsp</result>
+        <action name="fetchOSMIndexMenu" class="cn.com.wh.login.action.MenuAction" method="fetchOSMIndexMenu">
+            <result name="menu">/wh/logined/osmIndexMenu.jsp</result>
+        </action>
+        <action name="fetchSubSystemMenu" class="cn.com.wh.login.action.MenuAction" method="fetchSubSystemMenu">
+            <result name="menu">/wh/logined/osmSubSystemMenu.jsp</result>
         </action>
     </package>
 </struts>

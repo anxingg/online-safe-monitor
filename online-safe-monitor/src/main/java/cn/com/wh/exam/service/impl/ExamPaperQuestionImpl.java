@@ -2,12 +2,9 @@ package cn.com.wh.exam.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import cn.com.qytx.hotline.phonetask.domain.QuestionItem;
 import cn.com.qytx.platform.base.service.impl.BaseServiceImpl;
 import cn.com.wh.exam.dao.ExamPaperQuestionDao;
 import cn.com.wh.exam.dao.ExamQuestionDao;

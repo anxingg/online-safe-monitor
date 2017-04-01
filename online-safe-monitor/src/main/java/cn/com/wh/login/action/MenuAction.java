@@ -11,10 +11,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+
 import cn.com.qytx.platform.base.action.BaseActionSupport;
 import cn.com.qytx.platform.org.domain.ModuleInfo;
 import cn.com.qytx.platform.org.domain.RoleModule;
 import cn.com.qytx.platform.org.domain.UserInfo;
+import cn.com.qytx.platform.session.Constants;
+import cn.com.wh.WHConstant;
 import cn.com.wh.util.DataInitUtil;
 
 /**
@@ -26,132 +30,69 @@ import cn.com.wh.util.DataInitUtil;
  * @Date           2015-9-1 上午11:16:04 
  */
 public class MenuAction extends BaseActionSupport{
-
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+	/**
+	 * 首页菜单或子系统菜单
+	 */
 	public List<ModuleInfo> showModuleList;
-	
-	public static int zhroleid = 3;
-	public static int qyroleid = 2;
-	
-	public String fetchMenu(){
-		UserInfo info =getLoginUser();
-//		List<ModuleInfo> allModuleInfoList = DataInitUtil.moduleInfoList;
-		showModuleList = new ArrayList<ModuleInfo>();
-		Map<Integer,RoleModule> roleModuleMap_zh = DataInitUtil.roleModuleMap_zh;
-		Map<Integer,RoleModule> roleModuleMap_zhc = DataInitUtil.roleModuleMap_zhc;
-		Map<Integer,RoleModule> roleModuleMap_qy = DataInitUtil.roleModuleMap_qy;
-		
-		List<ModuleInfo> sortList = DataInitUtil.sortList;
-		
-//		List<ModuleInfo> showSecModeleList_3 = new  ArrayList<ModuleInfo>();
-//		List<ModuleInfo> showSecModeleList_2 = new  ArrayList<ModuleInfo>();
-		int whroletype = null==this.getSession().getAttribute("whroletype")?2:(Integer)this.getSession().getAttribute("whroletype");
-		int sysType = null==this.getSession().getAttribute("sysType")?1:(Integer)this.getSession().getAttribute("sysType");
-//		int allModuleInfoListsize = allModuleInfoList.size();
-//		for(int n=0;n<allModuleInfoListsize;n++){
-//			ModuleInfo moduleInfo = allModuleInfoList.get(n);
-//			if(2==moduleInfo.getModuleLevel()&&2==Integer.parseInt(moduleInfo.getModuleCode())){//getModuleCode 1 企业   2政府
-//				showSecModeleList_3.add(moduleInfo);
-//			}else if(2==moduleInfo.getModuleLevel()&&1==Integer.parseInt(moduleInfo.getModuleCode())){
-//				showSecModeleList_2.add(moduleInfo);
-//			}
-//		}
-		
-		
-		int sortListsize = sortList.size();
-		
-		
-		for(int k=0;k<sortListsize;k++){
-			ModuleInfo _moduleInfo = sortList.get(k);
-			int key = _moduleInfo.getModuleId();
-			if(whroletype==1){//政府端
-				if (sysType==0) {//只显示公告模块
-					if (_moduleInfo.getModuleName().startsWith("公告")) {
-						showModuleList.add(_moduleInfo);
-					}
-				}else {//不显示公告模块
-					if(roleModuleMap_zh.containsKey(key)){
-						if (_moduleInfo.getModuleName().equals("操作日志")) {
-							if (info.getIsDefault()==0) {
-								showModuleList.add(_moduleInfo);
-							}
-						}else if (_moduleInfo.getModuleName().startsWith("公告")) {
-							
-						}else {
-							showModuleList.add(_moduleInfo);
+	/**
+	 * 子系统名称
+	 */
+	public String  subSystem;
+	/**
+	 * 返回首页的主九宫格菜单
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public String fetchOSMIndexMenu(){
+		showModuleList= new ArrayList<ModuleInfo>();
+		List<ModuleInfo> moduleList = (List<ModuleInfo>) this.getSessionSupport().getSession().getAttribute(Constants.CURRENT_LOGIN_MODULELIST);
+		for(ModuleInfo moduleInfo : moduleList){
+			if((moduleInfo.getModuleLevel()==1) && 
+					(WHConstant.SYS_NAME.equals(moduleInfo.getSysName()))){
+				showModuleList.add(moduleInfo);
+			}
+		}
+		return "menu";
+	}
+	/**
+	 * 返回某子系统菜单
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public String fetchSubSystemMenu(){
+		if(StringUtils.isEmpty(subSystem)){
+			subSystem=WHConstant.MODULE_SYSTEMMANAGE;
+		}
+		String cacheKey="cache_"+subSystem;
+		//由于这个逻辑复杂，且重用度很高，因此放入缓存中
+		if(this.getSessionSupport().getSession().getAttribute(cacheKey)!=null)
+			showModuleList=(List<ModuleInfo>)this.getSessionSupport().getSession().getAttribute(cacheKey);
+		else{
+			showModuleList= new ArrayList<ModuleInfo>();
+			List<ModuleInfo> moduleList = (List<ModuleInfo>) this.getSessionSupport().getSession().getAttribute(Constants.CURRENT_LOGIN_MODULELIST);
+			for(ModuleInfo moduleInfo : moduleList){
+				//增加二级菜单以及他的子菜单，为了前台菜单的排序
+				if((moduleInfo.getModuleLevel()==2) && 
+						(WHConstant.SYS_NAME.equals(moduleInfo.getSysName()))
+						&&(subSystem.equals(moduleInfo.getModuleClass()))){
+					showModuleList.add(moduleInfo);
+					Integer parentId=moduleInfo.getModuleId();
+					//添加他的子菜单
+					for(ModuleInfo moduleInfo2 : moduleList){
+						if(moduleInfo2.getParentId().equals(parentId)){
+							showModuleList.add(moduleInfo2);
 						}
-						
-					}
-				}
-			}else if(whroletype == 3){//政府端普通用户
-				if(roleModuleMap_zhc.containsKey(key)){
-					if (!_moduleInfo.getModuleName().equals("操作日志")) {
-						showModuleList.add(_moduleInfo);
-					}
-				}
-			}else{//企业端
-				if (sysType==0) {//只显示公告模块
-					if (_moduleInfo.getModuleName().startsWith("公告")) {
-						showModuleList.add(_moduleInfo);
-					}
-				}else {//不显示公告模块
-					if(roleModuleMap_qy.containsKey(key)&&!_moduleInfo.getModuleName().startsWith("公告")){
-						showModuleList.add(_moduleInfo);
 					}
 				}
 			}
+			this.getSessionSupport().getSession().setAttribute(cacheKey, showModuleList);
 		}
-		
-		
-//		Iterator iter = moduleMap.entrySet().iterator();
-//		
-//		while(iter.hasNext()){
-//			Map.Entry entry = (Map.Entry) iter.next();
-//			Object key = entry.getKey();
-//			if(whroletype==1){
-//				if(roleModuleMap_zh.containsKey(key)){
-//					showModuleList.add(moduleMap.get(key));
-//				}
-//			}else{
-//				if(roleModuleMap_qy.containsKey(key)){
-//					showModuleList.add(moduleMap.get(key));
-//				}
-//			}
-//		}
-		
-		
-//		int rolesize  = roleModuleInfoList.size();
-//		//政府端  role_id = 3
-//		if(whroletype==1){
-//			for(int i=0;i<rolesize;i++){
-//				RoleModule roleModule = roleModuleInfoList.get(i);
-//				if(zhroleid == roleModule.getRoleId()){
-//					int key = roleModule.getModuleId();
-//					if(moduleMap.containsKey(key)){
-//						showModuleList.add(moduleMap.get(key));						
-//					}
-//				}
-//			}
-//		}else{//企业端 role_id = 2
-//			for(int i=0;i<rolesize;i++){
-//				RoleModule roleModule = roleModuleInfoList.get(i);
-//				if(qyroleid == roleModule.getRoleId()){
-//					int key = roleModule.getModuleId();
-//					if(moduleMap.containsKey(key)){
-//						showModuleList.add(moduleMap.get(key));
-//					}
-//				}
-//			}
-//		}
 		return "menu";
-		
 	}
-
-
 	public List<ModuleInfo> getShowModuleList() {
 		return showModuleList;
 	}

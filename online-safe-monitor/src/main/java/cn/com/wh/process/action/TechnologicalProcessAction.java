@@ -25,6 +25,7 @@ import cn.com.wh.process.domain.TechnologicalProcess;
 import cn.com.wh.process.service.ITechnologicalProcess;
 import cn.com.wh.reliefgoods.domain.SearchVo;
 import cn.com.wh.safeaccident.util.Tool;
+import cn.com.wh.support.SessionSupport;
 
 import com.google.gson.Gson;
 /**
@@ -135,7 +136,7 @@ public class TechnologicalProcessAction extends BaseActionSupport{
 				info.setIsDelete(0);
 				info.setIsForkGroup(getLoginUser().getIsForkGroup());
 				info.setGroupId(getLoginUser().getIsForkGroup());
-				info.setGroupName(getSession().getAttribute("companyName").toString());
+				info.setGroupName(((SessionSupport)(this.getSessionSupport())).getCurrentCompanyName());
 				info.setCreateUserId(getLoginUser().getUserId());
 				technologicalProcessService.saveOrUpdate(info);
 				info.setAttachmentList(null);

@@ -42,7 +42,7 @@ public class LoginAction extends BaseActionSupport {
      */
     public String loginForward() throws Exception{
 		//登录日志
-		UserInfo userInfo = (UserInfo)getSession().getAttribute("adminUser");
+		UserInfo userInfo = this.getSessionSupport().getCurrentLoginUser();
 		Log log = new Log();
 		log.setCompanyId(userInfo.getCompanyId());
 		log.setInsertTime(new Timestamp(new Date().getTime()));
@@ -58,16 +58,16 @@ public class LoginAction extends BaseActionSupport {
 		log.setType(0);//手动添加系统日志
 		logService.saveOrUpdate(log);
 		//监听登录用户
-		 if(!OnlineUserListener.onlineUserIdList.contains(userInfo.getUserId())){
-         	OnlineUserListener.onlineUserIdList.add(userInfo.getUserId());
-         }
+		if(!OnlineUserListener.onlineUserIdList.contains(userInfo.getUserId())){
+			OnlineUserListener.onlineUserIdList.add(userInfo.getUserId());
+		}
 	    //sso单点登录
 	    String sso_token = UUID.randomUUID().toString();
 		SSOCache.getInstance().store(sso_token,userInfo);
 		super.getRequest().getSession().setAttribute("sso_token",sso_token); 
 		
 		String downPath = filePathConfig.getFileViewPath();
-		this.getSession().setAttribute("downPath", downPath);
+		this.getSessionSupport().setDownPath(downPath);
 		return SUCCESS;
     }
     
@@ -78,12 +78,12 @@ public class LoginAction extends BaseActionSupport {
 	 * @throws Exception 
 	 */
 	public String updateUserSkinLogo() throws Exception{
-		UserInfo loginUser = (UserInfo) getSession().getAttribute("adminUser");
+		UserInfo loginUser = this.getSessionSupport().getCurrentLoginUser();
 		if(skinLogo != 0){
 			userService.updateUserSkinLogo(loginUser.getUserId(), skinLogo);
 		}
 		loginUser = userService.findOne(loginUser.getUserId());
-		this.getSession().setAttribute("adminUser", loginUser);
+		this.getSessionSupport().setCurrentLoginUser(loginUser);
 		loginForward();
 		return null;
 	}
@@ -94,7 +94,7 @@ public class LoginAction extends BaseActionSupport {
 	 * @return
 	 */
 	public String checkSession(){
-		UserInfo loginUser = (UserInfo) getSession().getAttribute("adminUser");
+		UserInfo loginUser = this.getSessionSupport().getCurrentLoginUser();
 		if(loginUser!=null){
 			ajax("0");
 		}else{

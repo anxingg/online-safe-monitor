@@ -6,6 +6,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import cn.com.qytx.platform.org.domain.UserInfo;
+import cn.com.qytx.platform.session.Constants;
 
 /**
  * Created by izerui.com on 14-5-8.
@@ -38,7 +39,7 @@ public enum TaskQueryType implements IQuerySQLGenerator{
         ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder
                 .currentRequestAttributes();
         HttpServletRequest request = attr.getRequest();
-        return (UserInfo)request.getSession().getAttribute("adminUser");
+        return (UserInfo)request.getSession().getAttribute(Constants.CURRENT_LOGIN_USER);
     }
 
 }

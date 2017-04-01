@@ -206,7 +206,7 @@ public class SystemSetAction  extends BaseActionSupport {
         	ui.setLastUpdateTime(new Date());
         	userService.saveOrUpdate(ui);
         	if (userInfo.getUserId().equals(userId)) {
-        		getSession().setAttribute("adminUser", ui);
+        		this.getSessionSupport().setCurrentLoginUser(ui);
 			}
         	
     		Log log = new Log();
@@ -263,7 +263,7 @@ public class SystemSetAction  extends BaseActionSupport {
     		ui.setNtkoUrl(user.getNtkoUrl());
     	}
     	user = userService.saveOrUpdate(ui);
-    	getSession().setAttribute("adminUser", user);
+    	this.getSessionSupport().setCurrentLoginUser(user);
 		ajax(0);
 		return null;
     }

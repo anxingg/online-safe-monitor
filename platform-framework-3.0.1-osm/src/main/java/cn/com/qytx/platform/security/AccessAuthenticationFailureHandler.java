@@ -11,6 +11,8 @@ import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
+import cn.com.qytx.platform.session.Constants;
+
 /**
  * 自定义Spring Security 登陆异常处理
  * User: 黄普友
@@ -28,7 +30,7 @@ public class AccessAuthenticationFailureHandler implements AuthenticationFailure
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException e) throws IOException, ServletException {
         request.setCharacterEncoding("UTF-8");
-        request.getSession().setAttribute("adminUser", null);
+        request.getSession().setAttribute(Constants.CURRENT_LOGIN_USER, null);
         if (defaultFailureUrl == null) {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Authentication Failed: " + e.getMessage());
         } else {

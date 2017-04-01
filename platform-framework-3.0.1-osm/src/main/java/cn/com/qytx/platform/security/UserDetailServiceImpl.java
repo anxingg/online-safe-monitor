@@ -30,6 +30,7 @@ import cn.com.qytx.platform.org.service.IGroup;
 import cn.com.qytx.platform.org.service.IModule;
 import cn.com.qytx.platform.org.service.IRole;
 import cn.com.qytx.platform.org.service.IUser;
+import cn.com.qytx.platform.session.Constants;
 import cn.com.qytx.platform.utils.datetime.DateTimeUtil;
 
 /**
@@ -59,13 +60,6 @@ public class UserDetailServiceImpl  implements UserDetailsService {
     @Resource
     private IGroup groupService;
     
-    //用户所属部门
-    public final static String USER_GROUP = "usergroup";
-    //用户部门的子部门集合
-    public final static String USER_SUBGROUPS = "usersubgroups";
-    //用户的角色集合
-    public final static String USER_ROLES = "userroles";
-    
     public UserDetails loadUserByUsername(String loginName) throws UsernameNotFoundException, DataAccessException {
         //获取请求        
         ServletRequestAttributes attr = (ServletRequestAttributes)RequestContextHolder.currentRequestAttributes();
@@ -74,10 +68,9 @@ public class UserDetailServiceImpl  implements UserDetailsService {
         
         if (loginName == null) {
             request.getSession().setAttribute("loginFailure","failure"); //登陆失败
-        }else{
-            try
-            {
-
+        }
+        else{
+            try{
                 UserInfo user=userService.findByLoginName(loginName);
                 List<UserInfo> list = userService.findUsersByLoginNames(loginName);
                 
@@ -105,8 +98,9 @@ public class UserDetailServiceImpl  implements UserDetailsService {
                     	return null;
 					}
                     setUserDetailInfo(user, request.getSession());
-                    request.getSession().setAttribute("companyInfo",companyInfo);//把单位列表存放到session
-                    dataSource.loadResourceDefine();//加载模块列表
+                    request.getSession().setAttribute(Constants.CURRENT_LOGIN_COMPANY,companyInfo);//把单位列表存放到session
+                    
+                    //dataSource.loadResourceDefine();//加载模块列表
                     String roleIdArr="";
                     List<RoleInfo> roleList =roleService.getRoleByUser(user.getUserId()); //根据人员Id获取角色列表
                     if(roleList!=null)
@@ -117,12 +111,12 @@ public class UserDetailServiceImpl  implements UserDetailsService {
                     //add by jiayq,如果是超级管理员用户，则有所有的菜单权限
                     List<ModuleInfo> moduleList = null;
                     if(user.getIsDefault()!=null&&user.getIsDefault() == 0 ){
-                    	moduleList = moduleService.findAll();
+                    	moduleList = moduleService.getModuleByRole(null,null);
                     }else{
-                    	moduleList =moduleService.getModuleByRole(roleIdArr);//获取模块列表
+                    	moduleList =moduleService.getModuleByRole(roleIdArr,null);//获取模块列表
                     }
                     
-                    request.getSession().setAttribute("moduleList",moduleList);//把模块列表存放到session
+                    request.getSession().setAttribute(Constants.CURRENT_LOGIN_MODULELIST,moduleList);//把模块列表存放到session
                     //给该用户添加授权模块
                     List<GrantedAuthority> authsList = new ArrayList<GrantedAuthority>();
                     for (ModuleInfo moduleInfo : moduleList) {
@@ -133,8 +127,8 @@ public class UserDetailServiceImpl  implements UserDetailsService {
                     String ip = getIpAddr(request);
                     user.setIp(ip);
                     
-                    request.getSession().setAttribute("adminUser",user);//登录信息保存在Session
-                    request.getSession().setAttribute("adminUserXC",user);//登录信息保存在Session
+                    request.getSession().setAttribute(Constants.CURRENT_LOGIN_USER,user);//登录信息保存在Session
+                    request.getSession().setAttribute(Constants.CURRENT_LOING_USERX,user);//登录信息保存在Session
                     userService.updateLastLoginTime(user.getUserId());
                     org.springframework.security.core.userdetails.User userdetail = new org.springframework.security.core.userdetails.User(
                             user.getLoginName(), user.getLoginPass(), true, true, true, true, authsList);
@@ -196,9 +190,9 @@ public class UserDetailServiceImpl  implements UserDetailsService {
 	    	GroupInfo gInfo = groupService.findOne(groupId);
 	    	List<GroupInfo> subgrouplist = groupService.getSubGroupList(groupId);
 	    	List<RoleInfo> roleList =roleService.getRoleByUser(userInfo.getUserId());
-	    	session.setAttribute(USER_GROUP, gInfo);
-	    	session.setAttribute(USER_SUBGROUPS, subgrouplist);
-	    	session.setAttribute(USER_ROLES, roleList);
+	    	session.setAttribute(Constants.CURRENT_USER_GROUP, gInfo);
+	    	session.setAttribute(Constants.CURRENT_USER_SUBGROUPS, subgrouplist);
+	    	session.setAttribute(Constants.CURRENT_USER_ROLES, roleList);
     	}
     }
 }

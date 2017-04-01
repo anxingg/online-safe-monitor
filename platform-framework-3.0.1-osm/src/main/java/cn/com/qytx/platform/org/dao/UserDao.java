@@ -1041,7 +1041,7 @@ public class UserDao<T extends UserInfo>  extends BaseDao<UserInfo, Integer> imp
 	            "a.link_id as linkId ,a.user_state as userState,a.user_power as userPower,a.sign_name as signName,a.role as role,a.photo as photo ,"+
 	            "b.firstClientLoginTime as firstClientLoginTime,a.v_group as vgroup,a.is_delete as isDelete,a.mobile_show_state as mobileShowState, "+
 	            "a.full_py as fullPy,a.formatted_number as formattedNumber "+
-				"from view_user_info a left join (select userId,MAX(FirstClientLoginTime) as firstClientLoginTime from UserLoginST group by UserId) b  on a.user_id=b.userId ";
+				"from tb_user_info a left join (select userId,MAX(FirstClientLoginTime) as firstClientLoginTime from UserLoginST group by UserId) b  on a.user_id=b.userId ";
 		hql+="  where a.company_id="+ companyId;
 		hql+="  and a.partition_companyid="+ (companyId%10);
 	//	String hql ="select a from UserInfo a where companyId=31146 and isDelete=0";

@@ -31,7 +31,7 @@ public class NotifyViewDao extends BaseDao<NotifyView,Integer>{
 		return Integer.valueOf(entityManager.createNativeQuery(hql).getSingleResult().toString());
 	}
 	public List<Map<String,Object>> getMapPublishUsers(List<Integer> ids){
-		String sql = "select a.user_id,a.user_name,b.group_id ,b.group_name  from view_user_info a left join tb_group_info b  on a.group_id = b.group_id where a.user_id in (?1) order by b.grade asc ,  b.order_index asc";
+		String sql = "select a.user_id,a.user_name,b.group_id ,b.group_name  from tb_user_info a left join tb_group_info b  on a.group_id = b.group_id where a.user_id in (?1) order by b.grade asc ,  b.order_index asc";
 		return entityManager.createNativeQuery(sql).setParameter(1,ids).unwrap(SQLQuery.class).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP).list();
 	}
 
@@ -52,7 +52,7 @@ public class NotifyViewDao extends BaseDao<NotifyView,Integer>{
 				list.add(Integer.parseInt(str));
 			}
 		}
-		String sql ="select a.user_id as userId,a.user_name as userName,b.group_id as groupId,b.group_name as groupName,c.counting from view_user_info  a left join tb_group_info b on a.group_id = b.group_id left join (select b.user_id ,count(*) as counting from tb_cbb_notify_view a left join view_user_info b on a.create_user_id = b.user_id where a.notify_id = "+notify.getId()+" group by user_id  )  c on a.user_id = c.user_id where a.USER_ID in (?1) order by b.grade asc ,  b.order_index asc ";
+		String sql ="select a.user_id as userId,a.user_name as userName,b.group_id as groupId,b.group_name as groupName,c.counting from tb_user_info  a left join tb_group_info b on a.group_id = b.group_id left join (select b.user_id ,count(*) as counting from tb_cbb_notify_view a left join tb_user_info b on a.create_user_id = b.user_id where a.notify_id = "+notify.getId()+" group by user_id  )  c on a.user_id = c.user_id where a.USER_ID in (?1) order by b.grade asc ,  b.order_index asc ";
 		return entityManager.createNativeQuery(sql).setParameter(1,list).unwrap(SQLQuery.class).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP).list();
 	}
 	/**

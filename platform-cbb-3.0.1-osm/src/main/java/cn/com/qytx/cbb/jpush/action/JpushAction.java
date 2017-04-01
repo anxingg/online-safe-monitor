@@ -29,9 +29,8 @@ public class JpushAction extends BaseActionSupport {
     {
         try
         {
-        	CompanyInfo companyInfo = (CompanyInfo) getSession().getAttribute("companyInfo");
+        	CompanyInfo companyInfo = (CompanyInfo) getSessionSupport().getSession().getAttribute("companyInfo");
             int companyId = companyInfo.getCompanyId();
-        	this.getSession().getAttribute("");
             Map<String, String> hm = new HashMap<String, String>();
             hm.put("type", "1");
             int result= jpushService.sendCustomMessageWithTag(String.valueOf(companyId),"","","",hm,getValue("masterSecret"),getValue("appKey"));

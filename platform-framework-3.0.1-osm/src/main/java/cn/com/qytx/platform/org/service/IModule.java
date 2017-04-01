@@ -15,23 +15,11 @@ import cn.com.qytx.platform.org.domain.ModuleInfo;
  */
 public interface IModule   extends BaseService<ModuleInfo>, Serializable{
     /**
-     * 获取所有功能模块
-     * @return
-     */
-    public List<ModuleInfo> getAllModule();
-
-    /**
      * 根据角色ID数组获取模块列表
      * @param roleArr 角色ID，多个ID直接用，隔开
      * @return
      */
-    public List<ModuleInfo> getModuleByRole(String roleArr);
-    /**
-     * 根据角色ID数组获取没有权限模块列表
-     * @param roleArr 角色ID，多个ID直接用，隔开
-     * @return
-     */
-	public List<ModuleInfo> getNotModuleByRole(String roleArr);
+    public List<ModuleInfo> getModuleByRole(String roleArr,String sysName);
     
 	/**
 	 * @Description: TODO(得到级别Module) 
@@ -39,7 +27,7 @@ public interface IModule   extends BaseService<ModuleInfo>, Serializable{
 	 * @param  moduleMap
 	 * @return Map<Integer,Module>    返回类型
 	 */
-	public Map<Integer,ModuleInfo> findModuleLevelMap(Map<Integer,ModuleInfo> moduleMap,Integer level);
+	public Map<Integer,ModuleInfo> findModuleLevelMap(Map<Integer,ModuleInfo> moduleMap,Integer level,String sysName);
 	
 	/**
 	 * @Title: findModuleMap 
@@ -47,14 +35,8 @@ public interface IModule   extends BaseService<ModuleInfo>, Serializable{
 	 * @param sysName 系统名称
 	 * @return Map<Integer,T> 返回类型
 	 */
-	public Map<Integer,ModuleInfo> findModuleMap(String sysName,Integer roleId);
+	public Map<Integer,ModuleInfo> findModuleMap(String roleArr,String sysName);
 	
-	/**
-	 * 根据用户Id获取用户有权限的模块列表
-	 * @param companyId
-	 * @param userId
-	 * @return
-	 */
-	public List<ModuleInfo> getModuleListByUser(int companyId,int userId);
+	
 	
 }

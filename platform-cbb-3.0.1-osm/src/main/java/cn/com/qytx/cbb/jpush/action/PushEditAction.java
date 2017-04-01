@@ -50,7 +50,7 @@ public class PushEditAction  extends BaseActionSupport{
 			String basePath = request.getScheme() + "://"
 		            + request.getServerName() + ":" + request.getServerPort()
 		            + path+"/" ;
-			UserInfo userInfo=(UserInfo) this.getSession().getAttribute("adminUser");
+			UserInfo userInfo=this.getSessionSupport().getCurrentLoginUser();
 			if(userInfo!=null&&pushId!=null){
 					//得到推送
 				//	PushInfo pushInfo=pushInfoService.findById(pushId);

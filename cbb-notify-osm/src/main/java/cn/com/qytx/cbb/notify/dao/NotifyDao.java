@@ -100,7 +100,9 @@ public class NotifyDao extends BaseDao<Notify,Integer>{
 		}
 	}
 	
-	public Page<Notify> list(Pageable pageable, Integer notifyType,String subject, Date beginDate, Date endDate,UserInfo userInfo,Integer columnId,Integer status, Integer whroletype){
+	public Page<Notify> list(Pageable pageable, Integer notifyType,String subject,
+			Date beginDate, Date endDate,UserInfo userInfo,Integer columnId,
+			Integer status){
 		StringBuffer hql = new StringBuffer(" isDelete = 0 ");
 		List<Object> value = new ArrayList<Object>();
 		if(notifyType!=null){ 
@@ -120,9 +122,6 @@ public class NotifyDao extends BaseDao<Notify,Integer>{
 //			calendar.setTime(endDate);
 //			calendar.add(calendar.DATE,1);
 //			value.add(calendar.getTime());
-		}
-		if(userInfo.getIsDefault()!=null && userInfo.getIsDefault()!=0 && whroletype == 2){
-			hql.append(" and createUser.userId = ").append(userInfo.getUserId());
 		}
 		if(status!=null && !"".equals(status)){
 			hql.append(" and status = "+status);
@@ -212,7 +211,7 @@ public class NotifyDao extends BaseDao<Notify,Integer>{
 		if(objTotal!=null &&!"".equals(objTotal)){
 			total = Integer.parseInt(objTotal.toString());
 		}
-		String sql = "SELECT n.id as notifyId,n.subject,(select name from tb_cbb_dict where info_type = 'notifyType"+columnId+"' and sys_tag != -1 and value =n.notify_type) as typename,(select user_name from view_user_info where user_id = n.create_user_id) as username,n.approve_date as approveDate,n.is_top as isTop, (SELECT COUNT (*) FROM tb_cbb_notify_view WHERE create_user_id = "+userId+" AND notify_id = n.id) AS counting, (select count(*) from tb_cbb_notify_view where notify_id = n.id ) as totalCount FROM tb_cbb_notify n WHERE "+sqlCondition.toString()+" ORDER BY is_top desc ,counting asc ,approve_date desc";
+		String sql = "SELECT n.id as notifyId,n.subject,(select name from tb_cbb_dict where info_type = 'notifyType"+columnId+"' and sys_tag != -1 and value =n.notify_type) as typename,(select user_name from tb_user_info where user_id = n.create_user_id) as username,n.approve_date as approveDate,n.is_top as isTop, (SELECT COUNT (*) FROM tb_cbb_notify_view WHERE create_user_id = "+userId+" AND notify_id = n.id) AS counting, (select count(*) from tb_cbb_notify_view where notify_id = n.id ) as totalCount FROM tb_cbb_notify n WHERE "+sqlCondition.toString()+" ORDER BY is_top desc ,counting asc ,approve_date desc";
         Query query = entityManager.createNativeQuery(sql);
         query.unwrap(SQLQuery.class).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP).setFirstResult(pageable.getOffset()).setMaxResults(pageable.getPageSize());
         List<Map<String,Object>> content = total > pageable.getOffset() ? query.getResultList() : Collections.<Map<String,Object>> emptyList();
@@ -239,7 +238,7 @@ public class NotifyDao extends BaseDao<Notify,Integer>{
 	
 	@SuppressWarnings("unchecked")
 	public Map<String,Object> viewNotify(Integer notifyId) {
-		String sql = "select a.approve_date as approveDate,a.subject,b.user_name as username,a.view_count as viewCount,a.publish_user_ids as publishUserIds ,isnull(c.counting,0) as counting from tb_cbb_notify a  left join view_user_info b on a.create_user_id = b.user_id left join (select notify_id as notifyId,count(DISTINCT(create_user_id)) as counting from tb_cbb_notify_view where notify_id = "+notifyId+"  group by notify_id ) c on a.id = c.notifyId where a.id = "+notifyId;
+		String sql = "select a.approve_date as approveDate,a.subject,b.user_name as username,a.view_count as viewCount,a.publish_user_ids as publishUserIds ,isnull(c.counting,0) as counting from tb_cbb_notify a  left join tb_user_info b on a.create_user_id = b.user_id left join (select notify_id as notifyId,count(DISTINCT(create_user_id)) as counting from tb_cbb_notify_view where notify_id = "+notifyId+"  group by notify_id ) c on a.id = c.notifyId where a.id = "+notifyId;
 		List<Map<String, Object>> list = entityManager.createNativeQuery(sql).unwrap(SQLQuery.class).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP).list();
 		if (list!=null&&list.size()>0) {
 			return list.get(0);

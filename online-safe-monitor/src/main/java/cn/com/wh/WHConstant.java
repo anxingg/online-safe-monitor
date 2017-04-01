@@ -9,24 +9,29 @@ package cn.com.wh;
  * 修改列表:
  */
 public interface WHConstant
-{
-    /**
-     * 企业角色代码
-     */
-    public static final String ENTERPRISEADMIN = "enterpriseadmin";
-    
-    /**
-     * 政府管理员角色代码
-     */
-    public static final String MANAGEADMIN = "manageadmin";
-    
-    /**
-     * 政府普通用户角色代码
-     */
-    public static final String MANAGECOMMON = "managecommon";
-    
-    /**
+{ 
+	//系统名称，例如菜单等支持多系统的需要传递系统名称
+	public static final String SYS_NAME="osm";
+    public static final String MODULE_SYSTEMMANAGE="osm_systemmanage";
+	
+	/**
      * 超级管理员角色代码
      */
     public static final String ADMIN = "admin";
+    
+    /**
+     * 角色类型，可能会根据不通的角色类型做不同的处理
+     * @author WYG
+     *
+     */
+    public class WHROLETYPE{
+    	public static String WHROLETYPE="whroletype";//Session中表示角色类型的常量
+    	public static int ADMIN=0;   //这个根据角色是否包含ADMIN来获得
+    	public static int MANAGE=1;  //这个可以根据用户的groupInfo,Type=1来获得
+    	public static int ENTERPRIS=2; //这个可以根据用户的groupInfo,Type=2来获得
+    }
+    
+    public class SESSIONCONSTANTS{
+    	public static String COMPANY_NAME="companyName";
+    }
 }

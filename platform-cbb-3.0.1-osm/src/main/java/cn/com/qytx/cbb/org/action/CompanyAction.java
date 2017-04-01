@@ -63,7 +63,7 @@ public class CompanyAction extends BaseActionSupport{
     	}
     	/*LogoConfig.getInstance().setLogoUrl(company.getLogUrl());
     	LogoConfig.getInstance().setSysName(company.getSysName());*/
-    	CompanyInfo sessionCompany=(CompanyInfo)this.getSession().getAttribute("companyInfo");
+    	CompanyInfo sessionCompany=this.getSessionSupport().getCurrentLoginCompany();
     	if(sessionCompany != null){
     		sessionCompany.setSysName(company.getSysName());
     		sessionCompany.setLogUrl(company.getLogUrl());

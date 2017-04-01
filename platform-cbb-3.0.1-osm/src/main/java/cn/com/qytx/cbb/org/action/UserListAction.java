@@ -365,7 +365,7 @@ public class UserListAction extends BaseActionSupport {
     			}
         			userVo.setChildrenGroupIds(childrenGroupIds);
         	}
-        	 UserInfo adminUser=(UserInfo)this.getSession().getAttribute("adminUser");
+        	 UserInfo adminUser=this.getSessionSupport().getCurrentLoginUser();
         	 String groupIds = getGroupIds(adminUser.getUserId());
         	setIDisplayLength(Integer.MAX_VALUE);
         	Order order = new Order(Direction.ASC,"orderIndex");

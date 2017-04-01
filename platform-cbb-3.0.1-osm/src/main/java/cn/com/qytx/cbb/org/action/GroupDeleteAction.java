@@ -75,7 +75,7 @@ public class GroupDeleteAction extends BaseActionSupport
         groupService.deleteGroup(groupId);
         
       //系统日志
-    	UserInfo userInfo = (UserInfo)getSession().getAttribute("adminUser");
+    	UserInfo userInfo = this.getSessionSupport().getCurrentLoginUser();
 		Log log = new Log();
 		log.setCompanyId(userInfo.getCompanyId());
 		log.setInsertTime(new Timestamp(new Date().getTime()));

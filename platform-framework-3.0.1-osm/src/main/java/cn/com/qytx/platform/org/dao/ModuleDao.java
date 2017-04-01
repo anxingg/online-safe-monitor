@@ -31,30 +31,22 @@ public class ModuleDao <T extends ModuleInfo>  extends BaseDao<ModuleInfo,Intege
 	 */
 	private static final long serialVersionUID = 1L;
 
-	/**
-     * 获取所有功能模块(未删除的)
-     * @return 
-     */
-	public List<ModuleInfo> getAllModule()
-    {
-        return super.unDeleted().findAll();
-    }
     /**
      * 根据角色ID数组获取模块列表
      * @param roleArr 角色ID，多个ID直接用，隔开
      * @return 返回角色对应的菜单
      */
-	public List<ModuleInfo> getModuleByRole(String roleArr){
-        if (StringUtils.isEmpty(roleArr)){
-            return  new ArrayList<ModuleInfo>();
-        }
+	public List<ModuleInfo> getModuleByRole(String roleArr,String sysName){
         String hql = "";
-        if(roleArr!=null && !roleArr.equals(""))
-        {
-            hql+="isDelete = 0 and moduleId in (select moduleId from RoleModule where roleId in ("+roleArr+"))";
+        hql +=" isDelete =0";
+        if(!StringUtils.isEmpty(roleArr)){
+            hql+=" and moduleId in (select moduleId from RoleModule where roleId in ("+roleArr+"))";
         }
-        Order o = new Order(Direction.ASC,"orderIndex");
-        Sort s = new Sort(o);
+        if(!StringUtils.isEmpty(sysName)){
+        	hql+=" and sysName='"+sysName+"'";
+        }
+        Sort s = new Sort(new Order(Direction.ASC,"moduleLevel"),
+        		new Order(Direction.ASC,"orderIndex"));
         return this.findAll(hql,s);
     }
     /**
@@ -81,7 +73,8 @@ public class ModuleDao <T extends ModuleInfo>  extends BaseDao<ModuleInfo,Intege
 	 * @param  moduleMap 数据源
 	 * @return Map<Integer,Module> 按级别过滤后的菜单
 	 */
-	public Map<Integer,ModuleInfo> findModuleLevelMap(Map<Integer,ModuleInfo> moduleMap,Integer level){	
+	public Map<Integer,ModuleInfo> findModuleLevelMap(Map<Integer,ModuleInfo> moduleMap,
+			Integer level){	
 		Map<Integer, ModuleInfo> revModuleMap = new TreeMap<Integer, ModuleInfo>();
 		if(moduleMap!=null){
 			//根据级别过滤moduleMap
@@ -126,11 +119,11 @@ public class ModuleDao <T extends ModuleInfo>  extends BaseDao<ModuleInfo,Intege
 	 * @param roleId 角色ID
 	 * @return Map<Integer,Module>  key值是角色ID,value是菜单对象
 	 */
-	public Map<Integer,ModuleInfo> findModuleMap(String sysName,Integer roleId){
+	public Map<Integer,ModuleInfo> findModuleMap(String roleArr,String sysName){
 		Order o = new Order(Direction.ASC,"orderIndex");
         Sort s = new Sort(o);
 		//得到角色模版
-		List<ModuleInfo> moduleOwnList=this.getModuleByRole(roleId.toString());
+		List<ModuleInfo> moduleOwnList=this.getModuleByRole(roleArr,sysName);
 		//得到模版
 		List<ModuleInfo> moduleList=super.unDeleted().findAll("",s);
 

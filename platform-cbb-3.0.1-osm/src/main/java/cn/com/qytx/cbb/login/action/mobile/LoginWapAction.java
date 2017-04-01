@@ -68,7 +68,7 @@ public class LoginWapAction extends BaseActionSupport {
 	 */
 	public String loginAjax() {
 		UserInfo adminUser = null;
-		Object adminUserObj = this.getSession().getAttribute("adminUser");
+		Object adminUserObj = this.getSessionSupport().getCurrentLoginUser();
 		if (adminUserObj != null) {
 			adminUser = (UserInfo) adminUserObj;
 		}

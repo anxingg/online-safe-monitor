@@ -167,7 +167,7 @@ public class UpdateWHCompanyPersonAction extends BaseActionSupport{
 	public String getLegalPersonInfo(){
 		
 		try {
-			UserInfo userInfo = (UserInfo) getSession().getAttribute("adminUser");
+			UserInfo userInfo = this.getSessionSupport().getCurrentLoginUser();
 			if(group_id==null){
 				group_id = userInfo.getGroupId();
 			}
@@ -212,7 +212,7 @@ public class UpdateWHCompanyPersonAction extends BaseActionSupport{
 	public String updateLegalPerson(){
 		
 		try {
-			UserInfo userInfo = (UserInfo) getSession().getAttribute("adminUser");
+			UserInfo userInfo = this.getSessionSupport().getCurrentLoginUser();
 			Integer groupId = userInfo.getGroupId();
 			
 			person = wHCompanyPersonImpl.findByGroupId(groupId);
@@ -264,7 +264,7 @@ public class UpdateWHCompanyPersonAction extends BaseActionSupport{
 	public String updatePerson(){
 		
 		try {
-			UserInfo userInfo = (UserInfo) getSession().getAttribute("adminUser");
+			UserInfo userInfo = this.getSessionSupport().getCurrentLoginUser();
 			person = wHCompanyPersonImpl.findWHCompanyPerson(personId);
 			person.setName(name);
 			person.setPhone(phone);
@@ -308,7 +308,7 @@ public class UpdateWHCompanyPersonAction extends BaseActionSupport{
 	public String updateSpecialWorkPerson(){
 		
 		try {
-			UserInfo userInfo = (UserInfo) getSession().getAttribute("adminUser");
+			UserInfo userInfo = this.getSessionSupport().getCurrentLoginUser();
 			person = wHCompanyPersonImpl.findWHCompanyPerson(personId);
 			//政府端修改人员公司
 //			if(group_id!=null && group_id != -1){				

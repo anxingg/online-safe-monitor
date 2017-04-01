@@ -600,18 +600,20 @@ public class UploadAction extends BaseActionSupport
     {
         try
         {
-            UserInfo userInfo = (UserInfo) getSession().getAttribute("adminUser");
+        	//this.getSessionSupport().getCurrentLoginUser()
+        	//this.getSessionSupport().getCurrentLoginUser()
+            UserInfo userInfo = this.getSessionSupport().getCurrentLoginUser();
             attach.setCompanyId(userInfo.getCompanyId());
             attach.setCreateUserId(userInfo.getUserId());
             attachmentService.saveOrUpdate(attach);
-            Map<String, Integer> m = (Map<String, Integer>) this.getSession().getAttribute("attachment");
+            Map<String, Integer> m = (Map<String, Integer>) this.getSessionSupport().getSession().getAttribute("attachment");
             if (m == null)
             {
                 m = new HashMap<String, Integer>();
             }
             m.put(filePageId, attach.getId());
 
-            this.getSession().setAttribute("attachment", m);
+            this.getSessionSupport().getSession().setAttribute("attachment", m);
             Map<String, Object> jsonMap = new HashMap<String, Object>();
             jsonMap.put("attachmentId", attach.getId());
             jsonMap.put("map", m);
@@ -639,8 +641,7 @@ public class UploadAction extends BaseActionSupport
     {
         try
         {
-            Map<String, Integer> m = (Map<String, Integer>) this.getSession().getAttribute(
-                    "attachment");
+            Map<String, Integer> m = (Map<String, Integer>) this.getSessionSupport().getSession().getAttribute("attachment");
             if (m == null)
             {
                 m = new HashMap<String, Integer>();
@@ -670,7 +671,7 @@ public class UploadAction extends BaseActionSupport
     {
         try
         {
-            this.getSession().removeAttribute("attachment");
+            this.getSessionSupport().getSession().removeAttribute("attachment");
             PrintWriter writer = new PrintWriter(this.getResponse().getWriter());
             writer.print(0);
             writer.flush();

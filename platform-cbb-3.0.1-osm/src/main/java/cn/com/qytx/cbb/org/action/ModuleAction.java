@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringEscapeUtils;
 
 import cn.com.qytx.platform.base.action.BaseActionSupport;
 import cn.com.qytx.platform.org.domain.ModuleInfo;
+import cn.com.qytx.platform.session.Constants;
 
 import com.google.gson.Gson;
 
@@ -62,8 +63,8 @@ public class ModuleAction extends BaseActionSupport {
 				+ this.getRequest().getServerPort() + path + "/";
 
 		List<ModuleInfo> moduleList = new ArrayList<ModuleInfo>();
-		if (getSession().getAttribute("moduleList") != null) {
-			moduleList = (List<ModuleInfo>) getSession().getAttribute("moduleList");
+		if (this.getSessionSupport().getSession().getAttribute(Constants.CURRENT_LOGIN_MODULELIST) != null) {
+			moduleList = (List<ModuleInfo>) this.getSessionSupport().getSession().getAttribute(Constants.CURRENT_LOGIN_MODULELIST);
 		}
 		StringBuffer sb = new StringBuffer();
 		sb.append("<em class=\"top_jt\"></em>");
@@ -254,8 +255,8 @@ public class ModuleAction extends BaseActionSupport {
 				+ this.getRequest().getServerPort() + path + "/";
 
 		List<ModuleInfo> moduleList = new ArrayList<ModuleInfo>();
-		if (getSession().getAttribute("moduleList") != null) {
-			moduleList = (List<ModuleInfo>) getSession().getAttribute("moduleList");
+		if (this.getSessionSupport().getSession().getAttribute(Constants.CURRENT_LOGIN_MODULELIST) != null) {
+			moduleList = (List<ModuleInfo>) this.getSessionSupport().getSession().getAttribute(Constants.CURRENT_LOGIN_MODULELIST);
 		}
 		
 	 

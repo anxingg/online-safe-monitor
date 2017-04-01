@@ -1,15 +1,10 @@
 package cn.com.qytx.platform.action;
 
 import java.io.PrintWriter;
-
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import cn.com.qytx.hotline.ivr.domain.CallCenterConst;
 import cn.com.qytx.platform.base.action.BaseActionSupport;
 import cn.com.qytx.platform.domain.SystemBasisSet;
-import cn.com.qytx.platform.org.domain.CompanyInfo;
-import cn.com.qytx.platform.org.service.ICompany;
 import cn.com.qytx.platform.service.IPlatformParameterService;
 
 public class SystemBasisSetAction extends BaseActionSupport{
@@ -19,8 +14,6 @@ public class SystemBasisSetAction extends BaseActionSupport{
 	private static final long serialVersionUID = 6477911543402486311L;
 	@Autowired
 	private transient IPlatformParameterService parmsService;
-	@Autowired
-	private    ICompany  companyService;
 	
 	private SystemBasisSet sysSet;
 	
@@ -55,12 +48,14 @@ public String systemBasisSetSave(){
 		 * 
 		 */
 		//取出鹤壁人民医院对应的Id
+		/*
 	   int hbCpId=	CallCenterConst.COMPANY_MARK_SYSTEM;
 	   CompanyInfo  ci=	companyService.findOne(hbCpId);
 	   if(ci!=null){
 		   ci.setCompanyName(sysSet.getOrganizationsRootName());
 		   companyService.saveOrUpdate(ci);
 	   }
+	   */
 //		if(ciList!=null&&ciList.size()>0){
 //			
 //			CompanyInfo  ci=	ciList.get(0);

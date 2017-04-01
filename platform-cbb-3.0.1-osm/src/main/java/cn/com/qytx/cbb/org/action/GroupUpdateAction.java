@@ -103,7 +103,7 @@ public class GroupUpdateAction extends BaseActionSupport {
 	    	}
 	    	groupService.addOrUpdateGroup(groupOld);
 	    	//系统日志
-	    	UserInfo userInfo = (UserInfo)getSession().getAttribute("adminUser");
+	    	UserInfo userInfo = this.getSessionSupport().getCurrentLoginUser();
 			Log log = new Log();
 			log.setCompanyId(userInfo.getCompanyId());
 			log.setInsertTime(new Timestamp(new Date().getTime()));

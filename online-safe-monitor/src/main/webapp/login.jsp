@@ -25,7 +25,7 @@
 </head>
 <body class="loginBody">
 <div class="login_head">
-    <span class="logo"><img src="${ctx}wh/images/login/logo.png"/>乌海市海南区工业园区</span>
+    <span class="logo"><img src="${ctx}wh/images/login/logo.png"/>${applicationScope.systemBasisSet.backstageName}</span>
     <span class="help"><a href="javascript:void(0);">常见问题</a>|<a href="javascript:void(0);">帮助中心</a></span>
  </div>
  <div class="loginBox">
@@ -44,7 +44,7 @@
            <p class="login_btn"><input id="btnLogin" class="bt_logo" value="登 录" type="button"></p>
    </div>
    </form>
-   <div class="copy">版权所有：乌海市海南区工业园区</div>
+   <div class="copy">版权所有：${applicationScope.systemBasisSet.unitInformation}</div>
  </div>
 
 </body>

@@ -21,6 +21,7 @@ import cn.com.qytx.platform.base.query.Sort.Direction;
 import cn.com.qytx.platform.log.service.ILog;
 import cn.com.qytx.platform.log.service.LogType;
 import cn.com.wh.safeaccident.util.Tool;
+import cn.com.wh.support.SessionSupport;
 import cn.com.wh.training.domain.PreserviceTraining;
 import cn.com.wh.training.domain.SearchVo;
 import cn.com.wh.training.service.IPreserviceTraining;
@@ -156,7 +157,7 @@ public class PreserviceTrainingAction extends BaseActionSupport{
 			train.setIsDelete(0);
 			train.setIsForkGroup(getLoginUser().getIsForkGroup());
 			train.setGroupId(getLoginUser().getIsForkGroup());
-			train.setCompanyName(this.getSession().getAttribute("companyName").toString());
+			train.setCompanyName(((SessionSupport)(this.getSessionSupport())).getCurrentCompanyName());
 			train = preserviceTrainingService.saveOrUpdate(train);
 			//记录日志
 			logService.saveOrUpdate( Tool.generateLog(getLoginUser(), 

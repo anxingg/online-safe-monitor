@@ -14,6 +14,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
 
+import cn.com.qytx.platform.session.Constants;
+
 public class SessionFilter implements Filter
 {
 
@@ -78,14 +80,14 @@ public class SessionFilter implements Filter
             }
             else
             {
-                if (session.getAttribute("adminUser") == null&&session.getAttribute("adminUserXC") == null)
+                if (session.getAttribute(Constants.CURRENT_LOGIN_USER) == null && session.getAttribute(Constants.CURRENT_LOING_USERX) == null)
                 {
                     response.sendRedirect(basePath + "login.jsp");
                 }
                 else
                 {
-                	if( session.getAttribute("adminUser") == null){
-                		session.setAttribute("adminUser",session.getAttribute("adminUserXC") );
+                	if( session.getAttribute(Constants.CURRENT_LOGIN_USER) == null){
+                		session.setAttribute(Constants.CURRENT_LOGIN_USER,session.getAttribute(Constants.CURRENT_LOING_USERX) );
                 	}
                     chain.doFilter(req, res);
                 }

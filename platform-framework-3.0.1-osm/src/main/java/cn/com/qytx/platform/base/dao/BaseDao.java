@@ -371,6 +371,15 @@ public class BaseDao<T,ID extends Serializable> extends AbstractBaseDao<T,ID> {
     public List<T> findAll() {
         return findAll(null);
     }
+    
+    /**
+     * 查询所有集合
+     * @return
+     */
+    @ClearParamAfterMethod
+    public List<T> findAll(Sort sort) {
+        return findAll(null,sort);
+    }
 
     /**
      * 查询指定条件，并返回集合
@@ -434,13 +443,10 @@ public class BaseDao<T,ID extends Serializable> extends AbstractBaseDao<T,ID> {
         }
 
         Integer total = count(condition,values);
-
         Query query = createQuery(condition, pageable.getSort(), values);
         query.setFirstResult(pageable.getOffset());//设置从起始值
         query.setMaxResults(pageable.getPageSize());//设置要读取多少条
-
         List<T> content = total > pageable.getOffset() ? query.getResultList() : Collections.<T> emptyList();
-
         return new PageImpl<T>(content, pageable, total);
     }
     /**
@@ -455,15 +461,15 @@ public class BaseDao<T,ID extends Serializable> extends AbstractBaseDao<T,ID> {
     	if(pageable==null){
            throw new PlatformException("分页数据异常");
         }
-    	 Integer total = totalCountBySql(sql, values);
-    	 Query query = entityManager.createNativeQuery(sql);
-    	 applySQLQueryParameter(query,values);
-         query.setFirstResult(pageable.getOffset());//设置从起始值
-         query.setMaxResults(pageable.getPageSize());//设置要读取多少条
-         query.unwrap(SQLQuery.class).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
-         List<Map<String,Object>> content = total > pageable.getOffset() ? query.getResultList() : Collections.<Map<String,Object>> emptyList();
+    	Integer total = totalCountBySql(sql, values);
+    	Query query = entityManager.createNativeQuery(sql);
+    	applySQLQueryParameter(query,values);
+        query.setFirstResult(pageable.getOffset());//设置从起始值
+        query.setMaxResults(pageable.getPageSize());//设置要读取多少条
+        query.unwrap(SQLQuery.class).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+        List<Map<String,Object>> content = total > pageable.getOffset() ? query.getResultList() : Collections.<Map<String,Object>> emptyList();
 
-         return new PageImpl<Map<String,Object>>(content,pageable,total);
+        return new PageImpl<Map<String,Object>>(content,pageable,total);
     }
     	
     /**
@@ -588,7 +594,6 @@ public class BaseDao<T,ID extends Serializable> extends AbstractBaseDao<T,ID> {
      * @param entity
      */
     private void doFilter(T entity){
-
         if(entity==null){
             return;
         }
@@ -651,7 +656,6 @@ public class BaseDao<T,ID extends Serializable> extends AbstractBaseDao<T,ID> {
         }
 
         private JpqlQueryHolder(String condition, Object[] values) {
-
             if(startsWithAny(condition,IGNORE_CONSTAINS_CHARSEQUENCE)){
                 throw new PlatformException("查询条件中只能包含WHERE条件表达式!");
             }

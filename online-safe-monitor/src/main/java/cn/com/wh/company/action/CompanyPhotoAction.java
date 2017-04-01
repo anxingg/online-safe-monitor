@@ -101,7 +101,7 @@ public class CompanyPhotoAction extends BaseActionSupport{
 		
 		list = companyPhotoImpl.findByGroupId(groupId);
 		
-		downPath = (String) this.getSession().getAttribute("downPath");
+		downPath = this.getSessionSupport().getDownPath();
 		downPath = downPath.replace("\\:", ":");
 				
 		return "success";

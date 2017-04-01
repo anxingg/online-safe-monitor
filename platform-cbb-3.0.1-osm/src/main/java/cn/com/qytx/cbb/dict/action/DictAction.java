@@ -231,7 +231,7 @@ public class DictAction extends BaseActionSupport {
 	 * @return String
 	 */
 	public String addType() {
-		UserInfo userInfo = (UserInfo) getSession().getAttribute("adminUser");
+		UserInfo userInfo = this.getSessionSupport().getCurrentLoginUser();
 		if (dictService.getInfoTypeByNameAndParentId(infoType, sysTag, name,parentId) == null) {
 			List<Dict> list = dictService.findAllListByParentId(infoType, sysTag,parentId);
 			if (list != null && !list.isEmpty())
@@ -296,7 +296,7 @@ public class DictAction extends BaseActionSupport {
 	 * @return
 	 */
 	public String updateType() {
-		UserInfo userInfo = (UserInfo) getSession().getAttribute("adminUser");
+		UserInfo userInfo = this.getSessionSupport().getCurrentLoginUser();
 		Dict type = dictService.findOne(id);
 		// 判断名称是否已经存在
 		Dict t = dictService.getInfoTypeByNameAndNotIdParentId(type.getInfoType(), type.getSysTag(), name, id,parentId);
@@ -340,7 +340,7 @@ public class DictAction extends BaseActionSupport {
 	 * @return
 	 */
 	public String deleteType() {
-		UserInfo userInfo = (UserInfo) getSession().getAttribute("adminUser");
+		UserInfo userInfo = this.getSessionSupport().getCurrentLoginUser();
 		if (sysTag==-1) {
 			dictService.deleteByInfoType(infoType);
 		}

@@ -47,8 +47,7 @@ public class AffairsForWapAction extends BaseActionSupport {
         PrintWriter out = null;
         try {
             out = this.getResponse().getWriter();
-            UserInfo adminUser = (UserInfo) getSession().getAttribute(
-                    "adminUser");
+            UserInfo adminUser = this.getSessionSupport().getCurrentLoginUser();
             // 检查邮件箱id
             Page<Affairs> page = this.affairsImpl.findPageByUserId(this.getPageable(), adminUser.getUserId(), MessageConst.SENDED);
 

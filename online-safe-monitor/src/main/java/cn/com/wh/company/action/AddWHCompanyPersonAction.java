@@ -75,7 +75,7 @@ public class AddWHCompanyPersonAction extends BaseActionSupport{
 	public String addPerson(){
 		
 		try {
-			UserInfo userInfo = (UserInfo) getSession().getAttribute("adminUser");
+			UserInfo userInfo = this.getSessionSupport().getCurrentLoginUser();
 			Integer group_id = userInfo.getGroupId();
 			WHCompanyPerson person = new WHCompanyPerson();
 			WHCompany wuhaiCompany = companyImpl.findByGroupId(group_id);

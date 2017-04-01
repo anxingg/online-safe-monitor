@@ -21,6 +21,7 @@ import cn.com.qytx.platform.base.query.PageRequest;
 import cn.com.qytx.platform.base.query.Pageable;
 import cn.com.qytx.platform.base.query.Sort;
 import cn.com.qytx.platform.org.domain.UserInfo;
+import cn.com.qytx.platform.session.BaseSessionSupport;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -43,6 +44,7 @@ public class BaseActionSupport extends ActionSupport implements ApplicationConte
 
     private Pageable pageable;
 
+    private BaseSessionSupport sessionSupport;
     /**
      * 获取分页开始索引值，默认从0开始
      * @return 分页开始索引值
@@ -110,11 +112,15 @@ public class BaseActionSupport extends ActionSupport implements ApplicationConte
         this.applicationContext = applicationContext;
     }
 
+    public BaseSessionSupport getSessionSupport()
+    {
+    	return (BaseSessionSupport)applicationContext.getBean("sessionSupport");
+    }
     /**
      * 获取当前的httpSession对象
      * @return 返回httpSession对象
      */
-    protected HttpSession getSession() {
+    private HttpSession getSession() {
         return getRequest().getSession();
     }
 
@@ -217,7 +223,7 @@ public class BaseActionSupport extends ActionSupport implements ApplicationConte
      * @return 返回当前登录用户
      */
     protected UserInfo getLoginUser(){
-    	return (UserInfo) getSession().getAttribute("adminUser");
+    	return this.getSessionSupport().getCurrentLoginUser();
     }
     
 }

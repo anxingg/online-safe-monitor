@@ -23,6 +23,7 @@ import cn.com.qytx.platform.org.domain.UserInfo;
 import cn.com.wh.aqyh.domain.WuhaiSafeDanger;
 import cn.com.wh.aqyh.service.AqyhService;
 import cn.com.wh.safeaccident.util.Tool;
+import cn.com.wh.support.SessionSupport;
 import cn.com.wh.util.DataInitUtil;
 import cn.com.wh.util.DateUtil;
 
@@ -82,8 +83,8 @@ public class AqyhAction extends BaseActionSupport{
 	
 	public String query(){
 
-		UserInfo userInfo = (UserInfo) getSession().getAttribute("adminUser");
-		int whroletype = null==this.getSession().getAttribute("whroletype")?-1:(Integer)this.getSession().getAttribute("whroletype");
+		UserInfo userInfo = this.getSessionSupport().getCurrentLoginUser();
+		int whroletype = ((SessionSupport)this.getSessionSupport()).getCurrentWHRoleType();
 		if(whroletype==2){
 			group_id = String.valueOf(userInfo.getGroupId());
 		}else{
@@ -98,7 +99,7 @@ public class AqyhAction extends BaseActionSupport{
 		Order order = new Order(Direction.DESC, "vid");
 		Order order1 = new Order(Direction.DESC, "group_id");
 		Sort s = new Sort(order1,order);
-		data_source = null==this.getSession().getAttribute("whroletype")?1:(Integer)this.getSession().getAttribute("whroletype");
+		data_source = ((SessionSupport)this.getSessionSupport()).getCurrentWHRoleType();
 		Page<WuhaiSafeDanger> pageInfo = aqyhServiceImpl.queryByConPage(getPageable(s), group_id, review_time, checkdate, responsible_department, responsible,data_source);
 		List<WuhaiSafeDanger> queryList = null==pageInfo.getContent()?new ArrayList<WuhaiSafeDanger>():pageInfo.getContent();
 		int i = (pageNum - 1) * this.getIDisplayLength() + 1;
@@ -212,7 +213,7 @@ public class AqyhAction extends BaseActionSupport{
 //			whSafeDanger.setCreate_time(new Timestamp(System.currentTimeMillis()));
 //			whSafeDanger.setCreate_user(getLoginUser().getUserId());
 			whSafeDanger.setDanger_name(danger_name);
-			data_source = null==this.getSession().getAttribute("whroletype")?1:(Integer)this.getSession().getAttribute("whroletype");
+			data_source = ((SessionSupport)this.getSessionSupport()).getCurrentWHRoleType();
 			//whSafeDanger.setData_source(data_source);//从session中获取
 			whSafeDanger.setGroup_id(Integer.parseInt(group_id));
 			whSafeDanger.setGroup_name(DataInitUtil.companyMap.get(Integer.parseInt(group_id)));//从静态缓存中获取
@@ -236,7 +237,7 @@ public class AqyhAction extends BaseActionSupport{
 			whSafeDanger.setCreate_time(new Timestamp(System.currentTimeMillis()));
 			whSafeDanger.setCreate_user(getLoginUser().getUserId());
 			whSafeDanger.setDanger_name(danger_name);
-			data_source = null==this.getSession().getAttribute("whroletype")?1:(Integer)this.getSession().getAttribute("whroletype");
+			data_source = ((SessionSupport)this.getSessionSupport()).getCurrentWHRoleType();
 			whSafeDanger.setData_source(data_source);//从session中获取
 			whSafeDanger.setGroup_id(Integer.parseInt(group_id));
 			whSafeDanger.setGroup_name(DataInitUtil.companyMap.get(Integer.parseInt(group_id)));//从静态缓存中获取

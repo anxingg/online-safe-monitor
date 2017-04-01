@@ -13,10 +13,10 @@ public class DataBaseSet implements Serializable{
 	 * 描述含义
 	 */
 	private static final long serialVersionUID = 1L;
-		//参数描述
-		public String parDescribe;
+	//参数描述
+	public String parDescribe;
 	//参数项
-		public String parItems;
+	public String parItems;
 	//数据库主机IP
 	private String   dbHostIp;
 	//数据库连接端口

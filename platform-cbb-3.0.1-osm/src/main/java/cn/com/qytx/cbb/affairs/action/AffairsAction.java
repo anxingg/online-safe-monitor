@@ -267,7 +267,7 @@ public class AffairsAction extends BaseActionSupport
         try
         {
             // 首先获取登录人基本信息
-            UserInfo user = (UserInfo) this.getSession().getAttribute("adminUser");
+            UserInfo user = this.getSessionSupport().getCurrentLoginUser();
             
             // 初始化输出流
             out = this.getResponse().getWriter();
@@ -301,7 +301,7 @@ public class AffairsAction extends BaseActionSupport
             out = this.getResponse().getWriter();
 
             // 首先获取登录人基本信息
-            UserInfo user = (UserInfo) this.getSession().getAttribute("adminUser");
+            UserInfo user = this.getSessionSupport().getCurrentLoginUser();
 
             // 删除联系人信息
             affairsImpl.deleteAllReaded(user.getUserId());
@@ -332,7 +332,7 @@ public class AffairsAction extends BaseActionSupport
             out = this.getResponse().getWriter();
 
             // 首先获取登录人基本信息
-            UserInfo user = (UserInfo) this.getSession().getAttribute("adminUser");
+            UserInfo user = this.getSessionSupport().getCurrentLoginUser();
 
             // 删除联系人信息
             affairsImpl.deleteAllUnReaded(user.getUserId());
@@ -363,7 +363,7 @@ public class AffairsAction extends BaseActionSupport
             out = this.getResponse().getWriter();
 
             // 首先获取登录人基本信息
-            UserInfo user = (UserInfo) this.getSession().getAttribute("adminUser");
+            UserInfo user = this.getSessionSupport().getCurrentLoginUser();
 
             // 删除所有事务提醒信息
             affairsImpl.deleteAllAffairs(user.getUserId());
@@ -394,7 +394,7 @@ public class AffairsAction extends BaseActionSupport
             out = this.getResponse().getWriter();
 
             // 首先获取登录人基本信息
-            UserInfo user = (UserInfo) this.getSession().getAttribute("adminUser");
+            UserInfo user = this.getSessionSupport().getCurrentLoginUser();
 
             // 全部标记为已读
             affairsImpl.updateAllReaded(user.getUserId());
@@ -425,7 +425,7 @@ public class AffairsAction extends BaseActionSupport
             out = this.getResponse().getWriter();
 
             // 首先获取登录人基本信息
-            UserInfo user = (UserInfo) this.getSession().getAttribute("adminUser");
+            UserInfo user = this.getSessionSupport().getCurrentLoginUser();
 
             // 全部标记为已读
             affairsImpl.updateModuleReaded(user.getUserId(), moduleName);
@@ -526,7 +526,7 @@ public class AffairsAction extends BaseActionSupport
         try
         {
             // 首先获取登录人基本信息
-            UserInfo user = (UserInfo) this.getSession().getAttribute("adminUser");
+            UserInfo user = this.getSessionSupport().getCurrentLoginUser();
 
             // 删除已提醒收信人提醒
             affairsImpl.deleteAllSendReaded(user.getUserId());
@@ -546,7 +546,7 @@ public class AffairsAction extends BaseActionSupport
         try
         {
             // 首先获取登录人基本信息
-            UserInfo user = (UserInfo) this.getSession().getAttribute("adminUser");
+            UserInfo user = this.getSessionSupport().getCurrentLoginUser();
 
             // 删除所有已发送的事务提醒
             affairsImpl.deleteAllSendAffairs(user.getUserId());
@@ -566,7 +566,7 @@ public class AffairsAction extends BaseActionSupport
         try
         {
             // 首先获取登录人基本信息
-            UserInfo user = (UserInfo) this.getSession().getAttribute("adminUser");
+            UserInfo user = this.getSessionSupport().getCurrentLoginUser();
 
             // 删除所有已发送的事务提醒
             affairsImpl.deleteToUserDeleted(user.getUserId());
@@ -586,7 +586,7 @@ public class AffairsAction extends BaseActionSupport
         try
         {
             // 首先获取登录人基本信息
-            UserInfo user = (UserInfo) this.getSession().getAttribute("adminUser");
+            UserInfo user = this.getSessionSupport().getCurrentLoginUser();
 
             // 重发事务提醒
             if (affairsImpl.retransmissionAffairs(retransmissionId, user))
@@ -614,7 +614,7 @@ public class AffairsAction extends BaseActionSupport
         {
             out = this.getResponse().getWriter();
             // 首先获取登录人基本信息
-            UserInfo user = (UserInfo) this.getSession().getAttribute("adminUser");
+            UserInfo user = this.getSessionSupport().getCurrentLoginUser();
             affairsVo.setUserinfo(user);
 
             // 获取结果
@@ -657,7 +657,7 @@ public class AffairsAction extends BaseActionSupport
         try
         {
             // 首先获取登录人基本信息
-            UserInfo user = (UserInfo) this.getSession().getAttribute("adminUser");
+            UserInfo user = this.getSessionSupport().getCurrentLoginUser();
             affairsVo.setUserinfo(user);
             List<Affairs> affairsList = affairsImpl.getAllAffairsByVo(affairsVo);
 
@@ -783,7 +783,7 @@ public class AffairsAction extends BaseActionSupport
             }
 
             // 首先获取登录人基本信息
-            UserInfo user = (UserInfo) this.getSession().getAttribute("adminUser");
+            UserInfo user = this.getSessionSupport().getCurrentLoginUser();
             affairsVo.setUserinfo(user);
 
             // 删除联系人信息
@@ -804,7 +804,7 @@ public class AffairsAction extends BaseActionSupport
      */
     public String getShortcutMenu() throws InterruptedException
     {
-        UserInfo user = (UserInfo) this.getSession().getAttribute("adminUser");
+        UserInfo user = this.getSessionSupport().getCurrentLoginUser();
         // 查询所有未确认的事务提醒信息
         List<Affairs> list = affairsImpl.findUnReadByUserId(user.getUserId());
         
@@ -827,7 +827,7 @@ public class AffairsAction extends BaseActionSupport
     {
         try
         {
-            UserInfo user = (UserInfo) this.getSession().getAttribute("adminUser");
+            UserInfo user = this.getSessionSupport().getCurrentLoginUser();
 
             // 查询所有未确认的事务提醒信息
             List<Affairs> list = affairsImpl.findUnReadByUserId(user.getUserId());

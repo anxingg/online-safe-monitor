@@ -57,11 +57,11 @@ public class RoleModuleViewAction extends BaseActionSupport {
 	@SuppressWarnings("unchecked")
 	public String loadRoleModuleView() {
 		if (roleId != null) {
-			Map<Integer, ModuleInfo> moduleMap = moduleService.findModuleMap(null, roleId);
-			Map<Integer, ModuleInfo> firstModuleMap = moduleService.findModuleLevelMap(moduleMap, 1);
-			Map<Integer, ModuleInfo> secondModuleMap = moduleService.findModuleLevelMap(moduleMap, 2);
-			Map<Integer, ModuleInfo> thirdModuleMap = moduleService.findModuleLevelMap(moduleMap, 3);
-			Map<Integer, ModuleInfo> fourthModuleMap = moduleService.findModuleLevelMap(moduleMap, 4);
+			Map<Integer, ModuleInfo> moduleMap = moduleService.findModuleMap(roleId.toString(), null);
+			Map<Integer, ModuleInfo> firstModuleMap = moduleService.findModuleLevelMap(moduleMap, 1,null);
+			Map<Integer, ModuleInfo> secondModuleMap = moduleService.findModuleLevelMap(moduleMap, 2,null);
+			Map<Integer, ModuleInfo> thirdModuleMap = moduleService.findModuleLevelMap(moduleMap, 3,null);
+			Map<Integer, ModuleInfo> fourthModuleMap = moduleService.findModuleLevelMap(moduleMap, 4,null);
 
 			
 			List<ModuleInfo> firstModuleList=new ArrayList<ModuleInfo>();

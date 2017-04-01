@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*"  contentType="text/html; charset=UTF-8" pageEncoding="utf-8"  %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions"  prefix="fn"%>
 <%@include file="/ninclude/import.jsp"%>
-				<div class="l_menu">
+			<div class="l_menu">
         	<ul id="showmenu">
 				<c:forEach var="moduleInfo" items="${showModuleList}" varStatus="menu">
 				<c:choose>

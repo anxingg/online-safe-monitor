@@ -38,7 +38,7 @@ public class GetSystemTime extends BaseActionSupport {
 	
 	public String getSystemTime(){
 		try{
-			UserInfo userInfo = (UserInfo) this.getSession().getAttribute("adminUser");
+			UserInfo userInfo = this.getSessionSupport().getCurrentLoginUser();
 			if(userInfo!=null){
 				if(timeFormat==null || "".equals(timeFormat)){
 					timeFormat="yyyy-MM-dd";

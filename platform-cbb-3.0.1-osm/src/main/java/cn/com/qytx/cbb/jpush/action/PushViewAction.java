@@ -48,7 +48,7 @@ public class PushViewAction  extends BaseActionSupport{
 	 */
 	public String viewPush(){
 		try {
-			UserInfo userObject=(UserInfo)getSession().getAttribute("adminUser");
+			UserInfo userObject=this.getSessionSupport().getCurrentLoginUser();
 			if(userObject!=null&&pushId!=null){
 					PushInfo pushInfo=pushInfoService.findOne(pushId);
 					//发布时间

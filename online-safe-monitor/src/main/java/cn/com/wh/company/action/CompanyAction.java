@@ -32,6 +32,7 @@ import cn.com.wh.company.domain.WHCompany;
 import cn.com.wh.company.service.ISafetyInstitutions;
 import cn.com.wh.company.service.IWHCompany;
 import cn.com.wh.safeaccident.util.Tool;
+import cn.com.wh.support.SessionSupport;
 import cn.com.wh.util.DataInitUtil;
 
 import com.google.gson.Gson;
@@ -110,7 +111,7 @@ public class CompanyAction extends BaseActionSupport{
 		
 		try {
 			LOGGER.info("企业保存saveOrUpdateCpy   begin");
-			UserInfo userInfo = (UserInfo) getSession().getAttribute("adminUser");
+			UserInfo userInfo = this.getSessionSupport().getCurrentLoginUser();
 			groupId = userInfo.getGroupId();
 			WHCompany whcompany = companyImpl.findByGroupId(groupId);
 			//LOGGER.info("saveOrUpdateCpy 值： ");
@@ -341,7 +342,7 @@ public class CompanyAction extends BaseActionSupport{
 	 */
 	public String addCompany(){
 		try {
-			UserInfo userInfo = (UserInfo) getSession().getAttribute("adminUser");
+			UserInfo userInfo = this.getSessionSupport().getCurrentLoginUser();
 			//保存部门
 			GroupInfo group = new GroupInfo();
 			group.setCompanyId(1);
@@ -425,7 +426,7 @@ public class CompanyAction extends BaseActionSupport{
 	
 	public String resetPass(){
 		try {
-			Integer whroletype = (Integer)getSession().getAttribute("whroletype");
+			Integer whroletype = ((SessionSupport)this.getSessionSupport()).getCurrentWHRoleType();
 			if(whroletype!=null && whroletype==1){//政府用户
 				//保存登录用户
 				List<UserInfo> list = userService.findUsersByGroupId(groupId.toString());
@@ -500,7 +501,7 @@ public class CompanyAction extends BaseActionSupport{
 	 * @return
 	 */
 	public String toUpdateCompany(){
-		UserInfo userInfo = (UserInfo) getSession().getAttribute("adminUser");
+		UserInfo userInfo = this.getSessionSupport().getCurrentLoginUser();
 		cpy = companyImpl.findByGroupId(userInfo.getGroupId());
 		return "success";
 	}

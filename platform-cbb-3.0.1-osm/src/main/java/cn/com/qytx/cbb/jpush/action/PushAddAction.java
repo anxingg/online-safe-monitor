@@ -49,7 +49,7 @@ public class PushAddAction  extends BaseActionSupport{
 			String basePath = request.getScheme() + "://"
 		            + request.getServerName() + ":" + request.getServerPort()
 		            + path+"/" ;
-			UserInfo userInfo=(UserInfo) this.getSession().getAttribute("adminUser");
+			UserInfo userInfo=this.getSessionSupport().getCurrentLoginUser();
 			int res=0;
 			if(userInfo!=null&&pushInfo!=null){
 					pushInfo.setUserId(userInfo.getUserId());

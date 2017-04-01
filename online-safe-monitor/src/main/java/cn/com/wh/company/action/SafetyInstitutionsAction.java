@@ -77,7 +77,7 @@ public class SafetyInstitutionsAction extends BaseActionSupport{
 	 * @return
 	 */
 	public String update(){
-		UserInfo userInfo = (UserInfo) getSession().getAttribute("adminUser");
+		UserInfo userInfo = this.getSessionSupport().getCurrentLoginUser();
 		if(userInfo != null){
 			String createFileIds = sis.getCreateFileIds();
 			String departmentFileIds = sis.getDepartmentFileIds();
@@ -169,7 +169,7 @@ public class SafetyInstitutionsAction extends BaseActionSupport{
 	 * @return
 	 */
 	public String jmpPage(){
-		UserInfo userInfo = (UserInfo) getSession().getAttribute("adminUser");
+		UserInfo userInfo = this.getSessionSupport().getCurrentLoginUser();
 		if(userInfo != null){
 			whCompany = companyImpl.findByGroupId(whCompany.getGroupId());
 			sis = sisService.findByGroupId(whCompany.getGroupId());

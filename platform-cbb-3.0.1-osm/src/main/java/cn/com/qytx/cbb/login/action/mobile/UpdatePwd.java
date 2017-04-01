@@ -79,9 +79,9 @@ public class UpdatePwd extends BaseActionSupport {
 		              }
 		              List<ModuleInfo> moduleList = new ArrayList<ModuleInfo>();
 		              if(user.getIsDefault()==0){
-		            	  moduleList = moduleService.getAllModule();
+		            	  moduleList = moduleService.getModuleByRole(null,null);
 		              }else{
-		            	  moduleList =moduleService.getModuleByRole(roleIdArr);//获取模块列表
+		            	  moduleList =moduleService.getModuleByRole(roleIdArr,null);//获取模块列表
 		              }
 		              wapUser.setModuleList(moduleList);
 			          String jsons = json.toJson(wapUser);
