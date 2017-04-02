@@ -19,8 +19,8 @@
 		<script type="text/javascript" src="${ctx}plugins/My97DatePicker/WdatePicker.js"></script>
 		<!-- flat css js end-->
 		<!-- table.css -->
-			<!-- 人员选择  start-->
-		<script type="text/javascript" src="${ctx}js/logined/daily/selectuser.js"></script>
+		<!-- 人员选择  start-->
+		<script type="text/javascript" src="${ctx}js/logined/user/selectuser.js"></script>
 	    <script type="text/javascript" src="${ctx}js/common/hashmap.js"></script>
 	    <script type="text/javascript" src="${ctx}js/common/treeNode.js"></script>
 	    <script type="text/javascript" src="${ctx}js/user/selectuser.js"></script>

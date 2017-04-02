@@ -48,7 +48,6 @@ a {
 .headMenu {
 	display: inline-block;
 	float: right;
-	width: 530px;
 	height: 100%;
 	/*line-height: 90px;*/
 }
@@ -191,7 +190,7 @@ a {
 	background:#f5f7f6; border:none
 }
 
-.mainIframe{ width:100%;}
+.mainIframe{ width:100%;height:100%}
 
 .check_right {
 	margin-left: 200px;

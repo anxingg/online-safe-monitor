@@ -18,7 +18,6 @@
 </head>
 
 <body>
-<input type="hidden" id="whroletype" value="<s:property value="#session.whroletype"/>" />
 <input type="hidden" id="sysTag" value='1'/>
 <input type="hidden" id="sysTagItem" value='${paramValues.sysTag[0]}'/>
 <input type="hidden" id="infoType" />
@@ -42,7 +41,6 @@
     </div>
   </div>
   <div class="list">
-  <s:if test="#session.whroletype==1">
   <div class="searchArea">
       <ul>
           <li>
@@ -55,7 +53,6 @@
               </li>
           </ul>
     </div>
-    </s:if>
     <table cellpadding="0" cellspacing="0"  class="pretty dataTable">
       <thead>
         <tr>
