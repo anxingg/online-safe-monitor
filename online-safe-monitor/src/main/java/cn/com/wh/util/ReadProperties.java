@@ -1,4 +1,4 @@
-package cn.com.wh.safeaccident.util;
+package cn.com.wh.util;
 
 import java.io.FileInputStream;
 import java.io.IOException;

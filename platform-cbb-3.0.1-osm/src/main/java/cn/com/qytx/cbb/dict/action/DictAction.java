@@ -120,7 +120,7 @@ public class DictAction extends BaseActionSupport {
 	 * 获得类别属性结构(数据字典页面的右侧树形结构使用)
 	 */
 	public String getAllDictsTree() {
-        List<Dict> list = dictService.findSysListByCompanyId();  //获取数据字典列表
+        List<Dict> list = dictService.findSysList(sysTag);  //获取数据字典列表
         List<TreeNode> treeNodes = new ArrayList<TreeNode>();
         
         //创建部门树
@@ -130,6 +130,7 @@ public class DictAction extends BaseActionSupport {
         ajax(jsons);
         return null;
     }
+	
 	/**
      * 创建部门树
      * 在zTree树中使用时，只需要给TreeNode节点中pid赋值就可以了，不需要设置Children

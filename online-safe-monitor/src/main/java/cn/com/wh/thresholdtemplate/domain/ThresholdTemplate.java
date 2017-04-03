@@ -23,6 +23,7 @@ public class ThresholdTemplate implements java.io.Serializable {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name = "ID")
 	private Integer vid;//id
 	
 	@Column(name="TEMPLATENAME")

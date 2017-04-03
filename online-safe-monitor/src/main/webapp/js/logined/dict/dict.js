@@ -7,10 +7,10 @@ $(document).ready(function() {
 	refreshTree();
 	// 添加
 	$("#addType").live("click", function() {
-				addTypeOpen(1);
+				addTypeOpen(2);
 			});
 	$("#addSysType").live("click", function() {
-				addTypeOpen(-1);
+				addTypeOpen(2);
 			});
 
 	// 删除
@@ -142,7 +142,6 @@ function getTypeList() {
 			$("#types").html(" ");
 			var html = "";
 			var tdClass="";
-			var whroletype = $("#whroletype").val();
 			if(jsonData==null || jsonData.length==0){
 				html+="<tr class='odd'><td colspan='4'>没有检索到数据</td></tr>";
 			}else{
@@ -157,11 +156,7 @@ function getTypeList() {
 					html += "  <td><input type=\"checkbox\"   name='typeList'  maxlength='8' id='"+ jsonData[i].id+ "' value='"+ jsonData[i].name+ "'  /></td>";
 					html += "   <td>"+(i+1)+"</td>";
 					html += "   <td class=\"data_l\">"+jsonData[i].name+"</td>";
-					if(whroletype == 3){
-						html += '   <td class="right_bdr0">--</td>';
-					}else {
-						html += "   <td class=\"right_bdr0\"><a href=\"javascript:void(0)\" onclick=\"updateTypeOpen('"+ jsonData[i].id+ "','"+ jsonData[i].name+ "',"+ jsonData[i].value+ ","+vorder+" )\">修改</a></td>";
-			        }
+					html += "   <td class=\"right_bdr0\"><a href=\"javascript:void(0)\" onclick=\"updateTypeOpen('"+ jsonData[i].id+ "','"+ jsonData[i].name+ "',"+ jsonData[i].value+ ","+vorder+" )\">修改</a></td>";
 			        html += "  </tr>";
 				}
 			}
@@ -285,7 +280,7 @@ function addType(typeName,typeValue,sysType,infoTypeValue) {
 				success : function(data) {
 					if (data == 0) {
 						addArt.close();
-						 if(sysType==1){getTypeList();}
+						 if(sysType==2){getTypeList();}
 					    else{getSysTypeList();}
 					} else if (data == 1) {
 						art.dialog.alert("添加失败,类型已存在！");
@@ -397,7 +392,7 @@ function updateType(id, typeName,sysType,typeValue,infoType) {
 				},
 				success : function(data) {
 					if (data == 0) {
-					     if(sysType==1){
+					     if(sysType==2){
 					     	 getTypeList();
 					     } else{
 					       getSysTypeList();
@@ -550,6 +545,7 @@ function refreshTree(){
 	$.ajax({
 		url : basePath + "dict/setup_getAllDictsTree.action",
 		type : "post",
+		data : {'sysTag':2},
 		dataType : "json",
 		success : function(data) {
 			var param = {

@@ -67,7 +67,7 @@ public class MenuAction extends BaseActionSupport{
 		if(StringUtils.isEmpty(subSystem)){
 			subSystem=WHConstant.MODULE_SYSTEMMANAGE;
 		}
-		String cacheKey="cache_"+subSystem;
+		String cacheKey="cache_fetchSubSystemMenu_"+subSystem;
 		//由于这个逻辑复杂，且重用度很高，因此放入缓存中
 		if(this.getSessionSupport().getSession().getAttribute(cacheKey)!=null)
 			showModuleList=(List<ModuleInfo>)this.getSessionSupport().getSession().getAttribute(cacheKey);
@@ -76,9 +76,8 @@ public class MenuAction extends BaseActionSupport{
 			List<ModuleInfo> moduleList = (List<ModuleInfo>) this.getSessionSupport().getSession().getAttribute(Constants.CURRENT_LOGIN_MODULELIST);
 			for(ModuleInfo moduleInfo : moduleList){
 				//增加二级菜单以及他的子菜单，为了前台菜单的排序
-				if((moduleInfo.getModuleLevel()==2) && 
-						(WHConstant.SYS_NAME.equals(moduleInfo.getSysName()))
-						&&(subSystem.equals(moduleInfo.getModuleClass()))){
+				if((moduleInfo.getModuleLevel()==2)
+						&&(subSystem.equals(moduleInfo.getSysName()))){
 					showModuleList.add(moduleInfo);
 					Integer parentId=moduleInfo.getModuleId();
 					//添加他的子菜单

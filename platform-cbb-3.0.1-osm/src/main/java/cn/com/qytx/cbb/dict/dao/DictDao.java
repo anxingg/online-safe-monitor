@@ -1,10 +1,12 @@
 package cn.com.qytx.cbb.dict.dao;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Repository;
 
 import cn.com.qytx.cbb.dict.domain.Dict;
@@ -66,13 +68,28 @@ public class DictDao extends BaseDao<Dict,Integer> implements Serializable{
 	
 	/**
 	 * 通过父节点id获得子节点数据字典
-	 * @param infoType
+	 * @param infoType 
 	 * @param grade
 	 * @param parentId
 	 * @return
 	 */
 	public List<Dict> findListByParentId(String infoType, Integer grade,Integer parentId) {
-		return findAll("infoType=?1 and grade>?2 and isDelete=0 and parentId=?3",new Sort(new Sort.Order(Sort.Direction.ASC,"grade")),infoType,grade,parentId);
+		String hql=" isDelete= 0 ";
+		List<Object> params = new ArrayList<Object>();
+		if(!StringUtils.isEmpty(infoType)){
+			hql+=" and infoType= ? ";
+			params.add(infoType);
+		}
+		if(grade!=null){
+			hql+=" and grade > ? ";
+			params.add(grade);
+		}
+		if(parentId!=null){
+			hql+=" and parentId = ? ";
+			params.add(parentId);
+		}
+		return findAll(hql,
+				new Sort(new Sort.Order(Sort.Direction.ASC,"infoOrder")),params.toArray());
 	}
 	
 	/**
@@ -223,7 +240,13 @@ public class DictDao extends BaseDao<Dict,Integer> implements Serializable{
 	 * @return
 	 */
 	public List<Dict> findSysList(Integer sysTag) {
-		return this.findAll("isDelete=0 and sysTag=?1",new Sort(new Sort.Order(Sort.Direction.ASC,"infoOrder")),sysTag);
+		String hql=" isDelete=0 ";
+		List<Object> params = new ArrayList<Object>();
+		if(sysTag!=null){
+			hql+="and sysTag=? ";
+			params.add(sysTag);
+		}
+		return this.findAll(hql,new Sort(new Sort.Order(Sort.Direction.ASC,"infoOrder")),params.toArray());
 	}
 	
 	/**

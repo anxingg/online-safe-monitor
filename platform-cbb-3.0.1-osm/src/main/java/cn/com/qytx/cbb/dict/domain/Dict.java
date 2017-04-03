@@ -48,7 +48,7 @@ public class Dict extends BaseDomain
     
     @Expose
 	@Column(name = "info_order")
-    private Integer infoOrder; // 是否删除 1：已删除 0：未删除
+    private Integer infoOrder; // 
     
     @Transient
     private Integer canDelete;//是否为系统默认的类型 ：  0：默认    null或1：用户自定义   默认类型不可以删除和编辑

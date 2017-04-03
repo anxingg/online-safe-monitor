@@ -14,9 +14,11 @@ import cn.com.qytx.platform.base.query.Page;
 import cn.com.qytx.platform.base.query.Sort;
 import cn.com.qytx.platform.base.query.Sort.Direction;
 import cn.com.qytx.platform.log.service.ILog;
+import cn.com.qytx.platform.log.service.LogType;
 import cn.com.wh.thresholdtemplate.domain.ThresholdTemplate;
 import cn.com.wh.thresholdtemplate.service.IThresholdTemplate;
 import cn.com.wh.util.DataInitUtil;
+import cn.com.wh.util.Tool;
 
 public class ThresholdTemplateAction extends BaseActionSupport {
 
@@ -34,9 +36,13 @@ public class ThresholdTemplateAction extends BaseActionSupport {
 	@Resource
 	private ILog logService;
 	
+	private ThresholdTemplate thresholdTemplate;
+	
 	private String watchType;
 	
 	private String keyWord;
+	
+	private Integer vid;
 	
 	public String getWatchType() {
 		return watchType;
@@ -49,6 +55,13 @@ public class ThresholdTemplateAction extends BaseActionSupport {
 	}
 	public void setKeyWord(String keyWord) {
 		this.keyWord = keyWord;
+	}
+	
+	public Integer getVid() {
+		return vid;
+	}
+	public void setVid(Integer vid) {
+		this.vid = vid;
 	}
 	private String formatLevel(ThresholdTemplate thresholdTemplate)
 	{
@@ -180,7 +193,25 @@ public class ThresholdTemplateAction extends BaseActionSupport {
 	 * @return
 	 */
 	public String delete(){
-		
+		try {
+			thresholdTemplate=thresholdTemplateImpl.findOne(vid);
+			thresholdTemplate.setIsDelete(1);
+			thresholdTemplateImpl.saveOrUpdate(thresholdTemplate);
+			LOGGER.info("删除阈值模板，vid："+vid);
+			
+			//记录日志
+			logService.saveOrUpdate(Tool.generateLog(getLoginUser(), 
+					this.getRequest().getRemoteAddr(), 
+					"删除阈值模板成功", 
+					LogType.LOG_YZMB_DELETE, 
+					thresholdTemplate, 
+					vid) );
+			ajax("1");
+		} catch (Exception e) {
+			e.printStackTrace();
+			LOGGER.error("删除阈值模板异常，vid="+vid+",异常信息："+e.getMessage());
+			ajax("0");
+		}
 		return null;
 	}
 	

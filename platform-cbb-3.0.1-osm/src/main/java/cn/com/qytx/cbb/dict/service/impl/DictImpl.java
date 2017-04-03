@@ -51,9 +51,9 @@ public class DictImpl extends BaseServiceImpl<Dict> implements IDict {
 	
 	/**
 	 * 通过父节点id获得子节点数据字典
-	 * @param infoType
-	 * @param grade
-	 * @param parentId
+	 * @param infoType 字典类别
+	 * @param grade 父节点级别
+	 * @param parentId 父节点ID
 	 * @return
 	 */
 	public List<Dict> findListByParentId(String infoType, Integer grade,Integer parentId){

@@ -3,7 +3,7 @@ $(document).ready(function(){
 		url : basePath + "whmenu/fetchSubSystemMenu.action",
 		type : "post",
 		dataType : 'html',
-		data : 'subSystem=osm_systemmanage',
+		data : 'sys_name=osm_systemmanage',
 		success : function(data) {
 			console.log("success:"+data);
 			$("#leftMenu").html(data);

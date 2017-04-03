@@ -11,7 +11,8 @@ package cn.com.wh;
 public interface WHConstant
 { 
 	//系统名称，例如菜单等支持多系统的需要传递系统名称
-	public static final String SYS_NAME="osm";
+	public static final Integer DICT_SYS_TAG =2;  //本系统的数据字典标识的系统标记 
+	public static final String SYS_NAME="osm";    //主菜单的系统标记
     public static final String MODULE_SYSTEMMANAGE="osm_systemmanage";
 	
 	/**

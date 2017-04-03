@@ -31,9 +31,9 @@ import cn.com.wh.company.domain.SafetyInstitutions;
 import cn.com.wh.company.domain.WHCompany;
 import cn.com.wh.company.service.ISafetyInstitutions;
 import cn.com.wh.company.service.IWHCompany;
-import cn.com.wh.safeaccident.util.Tool;
 import cn.com.wh.support.SessionSupport;
 import cn.com.wh.util.DataInitUtil;
+import cn.com.wh.util.Tool;
 
 import com.google.gson.Gson;
 

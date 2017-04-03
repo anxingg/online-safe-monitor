@@ -18,7 +18,7 @@
 </head>
 
 <body>
-<input type="hidden" id="sysTag" value='1'/>
+<input type="hidden" id="sysTag" value='2'/>
 <input type="hidden" id="sysTagItem" value='${paramValues.sysTag[0]}'/>
 <input type="hidden" id="infoType" />
 <input type="hidden" id="SysTypeId" />
@@ -67,39 +67,5 @@
     </table>
   </div>
 </div>
-
-
-<!--  
-<div class="dictionary" >
-	<h1>数据字典设置</h1>
-	<div class="dataArea">
-      <div class="data_r">
-         <div class="workes">
-            <ul>
-               <%--<li><a href="javascript:void(0)"  id="addSysType" onclick="addTypeOpen(-1)"><em class="em1"></em>新增</a></li>
-               <li><a href="javascript:void(0)"  id="updateSysType" onclick="updateSysTypeOpen()"><em class="em2"></em>修改</a></li>
-               <li><a href="javascript:void(0)"  id="deleteSysType" onclick="deleteSysType()"><em class="em3"></em>删除</a></li>
-            --%>
-               <li><a href="javascript:void(0)"  id="addType" ><em class="em1"></em>新增</a></li>
-               <li><a href="javascript:void(0)"  id="updateType" ><em class="em2"></em>修改</a></li>
-               <li><a href="javascript:void(0)"  id="deleteType" ><em class="em3"></em>删除</a></li>
-            </ul>
-          </div>
-    	<div id="sysTypeList" class="d_list">    	
-    	</div>
-  	  </div>
-  <div class="data_l">
-    <h2>
-     <label class="radio"><input type="checkbox"  id="total"/>全选</label>&nbsp;&nbsp;
-     <input style="display: none" type="button" id="addType" class="formButton" value="新增"/>
-     <input style="display: none" type="button" class="formButton" id="updateType" value="修改"/>
-     <input style="display: none" type="button" class="formButton" id="deleteType" value="删除"/>
-    </h2>
-      <div id="types">
-      </div>
-  </div>
- </div>
-</div>
--->
 </body>
 </html>

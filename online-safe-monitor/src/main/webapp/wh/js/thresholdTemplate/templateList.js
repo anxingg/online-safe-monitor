@@ -1,6 +1,12 @@
 $(document).ready(function(){
 	
 	// 保存按钮绑定事件
+	$("#add").bind("click", function() {
+		addTemplate();
+		return false;
+	});
+	
+	// 保存按钮绑定事件
 	$("#search").bind("click", function() {
 		getTableList();
 		return false;
@@ -28,10 +34,10 @@ $(document).ready(function(){
 function initSelect(typeName,id) {
 	var paramData = {
 		'infoType' : typeName,
-		'sysTag' : 0
+		'grade' : 0
 	};
 	qytx.app.ajax({
-		url : basePath + "dict/getDicts.action",
+		url : basePath + "dict/setup_getDictsByParentId.action",
 		type : "post",
 		dataType : "text",
 		data : paramData,
@@ -80,27 +86,19 @@ function getTableList(){
 		"bAutoWidth" : false,// 自动宽度
 		"iDisplayLength" : 15, // 每页显示多少行
 		"aoColumns" : [{
-			"sTitle" : '预案编号',
-			"mDataProp" : 'planNo',
+			"sTitle" : '模板名称',
+			"mDataProp" : 'templateName'
+		}, {
+			"sTitle" : '监测类型',
+			"mDataProp" : "watchType"
+		}, {
+			"sTitle" : '适用量程',
+			"mDataProp" : 'range'
+		}, {
+			"sTitle" : '阈值设置',
+			"mDataProp" : 'level',
 			"sClass" : "longTxt"
 		}, {
-			"sTitle" : '企业名称',
-			"mDataProp" : "companyName",
-			"sClass" : "longTxt"
-		}, {
-			"sTitle" : '预案类型',
-			"mDataProp" : 'planTypeName'
-		}, {
-			"sTitle" : '备案时间',
-			"mDataProp" : 'prepareTime'
-		}, {
-			"sTitle" : '备案到期时间',
-			"mDataProp" : 'prepareEndTime'
-		}, {
-			"sTitle" : '应急内容（文件）',
-			"sClass" : "longTxt",
-			"mDataProp" : null
-		},{
 			"sTitle" : '操作',
 			"mDataProp" : null
 		}],
@@ -108,12 +106,9 @@ function getTableList(){
 			"sUrl" : basePath + "wh/plugins/datatable/cn.txt" // 中文包
 		},
 		"fnDrawCallback" : function(oSettings) {
-
 			 $('#myTable tbody  tr td').each(function() {
   				this.setAttribute('title', $(this).text());
   			});
-			
-			
 		},
 		"fnInitComplete" : function() {
 			// 重置iframe高度
@@ -121,30 +116,12 @@ function getTableList(){
 		},
 		"aoColumnDefs" : [
 			{
-				"aTargets" : [5], //操作
-				"fnRender" : function(oObj) {
-					var attachmentIds = oObj.aData.attachmentIds;
-					var attachName = oObj.aData.attachName;
-					var html = '';
-					if(attachmentIds == null || attachmentIds == undefined || attachmentIds == '' || attachmentIds == '-'){
-						html = '无附件';
-					}else {
-						html = '<a href="javascript:;" onclick="downloadReport(\''+attachmentIds+'\');">'+attachName+'</a>';
-					}
-					return html;
-					
-				}
-			},
-			{
-				"aTargets" : [6], //操作
+				"aTargets" : [4], //操作
 				"fnRender" : function(oObj) {
 					var vid = oObj.aData.vid;
-					var whroletype = $("#whroletype").val();
-					var html = '<a href="'+basePath+'wh/logined/plans/plansView.jsp?vid='+vid+'">查看</a>';
-					if(whroletype==2){//企业端
-						html+= '<a href="'+basePath+'wh/logined/plans/updatePlans.jsp?vid='+vid+'">修改</a>';
-						html+='<a href="javascript:void(0);" onclick="deletePlans('+vid+');">删除</a>';						
-					}
+					var html = '';
+					html+= '<a href="'+basePath+'wh/logined/thresholdtemplate/updateTemplate.jsp?vid='+vid+'">修改</a>';
+					html+='<a href="javascript:void(0);" onclick="deleteTemplate('+vid+');">删除</a>';	
 					return html;
 				}
 			}
@@ -153,28 +130,17 @@ function getTableList(){
 }
 
 /**
- * 下载附件
- * @param id
- */
-function downloadReport(id){
-	var attachmentId = new String(id);
-	attachmentId = attachmentId.replace(new RegExp(",","g"),'');
-	//alert(attachmentId);
-	downLoadAttachment(attachmentId);
-}
-
-/**
  * 新增操作
  */
-function addPlans() {
-	window.location.href = basePath + "wh/logined/plans/addPlans.jsp";
+function addTemplate() {
+	window.location.href = basePath + "wh/logined/thresholdtemplate/addTemplate.jsp";
 }
 
-function deletePlans(vid){
+function deleteTemplate(vid){
 	//确认对话框
-	art.dialog.confirm('确定删除该应急预案吗？', function() {
+	art.dialog.confirm('确定删除该模板吗？', function() {
 		$.ajax({
-			url : basePath + "plans/plans_delete.action",
+			url : basePath + "thresholdtemplate/thresholdtemplate_delete.action",
 			type : "post",
 			dataType : 'json',
 			data : {

@@ -7,20 +7,16 @@ import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.annotation.Resource;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
 import com.google.gson.Gson;
-
 import cn.com.qytx.platform.base.action.BaseActionSupport;
 import cn.com.qytx.platform.log.service.ILog;
 import cn.com.qytx.platform.log.service.LogType;
 import cn.com.qytx.platform.org.domain.UserInfo;
 import cn.com.wh.company.domain.WHCompanyPhoto;
 import cn.com.wh.company.service.IWHCompanyPhoto;
-import cn.com.wh.safeaccident.util.Tool;
+import cn.com.wh.util.Tool;
 
 /**
  * 功能：企业证照

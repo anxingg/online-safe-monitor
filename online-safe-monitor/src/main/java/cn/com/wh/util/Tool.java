@@ -1,10 +1,9 @@
-package cn.com.wh.safeaccident.util;
+package cn.com.wh.util;
 
 import java.lang.reflect.Type;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -301,10 +300,7 @@ public class Tool {
         log.setIsDelete(0);
         log.setLogType(logType);
         log.setRefId(refId);
-        List<Object> list = new ArrayList<Object>();
-        list.add(obj);
-        list.add(userInfo.getLoginName());
-        log.setLogContent(gson.toJson(list));
+        log.setLogContent(gson.toJson(obj));
 //        log.setLogContent(cutJson(gson, gson.toJson(obj), 250, "@@@内容过长，已截取@@@"));
         //System.out.println("gson="+gson.toJson(obj));
         log.setRemark(remark/*"登录成功"*/);

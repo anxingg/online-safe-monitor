@@ -11,7 +11,7 @@
 	<!-- 清除分页cookie start -->
 	<script type="text/javascript" src="${ctx}js/common/jquery.cookie.js"></script>
 	<!-- 清除分页cookie end -->
-    <script type="text/javascript" src="${ctx}wh/js/plans/templateList.js?version=${version}"></script>
+    <script type="text/javascript" src="${ctx}wh/js/thresholdTemplate/templateList.js?version=${version}"></script>
 </head>
 <body>
 	<div class="bread-line">
@@ -22,9 +22,9 @@
     </div>
 	<div class="list">
 		<div class="collect_search">
-			<span class="add">+添加模板</span>
+			<span class="add" id="add">添加模板</span>
             <span class="search" id="search">查询</span>
-            <input type="text" class="search_inp" name="" placeholder="请输入模板名称" id="" />
+            <input type="text" class="search_inp" name="keyWord" placeholder="请输入模板名称" id="keyWord" />
             <span class="label">关键字：</span>
             <select name="watchType" class="select" id="watchType">
 				<option value="">全部</option>

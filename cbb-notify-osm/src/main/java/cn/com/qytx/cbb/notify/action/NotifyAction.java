@@ -254,13 +254,8 @@ public class NotifyAction extends BaseActionSupport {
 		log.setInsertTime(new Timestamp(new Date().getTime()));
 		log.setIp(this.getRequest().getRemoteAddr());
 		log.setIsDelete(0);
-		if(notify.getColumnId() == 1){
-			log.setLogType(LogType.LOG_NOTIFY1_OK);
-			log.setRemark("公告生效成功");
-		}else {
-			log.setLogType(LogType.LOG_NOTIFY2_OK);
-			log.setRemark("政策法规生效成功");
-		}
+		log.setLogType(LogType.LOG_NOTIFY1_OK);
+		log.setRemark("公告生效成功");
 		log.setRefId(notify.getId());
 		log.setUserId(getLoginUser().getUserId());
 		log.setUserName(getLoginUser().getUserName());
@@ -323,22 +318,12 @@ public class NotifyAction extends BaseActionSupport {
 		log.setInsertTime(new Timestamp(new Date().getTime()));
 		log.setIp(this.getRequest().getRemoteAddr());
 		log.setIsDelete(0);
-		if(notify.getColumnId() == 1){
-			if(notify.getStatus() == 2){
-				log.setLogType(LogType.LOG_NOTIFY1_ADD1);
-				log.setRemark("公告发布成功");
-			}else {
-				log.setLogType(LogType.LOG_NOTIFY1_ADD2);
-				log.setRemark("公告存草稿成功");
-			}
+		if(notify.getStatus() == 2){
+			log.setLogType(LogType.LOG_NOTIFY1_ADD1);
+			log.setRemark("公告发布成功");
 		}else {
-			if(notify.getStatus() == 2){
-				log.setLogType(LogType.LOG_NOTIFY2_ADD1);
-				log.setRemark("政策法规发布成功");
-			}else {
-				log.setLogType(LogType.LOG_NOTIFY2_ADD2);
-				log.setRemark("政策法规存草稿成功");
-			}
+			log.setLogType(LogType.LOG_NOTIFY1_ADD2);
+			log.setRemark("公告存草稿成功");
 		}
 		log.setRefId(getLoginUser().getUserId());
 		log.setUserId(getLoginUser().getUserId());
@@ -450,13 +435,8 @@ public class NotifyAction extends BaseActionSupport {
 		log.setInsertTime(new Timestamp(new Date().getTime()));
 		log.setIp(this.getRequest().getRemoteAddr());
 		log.setIsDelete(0);
-		if(notify.getColumnId() == 1){
-			log.setLogType(LogType.LOG_NOTIFY1_UPDATE);
-			log.setRemark("公告修改成功");
-		}else {
-			log.setLogType(LogType.LOG_NOTIFY2_UPDATE);
-			log.setRemark("政策法规修改成功");
-		}
+		log.setLogType(LogType.LOG_NOTIFY1_UPDATE);
+		log.setRemark("公告修改成功");
 		log.setRefId(getLoginUser().getUserId());
 		log.setUserId(getLoginUser().getUserId());
 		log.setUserName(getLoginUser().getUserName());
@@ -656,13 +636,8 @@ public class NotifyAction extends BaseActionSupport {
 		log.setInsertTime(new Timestamp(new Date().getTime()));
 		log.setIp(this.getRequest().getRemoteAddr());
 		log.setIsDelete(0);
-		if(notify.getColumnId() == 1){
-			log.setLogType(LogType.LOG_NOTIFY1_DELETE);
-			log.setRemark("公告删除成功");
-		}else {
-			log.setLogType(LogType.LOG_NOTIFY2_DELETE);
-			log.setRemark("政策法规删除成功");
-		}
+		log.setLogType(LogType.LOG_NOTIFY1_DELETE);
+		log.setRemark("公告删除成功");
 		log.setRefId(notify.getId());
 		log.setUserId(getLoginUser().getUserId());
 		log.setUserName(getLoginUser().getUserName());
@@ -689,13 +664,8 @@ public class NotifyAction extends BaseActionSupport {
 		log.setInsertTime(new Timestamp(new Date().getTime()));
 		log.setIp(this.getRequest().getRemoteAddr());
 		log.setIsDelete(0);
-		if(notify.getColumnId() == 1){
-			log.setLogType(LogType.LOG_NOTIFY1_FAIL);
-			log.setRemark("公告终止成功");
-		}else {
-			log.setLogType(LogType.LOG_NOTIFY2_FAIL);
-			log.setRemark("政策法规终止成功");
-		}
+		log.setLogType(LogType.LOG_NOTIFY1_FAIL);
+		log.setRemark("公告终止成功");
 		log.setRefId(notify.getId());
 		log.setUserId(getLoginUser().getUserId());
 		log.setUserName(getLoginUser().getUserName());
@@ -716,13 +686,8 @@ public class NotifyAction extends BaseActionSupport {
 				log.setInsertTime(new Timestamp(new Date().getTime()));
 				log.setIp(this.getRequest().getRemoteAddr());
 				log.setIsDelete(0);
-				if(notify.getColumnId() == 1){
-					log.setLogType(LogType.LOG_NOTIFY1_DELETE);
-					log.setRemark("公告删除成功");
-				}else {
-					log.setLogType(LogType.LOG_NOTIFY2_DELETE);
-					log.setRemark("政策法规删除成功");
-				}
+				log.setLogType(LogType.LOG_NOTIFY1_DELETE);
+				log.setRemark("公告删除成功");
 				log.setRefId(Integer.parseInt(id));
 				log.setUserId(getLoginUser().getUserId());
 				log.setUserName(getLoginUser().getUserName());
@@ -747,22 +712,12 @@ public class NotifyAction extends BaseActionSupport {
 				log.setInsertTime(new Timestamp(new Date().getTime()));
 				log.setIp(this.getRequest().getRemoteAddr());
 				log.setIsDelete(0);
-				if(notify.getColumnId() == 1){
-					if(notify.getIsTop() == 1){
-						log.setLogType(LogType.LOG_NOTIFY1_UP);
-						log.setRemark("公告置顶成功");
-					}else {
-						log.setLogType(LogType.LOG_NOTIFY1_UNUP);
-						log.setRemark("公告取消置顶成功");
-					}
+				if(notify.getIsTop() == 1){
+					log.setLogType(LogType.LOG_NOTIFY1_UP);
+					log.setRemark("公告置顶成功");
 				}else {
-					if(notify.getIsTop() == 1){
-						log.setLogType(LogType.LOG_NOTIFY2_UP);
-						log.setRemark("政策法规置顶成功");
-					}else {
-						log.setLogType(LogType.LOG_NOTIFY2_UNUP);
-						log.setRemark("政策法规取消置顶成功");
-					}
+					log.setLogType(LogType.LOG_NOTIFY1_UNUP);
+					log.setRemark("公告取消置顶成功");
 				}
 				log.setRefId(Integer.parseInt(id));
 				log.setUserId(getLoginUser().getUserId());
