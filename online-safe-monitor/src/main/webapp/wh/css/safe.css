@@ -11,6 +11,7 @@ a {
 	text-decoration: none;
 }
 
+/*页面框架*/
 .wrap {
 	width: 100%;
 	min-width: 1280px;
@@ -1193,4 +1194,15 @@ a {
 	background-color: #f0f9fe;
 	/*border-bottom: 1px solid #E0E0E0;*/
 	border-right: 1px solid #E0E0E0;
+}
+
+
+/*阈值模板*/
+.template{}
+.template .bt_addmore{
+    color: #FFFFFF;
+    font-size: 16px;
+    background-color: #DEB887;
+    cursor: pointer;
+    border-radius: 5px;
 }

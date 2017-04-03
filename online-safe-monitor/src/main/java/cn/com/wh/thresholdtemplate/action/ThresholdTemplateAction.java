@@ -2,6 +2,7 @@ package cn.com.wh.thresholdtemplate.action;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -184,7 +185,25 @@ public class ThresholdTemplateAction extends BaseActionSupport {
 	 * @return
 	 */
 	public String add(){
-		
+		try{
+			LOGGER.info("阈值模板新增开始。。。");
+			thresholdTemplate.setCreateTime(new Timestamp(System.currentTimeMillis()));
+			thresholdTemplate.setIsDelete(0);
+			thresholdTemplateImpl.saveOrUpdate(thresholdTemplate);
+			LOGGER.info("阈值模板新增结束，vid:"+thresholdTemplate.getVid());
+			//记录日志
+			logService.saveOrUpdate( Tool.generateLog(getLoginUser(), 
+					this.getRequest().getRemoteAddr(), 
+					"新增应急预案成功", 
+					LogType.LOG_YZMB_ADD, 
+					thresholdTemplate, 
+					thresholdTemplate.getVid()) );
+			ajax(1);
+		} catch (Exception e) {
+			e.printStackTrace();
+			LOGGER.info("阈值模板新增异常，e:"+e.getMessage());
+			ajax(0);
+		}
 		return null;
 	}
 	

@@ -20,7 +20,7 @@ $(document).ready(function(){
 			return false;
 		}
 	});
-	//初始化预案类型下拉选
+
 	initSelect("watchType","watchType");
 	//加载列表
 	getTableList();
@@ -133,7 +133,7 @@ function getTableList(){
  * 新增操作
  */
 function addTemplate() {
-	window.location.href = basePath + "wh/logined/thresholdtemplate/addTemplate.jsp";
+	window.location.href = basePath + "wh/logined/thresholdTemplate/addTemplate.jsp?action=add";
 }
 
 function deleteTemplate(vid){
