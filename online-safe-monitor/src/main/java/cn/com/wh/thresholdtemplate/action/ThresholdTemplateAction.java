@@ -64,6 +64,13 @@ public class ThresholdTemplateAction extends BaseActionSupport {
 	public void setVid(Integer vid) {
 		this.vid = vid;
 	}
+	
+	public ThresholdTemplate getThresholdTemplate() {
+		return thresholdTemplate;
+	}
+	public void setThresholdTemplate(ThresholdTemplate thresholdTemplate) {
+		this.thresholdTemplate = thresholdTemplate;
+	}
 	private String formatLevel(ThresholdTemplate thresholdTemplate)
 	{
 		StringBuilder sb=new StringBuilder();
@@ -178,30 +185,120 @@ public class ThresholdTemplateAction extends BaseActionSupport {
 		}
 		return null;
 	}
-	
-	
 	/**
-	 * 新增
+	 * 过滤提交的template值，由于有默认显示的，用户设计没有输入
+	 * @param template
+	 * @return
+	 * @throws Exception 
+	 */
+	public ThresholdTemplate filter(ThresholdTemplate template) throws Exception
+	{
+		int has=0;
+		if((template.getLevel1Type()!=null)&&
+				(template.getLevel1Type().equals(-1))){
+			template.setLevel1Type(null);
+			template.setLeve1Low(null);
+			template.setLevel1High(null);
+			has++;
+		}
+		if((template.getLevel2Type()!=null)&&
+				(template.getLevel2Type().equals(-1))){
+			template.setLevel2Type(null);
+			template.setLeve2Low(null);
+			template.setLevel2High(null);
+			has++;
+		}
+		if((template.getLevel3Type()!=null)&&
+				(template.getLevel3Type().equals(-1))){
+			template.setLevel3Type(null);
+			template.setLeve3Low(null);
+			template.setLevel3High(null);
+			has++;
+		}
+		if((template.getLevel4Type()!=null)&&
+				(template.getLevel4Type().equals(-1))){
+			template.setLevel4Type(null);
+			template.setLeve4Low(null);
+			template.setLevel4High(null);
+			has++;
+		}
+		if((template.getLevel5Type()!=null)&&
+				template.getLevel5Type().equals(-1)){
+			template.setLevel5Type(null);
+			template.setLeve5Low(null);
+			template.setLevel5High(null);
+			has++;
+		}
+		if((template.getLevel6Type()!=null)&&
+				template.getLevel6Type().equals(-1)){
+			template.setLevel6Type(null);
+			template.setLeve6Low(null);
+			template.setLevel6High(null);
+			has++;
+		}
+		if((template.getLevel7Type()!=null)&&
+				template.getLevel7Type().equals(-1)){
+			template.setLevel7Type(null);
+			template.setLeve7Low(null);
+			template.setLevel7High(null);
+			has++;
+		}
+		if((template.getLevel8Type()!=null)&&
+				template.getLevel8Type().equals(-1)){
+			template.setLevel8Type(null);
+			template.setLeve8Low(null);
+			template.setLevel8High(null);
+			has++;
+		}
+		if((template.getLevel9Type()!=null)&&
+				template.getLevel9Type().equals(-1)){
+			template.setLevel9Type(null);
+			template.setLeve9Low(null);
+			template.setLevel9High(null);
+			has++;
+		}
+		if((template.getLevel10Type()!=null)&&
+				template.getLevel10Type().equals(-1)){
+			template.setLevel10Type(null);
+			template.setLeve10Low(null);
+			template.setLevel10High(null);
+			has++;
+		}
+		if(has>=10){
+			throw new Exception ("至少要存在一个");
+		}
+		return template;
+		
+	}
+	/**
+	 * 保存
 	 * @return
 	 */
-	public String add(){
+	public String save(){
+		String log="阈值模板新增";
 		try{
-			LOGGER.info("阈值模板新增开始。。。");
+			if(vid!=null){//是修改
+				thresholdTemplate.setVid(vid);
+				log="阈值模板修改";
+			}
+			LOGGER.info(log+"开始。。。");
+			thresholdTemplate=filter(thresholdTemplate);
 			thresholdTemplate.setCreateTime(new Timestamp(System.currentTimeMillis()));
+			thresholdTemplate.setEnableWarning(1);
 			thresholdTemplate.setIsDelete(0);
 			thresholdTemplateImpl.saveOrUpdate(thresholdTemplate);
-			LOGGER.info("阈值模板新增结束，vid:"+thresholdTemplate.getVid());
+			LOGGER.info(log+"结束，vid:"+thresholdTemplate.getVid());
 			//记录日志
 			logService.saveOrUpdate( Tool.generateLog(getLoginUser(), 
 					this.getRequest().getRemoteAddr(), 
-					"新增应急预案成功", 
+					log+"成功", 
 					LogType.LOG_YZMB_ADD, 
 					thresholdTemplate, 
 					thresholdTemplate.getVid()) );
 			ajax(1);
 		} catch (Exception e) {
 			e.printStackTrace();
-			LOGGER.info("阈值模板新增异常，e:"+e.getMessage());
+			LOGGER.info(log+"异常，e:"+e.getMessage());
 			ajax(0);
 		}
 		return null;
@@ -235,20 +332,23 @@ public class ThresholdTemplateAction extends BaseActionSupport {
 	}
 	
 	/**
-	 * 修改
-	 * @return
-	 */
-	public String update(){
-		
-		return null;
-	}
-	
-	/**
 	 * 获取信息
 	 * @return
 	 */
 	public String getInfo(){
-		
+		try {
+			thresholdTemplate = thresholdTemplateImpl.findOne(vid);
+			Gson json = new Gson();
+			String jsons = json.toJson(thresholdTemplate);
+			PrintWriter writer = new PrintWriter(this.getResponse().getWriter());
+			writer.print(jsons);
+			writer.flush();
+			writer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			LOGGER.error("getInfo发生异常： "+e.getMessage());
+			e.printStackTrace();
+		}
 		return null;
 	}
 

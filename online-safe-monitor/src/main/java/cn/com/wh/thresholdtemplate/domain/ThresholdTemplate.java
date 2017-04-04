@@ -27,7 +27,7 @@ public class ThresholdTemplate implements java.io.Serializable {
 	private Integer vid;//id
 	
 	@Column(name="TEMPLATENAME")
-	private Integer templateName;//模板名称
+	private String templateName;//模板名称
 	
 	@Column(name="WATCHTYPE")
 	private String watchType;//监测类型
@@ -170,13 +170,13 @@ public class ThresholdTemplate implements java.io.Serializable {
 
 
 
-	public Integer getTemplateName() {
+	public String getTemplateName() {
 		return templateName;
 	}
 
 
 
-	public void setTemplateName(Integer templateName) {
+	public void setTemplateName(String templateName) {
 		this.templateName = templateName;
 	}
 
@@ -626,7 +626,7 @@ public class ThresholdTemplate implements java.io.Serializable {
 
 
 
-	public ThresholdTemplate(Integer vid, Integer templateName,
+	public ThresholdTemplate(Integer vid, String templateName,
 			String watchType, Integer rangeLow, Integer rangeHigh, String unit,
 			Integer enableWarning, Integer leve1Low, Integer level1High,
 			Integer level1Type, Integer leve2Low, Integer level2High,

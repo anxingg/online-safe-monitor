@@ -120,7 +120,7 @@ function getTableList(){
 				"fnRender" : function(oObj) {
 					var vid = oObj.aData.vid;
 					var html = '';
-					html+= '<a href="'+basePath+'wh/logined/thresholdtemplate/updateTemplate.jsp?vid='+vid+'">修改</a>';
+					html+= '<a href="'+basePath+'wh/logined/thresholdTemplate/addTemplate.jsp?action=edit&vid='+vid+'">修改</a>';
 					html+='<a href="javascript:void(0);" onclick="deleteTemplate('+vid+');">删除</a>';	
 					return html;
 				}

@@ -36,8 +36,8 @@ public class ThresholdTemplateDao extends BaseDao<ThresholdTemplate, Integer> im
     	
     	if (!StringUtils.isEmpty(keyWord))
         {
-            hql += " and templateName = ?";
-            params.add(keyWord);
+            hql += " and templateName like ?";
+            params.add("%"+keyWord+"%");
         }
    
         return super.findAll(hql, pageable, params.toArray());		

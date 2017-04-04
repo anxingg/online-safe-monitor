@@ -5,25 +5,25 @@
  * 常用正则表达式
  * @constructor
  */
-var RegExps = function(){};
-RegExps.isEmail = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
-RegExps.isTel = /^0(([1-9]\d)|([3-9]\d{2}))\d{8}$/;//格式区号+号码 037165711369
-RegExps.isPhone = /^(13[0-9]|15[0-9]|18[0-9])\d{8}$/;
-RegExps.isNaturalNumber = /^\d+(\.\d+)?$/;//非负浮点数
-RegExps.isNumber = /^[-\+]?\d+(\.\d+)?$/;
-RegExps.isIdCard = /(^\d{15}$)|(^\d{17}[0-9Xx]$)/;
-RegExps.isMoney = /^\d+(\.\d+)?$/;
-RegExps.isZip = /^[1-9]\d{5}$/;
-RegExps.isQQ = /^[1-9]\d{4,10}$/;
-RegExps.isInt = /^[-\+]?\d+$/;
-RegExps.isEnglish = /^[A-Za-z]+$/;
-RegExps.isChinese =  /^[\u0391-\uFFE5]+$/;
-RegExps.isUrl =/^http(s)?:\/\/[A-Za-z0-9]+\.[A-Za-z0-9]+[\/=\?%\-&_~`@[\]\:+!]*([^<>])*$/;
-RegExps.isDate = /^\d{4}-\d{1,2}-\d{1,2}$/;
-RegExps.isTime = /^\d{4}-\d{1,2}-\d{1,2}\s\d{1,2}:\d{1,2}:\d{1,2}$/;
-RegExps.isNaturalInt=/^[0-9]*[1-9][0-9]*$/;  //非负整数（正整数   +   0）;
-RegExps.isLoginPass=/^[0-9a-zA-Z_]\w{5,17}$/;  //6-16位，区分大小写，只能使用字母、数字
-RegExps.isLoginName= /^\w+$/;  //登录名格式验证 用户名必须为数字字母或者下划线！
+var RegExpMy = function(){};
+RegExpMy.isEmail = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+RegExpMy.isTel = /^0(([1-9]\d)|([3-9]\d{2}))\d{8}$/;//格式区号+号码 037165711369
+RegExpMy.isPhone = /^(13[0-9]|15[0-9]|18[0-9])\d{8}$/;
+RegExpMy.isNaturalNumber = /^\d+(\.\d+)?$/;//非负浮点数
+RegExpMy.isNumber = /^[-\+]?\d+(\.\d+)?$/;
+RegExpMy.isIdCard = /(^\d{15}$)|(^\d{17}[0-9Xx]$)/;
+RegExpMy.isMoney = /^\d+(\.\d+)?$/;
+RegExpMy.isZip = /^[1-9]\d{5}$/;
+RegExpMy.isQQ = /^[1-9]\d{4,10}$/;
+RegExpMy.isInt = /^[-\+]?\d+$/;
+RegExpMy.isEnglish = /^[A-Za-z]+$/;
+RegExpMy.isChinese =  /^[\u0391-\uFFE5]+$/;
+RegExpMy.isUrl =/^http(s)?:\/\/[A-Za-z0-9]+\.[A-Za-z0-9]+[\/=\?%\-&_~`@[\]\:+!]*([^<>])*$/;
+RegExpMy.isDate = /^\d{4}-\d{1,2}-\d{1,2}$/;
+RegExpMy.isTime = /^\d{4}-\d{1,2}-\d{1,2}\s\d{1,2}:\d{1,2}:\d{1,2}$/;
+RegExpMy.isNaturalInt=/^[0-9]*[1-9][0-9]*$/;  //非负整数（正整数   +   0）;
+RegExpMy.isLoginPass=/^[0-9a-zA-Z_]\w{5,17}$/;  //6-16位，区分大小写，只能使用字母、数字
+RegExpMy.isLoginName= /^\w+$/;  //登录名格式验证 用户名必须为数字字母或者下划线！
 
 
 /**
@@ -32,7 +32,7 @@ RegExps.isLoginName= /^\w+$/;  //登录名格式验证 用户名必须为数字�
  */
 function isLoginName(loginName)
 {
-    return checkpatrn(RegExps.isLoginName,loginName);
+    return checkpatrn(RegExpMy.isLoginName,loginName);
 }
 
 /**
@@ -41,7 +41,7 @@ function isLoginName(loginName)
  */
 function isLoginPass(pass)
 {
-    return checkpatrn(RegExps.isLoginPass,pass);
+    return checkpatrn(RegExpMy.isLoginPass,pass);
 }
 /**
  * 验证是否日期格式
@@ -50,7 +50,7 @@ function isLoginPass(pass)
  */
 function isDate(s)
 {
-    return checkpatrn(RegExps.isDate,s);
+    return checkpatrn(RegExpMy.isDate,s);
 }
 /**
  * 验证是否非负整数（正整数   +   0）
@@ -59,7 +59,7 @@ function isDate(s)
  */
 function isNaturalInt(number)
 {
-    return checkpatrn(RegExps.isNaturalInt,number);
+    return checkpatrn(RegExpMy.isNaturalInt,number);
 }
 
 /**
@@ -69,7 +69,7 @@ function isNaturalInt(number)
  */
 function isUrl(s)
 {
-    return checkpatrn(RegExps.isUrl,s);
+    return checkpatrn(RegExpMy.isUrl,s);
 }
 
 /**
@@ -79,7 +79,7 @@ function isUrl(s)
  */
 function isChinese(s)
 {
-    return checkpatrn(RegExps.isChinese,s);
+    return checkpatrn(RegExpMy.isChinese,s);
 }
 /**
  * 验证是否英文
@@ -88,7 +88,7 @@ function isChinese(s)
  */
 function isEnglish(s)
 {
-    return checkpatrn(RegExps.isEnglish,s);
+    return checkpatrn(RegExpMy.isEnglish,s);
 }
 
 /**
@@ -98,7 +98,7 @@ function isEnglish(s)
  */
 function isInt(number)
 {
-    return checkpatrn(RegExps.isInt,number);
+    return checkpatrn(RegExpMy.isInt,number);
 }
 /**
  * 验证是否qq
@@ -107,7 +107,7 @@ function isInt(number)
  */
 function isQQ(qq)
 {
-    return checkpatrn(RegExps.isQQ,qq);
+    return checkpatrn(RegExpMy.isQQ,qq);
 }
 /**
  * 验证是否区号
@@ -116,7 +116,7 @@ function isQQ(qq)
  */
 function isZip(zip)
 {
-    return checkpatrn(RegExps.isZip,zip);
+    return checkpatrn(RegExpMy.isZip,zip);
 }
 /**
  * 验证是否数字
@@ -125,7 +125,7 @@ function isZip(zip)
  */
 function isIdCard(idCard)
 {
-    return checkpatrn(RegExps.isIdCard,idCard);
+    return checkpatrn(RegExpMy.isIdCard,idCard);
 }
 /**
  * 验证是否数字
@@ -134,7 +134,7 @@ function isIdCard(idCard)
  */
 function isNumber(number)
 {
-    return checkpatrn(RegExps.isNumber,number);
+    return checkpatrn(RegExpMy.isNumber,number);
 }
 /**
  * 验证邮箱
@@ -142,7 +142,7 @@ function isNumber(number)
  */
 function isEmail(email)
 {
-    return checkpatrn(RegExps.isEmail,email);
+    return checkpatrn(RegExpMy.isEmail,email);
 }
 /**
  * 验证固定电话号码
@@ -150,7 +150,7 @@ function isEmail(email)
  */
 function  isTel(tel)
 {
-    return checkpatrn(RegExps.isTel,tel);
+    return checkpatrn(RegExpMy.isTel,tel);
 }
 
 /**
@@ -160,7 +160,7 @@ function  isTel(tel)
  */
 function isNaturalNumber(number)
 {
-    return checkpatrn(RegExps.isNaturalNumber,number);
+    return checkpatrn(RegExpMy.isNaturalNumber,number);
 }
 
 /**
@@ -170,7 +170,7 @@ function isNaturalNumber(number)
  */
 function isPhone(phone)
 {
-    return checkpatrn(RegExps.isPhone,phone);
+    return checkpatrn(RegExpMy.isPhone,phone);
 }
 
 /**
