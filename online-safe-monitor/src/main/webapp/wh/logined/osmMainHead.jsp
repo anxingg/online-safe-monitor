@@ -12,7 +12,7 @@
 				<p>首页</p>
 			</li>
 		</a>
-		<a href="${ctx}wh/logined/osmWelcome.jsp">
+		<a href="${ctx}wh/logined/osmWelcome.jsp?sys_name=osm_systemmanage">
 			<li id="menu_systemmanage">
 				<img src="../img/set.png"/>
 				<p>系统管理</p>

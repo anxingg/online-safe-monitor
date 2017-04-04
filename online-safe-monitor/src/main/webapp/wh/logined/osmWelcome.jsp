@@ -13,6 +13,7 @@
 	<jsp:include page="osmHead.jsp" />
 </head>
 <body class="easyui-layout">
+	<input type="hidden" id="sys_name" value='${paramValues.sys_name[0]}'/>
 	<div data-options="region:'north',border:false" class="mainhead">
 		<%@include file="osmMainHead.jsp"%>
 	</div>	

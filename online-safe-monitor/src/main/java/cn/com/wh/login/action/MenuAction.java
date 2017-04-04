@@ -42,6 +42,13 @@ public class MenuAction extends BaseActionSupport{
 	 * 子系统名称
 	 */
 	public String  subSystem;
+	
+	public String getSubSystem() {
+		return subSystem;
+	}
+	public void setSubSystem(String subSystem) {
+		this.subSystem = subSystem;
+	}
 	/**
 	 * 返回首页的主九宫格菜单
 	 * @return

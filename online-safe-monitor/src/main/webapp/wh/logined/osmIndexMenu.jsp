@@ -27,6 +27,10 @@
   	 $(document).ready(function() {
   	 	$(".list_detail").click(function(){
 			 var moduleUrl=$(this).attr("moduleUrl");
+			 if(!moduleUrl.startsWith('http://')){
+			 	moduleUrl=basePath+moduleUrl;
+			 }
+			 console.log("open:"+moduleUrl);
 			 if(moduleUrl){
 			 	window.open(moduleUrl); 
 			 }
