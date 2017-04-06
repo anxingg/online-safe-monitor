@@ -32,7 +32,7 @@ public class BaseGroupInfo  extends BaseDomain{
 	@Column(name="group_name",length=50)
 	private String groupName;
 
-    //部门类型 1 企业通讯录 ;2 公共通讯录 ;3 私人通讯录  ; 4公共群组(原为4) 5 个人群组;
+    //部门类型 0 行政区域  1 政府组织结构 ;2 企业 ;3 私人通讯录  ; 4公共群组(原为4) 5 个人群组;
 	@Column(name="group_type")
 	private Integer groupType;
 	

@@ -103,12 +103,14 @@
         var functions= $.trim($("#functions").val());
         //是否是分支机构
         var isForkGroup = $("input[name='isForkGroup']:checked").val();
+        //机构类型
+        var groupType = $("input[name='groupType']:checked").val();
 //        if(functions.length>200){
 //            artDialog.alert("部门职能字数不能大于200");
 //            return;
 //        }
         var paramData={
-            'group.groupType':1,
+            'group.groupType':groupType,
             'group.groupState':0,
             'group.orderIndex':groupOrder,
             'group.groupName':groupName,
@@ -131,8 +133,8 @@
                 if(data==1)
                 {            
                 	var mainWindow=window.parent;
-                	mainWindow.openSelectTreeUser(mainWindow.zTreeOnCheckResult);
-                	art.dialog.tips('保存部门信息成功！');
+                	mainWindow.openSelectTreeOrganize(mainWindow.zTreeOnCheckResult);
+                	art.dialog.tips('保存机构信息成功！');
                 	//更新部门is_fork_group字段
 //                	var paramDataName = {
 //                			"groupName":groupName
@@ -150,11 +152,11 @@
 //                	});
                     
                 }else if (data==2){
-                    art.dialog.tips('部门名称已存在！');
+                    art.dialog.tips('机构名称已存在！');
                 }else if(data == 3){
-                	 art.dialog.tips('您没有权限在此部门下添加部门！');
+                	 art.dialog.tips('您没有权限在此机构下添加子机构！');
                 } else {
-                    art.dialog.alert('保存部门信息失败！');
+                    art.dialog.alert('保存机构信息失败！');
                 }
             }});
     }

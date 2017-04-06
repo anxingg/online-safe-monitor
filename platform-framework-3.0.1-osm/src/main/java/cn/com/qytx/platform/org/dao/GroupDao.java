@@ -140,6 +140,23 @@ public class GroupDao <T extends GroupInfo>  extends BaseDao<GroupInfo,Integer> 
     }
 
     /**
+     * 获取部门/群组列表
+     * @param companyId  企业ID
+     * @param groupTypeList  部门类型: 1.公共部门 2.公共群组 3.外部部门 4.个人群组
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+	public List<GroupInfo> getGroupList(int companyId,String groupTypeList)
+    {
+        //根据条件获取未删除的部门/群组列表
+         String hql="companyId=? and groupType in ("+groupTypeList+") and isDelete=0 ";
+         Order o = new Order(Direction.ASC,"orderIndex");
+         Order o1 = new Order(Direction.ASC,"groupId");
+     	 Sort sort = new Sort(o,o1);
+         return this.findAll(hql,sort,companyId);
+    }
+    
+    /**
      * 获取个人创建的部门/群组列表
      * @param companyId  企业ID
      * @param groupType  部门类型: 1.公共部门 2.公共群组 3.外部部门 4.个人群组

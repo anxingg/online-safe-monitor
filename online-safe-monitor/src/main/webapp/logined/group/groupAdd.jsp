@@ -33,6 +33,8 @@
 <input type="hidden" id="assistantId"/>
 <input type="hidden" id="topDirectorId"/>
 <input type="hidden" id="topChangeId"/>
+<!-- 乌海机构不需要电话 -->
+<input name="" type="hidden"  id="groupPhone" value=""/>
 <%
 	int parentId = 0;
  	if(!SystemContextHolder.getSessionContext().getRelationIds().contains("role_26")){
@@ -42,24 +44,30 @@
 <input type="hidden" id="parentId"  value="<%=parentId%>"/>
 		<div class="formPage">
   			<div class="formbg">
-				<div class="big_title">新增部门</div>
+				<div class="big_title">新增机构</div>
     			<div class="content_form">
 	
 			<form action="#" id="groupForm">
 				<table width="100%" border="0" cellpadding="0" cellspacing="0" class="inputTable">
 					<tr>
-						<th valign="middle"><em class="requireField">*</em><label>部门名称：</label>
+						<th valign="middle"><em class="requireField">*</em><label>机构名称：</label>
 						</th>
 						<td><input name="" type="text" class="formText" style="width:100%" maxlength="25" id="groupName" 
 						      valid="required" errmsg="group.group_name_not_null"/>
 						</td>
-						<th valign="top"><em class="requireField">*</em><label>电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话：</label>
+						<th valign="top"><em class="requireField">*</em><label>机构类型：</label>
 						</th>
-						<td><input name="" type="text" class="formText" style="width:100%" maxlength="12" id="groupPhone" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"  valid="required|isPhone" errmsg="group.group_phone_not_null|group.group_phone_format_error"/>
+						<td>
+							<label class="radio">
+                       			<input type="radio" value="0"  name="groupType"/>行政区
+                    		</label>
+                    		<label class="radio">
+                       			<input type="radio" value="1"  checked name="groupType"/>管理机构
+                    		</label>
 						</td>
 					</tr>
 					<tr>
-						<th><em class="requireField">*</em><label>上级部门：</label>
+						<th><em class="requireField">*</em><label>上级机构：</label>
 						</th>
 						<td>
 							<div id="treeContent" style="z-index:66;position:relative">
@@ -113,7 +121,7 @@
 						</td>
 					</tr>
 					<tr>
-						<th>部门职能：</th>
+						<th>描述：</th>
 						<td colspan="3">
 							<textarea class="formTextarea2 area area01"  id="functions"  cols="122" rows="4" name=""
 								fmaxlength="200"></textarea>

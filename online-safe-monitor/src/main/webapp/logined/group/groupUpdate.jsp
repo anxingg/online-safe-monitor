@@ -38,23 +38,31 @@
 <input type="hidden" id="oldParentId" value="${requestScope.groupInfoVO.parentId}"/>
 <input type="hidden" id="isHasChild" value="${requestScope.isHasChild}"/>
 <input type="hidden" id="isHasGroupUser" value="${requestScope.isHasGroupUser}"/>
+<!-- 乌海机构不需要电话 -->
+<input name="" type="hidden"  id="groupPhone" value="${requestScope.groupInfoVO.phone}"/>
 <div class="formPage">
   <div class="formbg">
-    <div class="big_title">编辑部门</div>
+    <div class="big_title">编辑机构</div>
     <div class="content_form">
     <form action="#" id="groupForm">
       <table width="100%" border="0" cellpadding="0" cellspacing="0"  class="inputTable">
         <tr>
-          <th><em class="requireField">*</em><label>部门名称：</label></th>
-          <td><input name="" type="text" class="formText"  id="groupName" 
-						      valid="required" errmsg="group.group_name_not_null" value="${requestScope.groupInfoVO.groupName}"/>
-						</td>
-          <th><em class="requireField">*</em><label>电话：</label></th>
-        <td><input name="" type="text" class="formText" maxlength="12" id="groupPhone" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"  valid="required|isPhone" errmsg="group.group_phone_not_null|group.group_phone_format_error" value="${requestScope.groupInfoVO.phone}"/>
-						</td>
+	         <th><em class="requireField">*</em><label>机构名称：</label></th>
+	         <td><input name="" type="text" class="formText"  id="groupName" 
+							      valid="required" errmsg="group.group_name_not_null" value="${requestScope.groupInfoVO.groupName}"/>
+							</td>
+	          <th><em class="requireField">*</em><label>机构类型：</label></th>
+	        <td>
+	        	<label class="radio">
+                    <input type="radio" value="0" <c:if test="${groupInfoVO.groupType == 0}">checked</c:if> name="groupType"/>行政区
+                </label>
+                <label class="radio">
+                   	<input type="radio" value="1" <c:if test="${groupInfoVO.groupType == 1}">checked</c:if> name="groupType"/>管理机构
+                </label>
+			</td>
         </tr>
         <tr>
-          <th><em class="requireField"  id="sjpartMent" >*</em><label>上级部门：</label></th>
+          <th><em class="requireField"  id="sjpartMent" >*</em><label>上级机构：</label></th>
         <td>
                        <input id="parentGroupName" type="text" readonly="readonly"  
                         class="formText"  />                        
@@ -102,7 +110,7 @@
           </td>
         </tr>
         <tr>
-          <th><label>部门职能：</label></th>
+          <th><label>描述：</label></th>
           <td colspan="3">
           <textarea  class="formTextarea2 area area01" id="functions" cols="123" rows="4" name=""
 				fmaxlength="200" >${requestScope.groupInfoVO.functions}</textarea></textarea>

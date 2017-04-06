@@ -56,12 +56,51 @@ public class TreeUserAction extends BaseActionSupport {
     private IGroupUser groupUserService;
 	//组类型GroupType
     private Integer type;
+    
+    //乌海项目使用的，展示多个类型
+    private String typeList;
+    
     private String searchName;
-    //显示类型 1 显示部门 2显示角色 3显示人员
+    
+    //显示类型 1 显示部门 2 显示角色(目前好像不管1，2都是显示部门) 3 显示人员
     private Integer showType;
     
     private String moduleName;
     
+    /**
+     * 乌海，根据类型列表展示树:例如仅展示区域、展示区域与组织结构
+     * 这个树是群组最 左边的大树，不是选择人员的那个树，选择人员的树用的是UserSelectAction
+     * @return
+     */
+    public String selectOrganizeByTypeList()
+    {
+        List<TreeNode> treeNodes = new ArrayList<TreeNode>();
+        // 根据部门选择
+        GroupInfo forkGroup = null;
+        //如果是发文分发，则不区分二级局
+        if(moduleName!=null&&moduleName.equals("dispatch")){
+            forkGroup = null;
+        }
+        int key = 0 ;
+        if(forkGroup!=null){
+            key =  forkGroup.getGroupId();
+        }
+        if(moduleName == null){
+            this.moduleName = "userTree";
+        }
+        if(type==null){
+            type = GroupInfo.DEPT;
+        }
+        treeNodes = userService.selectUserByGroup(getLoginUser(), forkGroup, moduleName, showType, key,getRequest().getContextPath(),typeList);
+        if(StringUtils.isEmpty(moduleName)){
+            //this.modulePrivService.removeNoPriv(treeNodes,adminUser.getUserId(),adminUser.getCompanyId(),null);
+        }
+        //Gson gson = new Gson();
+        Gson json = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+        String jsons = json.toJson(treeNodes);
+        ajax(jsons);
+        return null;
+    }
     /**
      * 根据类型选择人员
      * @return
@@ -251,4 +290,12 @@ public class TreeUserAction extends BaseActionSupport {
     {
         this.moduleName = moduleName;
     }
+	public String getTypeList() {
+		return typeList;
+	}
+	public void setTypeList(String typeList) {
+		this.typeList = typeList;
+	}
+    
+    
 }

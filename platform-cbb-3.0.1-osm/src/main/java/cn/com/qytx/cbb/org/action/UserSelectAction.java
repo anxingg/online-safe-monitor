@@ -38,6 +38,8 @@ import com.google.gson.GsonBuilder;
  */
 public class UserSelectAction extends BaseActionSupport
 {
+	//乌海新增，以逗号分割的部门类型
+	private String typeList;  
     private int type;// 选择类型1 部门 2 角色 3 分组 4 在线
     /** 用户信息 */
     @Resource(name = "userService")
@@ -64,7 +66,7 @@ public class UserSelectAction extends BaseActionSupport
 	
     private String searchName;
     private int showType;// 选择类型 1只显示部门 2 显示角色 3 显示人员
-    
+ 
     private Integer userId;
     private Integer companyId;
     /**
@@ -126,7 +128,23 @@ public class UserSelectAction extends BaseActionSupport
     	String contextPath = getRequest().getContextPath();
         List<TreeNode> treeNodes = new ArrayList<TreeNode>();
         moduleName = (moduleName == null?"":moduleName);
-        if (type == 1)
+        if(typeList!=null){
+        	 if(getLoginUser()!=null) {
+                 // 根据部门选择
+                 GroupInfo forkGroup = null;
+                 //如果是发文分发，则不区分二级局
+                 if (moduleName != null && moduleName.equals("dispatch")) {
+                     forkGroup = null;
+                 }
+                 int key = 0;
+                 if (forkGroup != null) {
+                     key = forkGroup.getGroupId();
+                 }
+                 UserInfo loginUser = getLoginUser();
+                 treeNodes = userService.selectUserByGroup(loginUser, forkGroup, moduleName, showType, key, contextPath, typeList);
+             }
+        }
+        else if (type == 1)
         {
             if(getLoginUser()!=null) {
                 // 根据部门选择
@@ -418,6 +436,12 @@ public class UserSelectAction extends BaseActionSupport
 		this.userId = userId;
 	}
 	
+	public String getTypeList() {
+		return typeList;
+	}
+	public void setTypeList(String typeList) {
+		this.typeList = typeList;
+	}
 	/**
 	 * 功能：获取所有用户
 	 * 作者：jiayongqiang

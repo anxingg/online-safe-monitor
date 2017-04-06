@@ -255,6 +255,7 @@ public interface IUser extends BaseService<UserInfo> {
      */
     public List<TreeNode> selectUserByGroup(UserInfo userInfo,GroupInfo forkGroup,String moduleName,int showType,int key,String path,int groupType);
     
+    public List<TreeNode> selectUserByGroup(UserInfo adminUser,GroupInfo forkGroup,String moduleName,int showType,int key,String path,String groupTypeList);
     /* (non-Javadoc)
 	 * 根据二级局查找二级局下属的部门-人员树，如果二级局为空则查询所有的部门-人员树
 	 * 有缓存的实现，

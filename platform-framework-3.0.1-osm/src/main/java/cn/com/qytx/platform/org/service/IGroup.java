@@ -43,6 +43,7 @@ public interface IGroup  extends BaseService<GroupInfo>,Serializable  {
      */
     public List<GroupInfo> getGroupList(int companyId,int groupType);
 
+    public List<GroupInfo> getGroupList(int companyId, String groupTypeList);
 
     /**
      * 获取部门列表

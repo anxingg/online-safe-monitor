@@ -6,21 +6,12 @@
 package cn.com.wh.login.action;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-
 import org.apache.commons.lang3.StringUtils;
-
 import cn.com.qytx.platform.base.action.BaseActionSupport;
 import cn.com.qytx.platform.org.domain.ModuleInfo;
-import cn.com.qytx.platform.org.domain.RoleModule;
-import cn.com.qytx.platform.org.domain.UserInfo;
 import cn.com.qytx.platform.session.Constants;
 import cn.com.wh.WHConstant;
-import cn.com.wh.util.DataInitUtil;
-
 /**
  * @ClassName:     MenuAction.java
  * @Description:   TODO(用一句话描述该文件做什么) 

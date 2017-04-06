@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>部门管理</title>
+<title>机构管理</title>
 <jsp:include page="../../common/flatHead.jsp" />
 <script type="text/javascript">
 	var basePath = "${ctx}";
@@ -19,7 +19,7 @@
 <script type="text/javascript" src="${ctx }flat/plugins/dialog/iframeTools.js"></script>
 <script type="text/javascript" src="${ctx}js/common/treeNode.js"></script>
 <script type="text/javascript" src="${ctx}js/logined/group/userTree.js"></script>
-<script type="text/javascript" src="${ctx}js/logined/group/group.js"></script>
+<script type="text/javascript" src="${ctx}js/logined/group/organize.js"></script>
 
 <script type="text/javascript">
     
@@ -32,7 +32,7 @@
 <div class="mainpage">
   <div class="leftMenu">
     <div class="service-menu">
-      <h1>部门管理</h1>
+      <h1>组织机构</h1>
    	  <div class="workes"><a href="javascript:void(0)" target="page" id="addDiv"><em class="em1"></em>新增</a><a href="javascript:void(0)" id="deleteGroupDiv"><em class="em3"></em>删除</a></div>
       <div class="zTreeDemoBackground">
       	<ul id="groupUserTree" class="ztree" style="margin-top:0px;width:auto;overflow:auto"></ul>

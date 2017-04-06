@@ -42,7 +42,6 @@
 
 	<!-- 呼叫中心 -->
 	<include file="struts/struts_init.xml"></include>
-	<include file="struts/org/struts_hotlineuser.xml"></include>
 
     <!-- 行政区域管理 -->
     <include file="struts/area/struts_fiveGradeArea.xml"/>

@@ -464,103 +464,164 @@ public class UserImpl   extends BaseServiceImpl<UserInfo> implements IUser {
 	 */
 	@Override
 //	@Cacheable(value="userTreeCache",key="#key+#moduleName+#showType+#groupType+'usergroup'")
-	public List<TreeNode> selectUserByGroup(UserInfo adminUser,GroupInfo forkGroup,String moduleName,int showType,int key,String path,int groupType) {
-			List<TreeNode> treeNodes = new ArrayList<TreeNode>();
-	      	CompanyInfo companyInfo = companyDao.findOne(adminUser.getCompanyId());
-	        List<GroupInfo> groupList = new ArrayList<GroupInfo>();
-	        if(companyInfo!=null)
-	        {
-	            if(forkGroup==null){
-	            	TreeNode treeHead = new TreeNode();
-	            	treeHead.setId("gid_0");//部门ID前加gid表示类型为部门
-	            	treeHead.setName(StringUtils.isBlank(companyInfo.getShortName())?companyInfo.getCompanyName():companyInfo.getShortName());
-	              	treeHead.setTitle(StringUtils.isBlank(companyInfo.getShortName())?companyInfo.getCompanyName():companyInfo.getShortName());
-	            	treeHead.setPId("gid_-1");
-	            	treeHead.setIcon(path + "/images/company.png");
-	            	treeHead.setOpen(true);
-	            	treeNodes.add(treeHead);
-	            	groupList = groupService.getGroupList(companyInfo.getCompanyId(), groupType);
-	            }else{
-	            	//add by jiayq
-	            	TreeNode treeHead = new TreeNode();
-	            	treeHead.setId("gid_"+forkGroup.getGroupId());
-	            	treeHead.setName(forkGroup.getGroupName());
-	            	treeHead.setTitle(forkGroup.getGroupName());
-	            	treeHead.setPId("gid_-1");
-	            	treeHead.setIcon(path + "/images/group.png");
-	            	treeHead.setOpen(true);
-	            	treeNodes.add(treeHead);
-	            	groupList = groupService.getSubGroupList(forkGroup.getGroupId());
-	            }
-	        }
-	       
-	        if (groupList != null)
-	        {
-	            String ids = "";
-	            // 遍历部门
-	            for (GroupInfo group : groupList)
-	            {
-	                ids += group.getGroupId() + ",";
-	               // String groupName = StringUtils.substring(group.getGroupName(), 0, 8);
-	                TreeNode treeNode = new TreeNode();
-	                treeNode.setId("gid_" + group.getGroupId().toString());// 部门ID前加gid表示类型为部门
-	                treeNode.setName(group.getGroupName());
-	                treeNode.setTitle(group.getGroupName());
-	                treeNode.setObj(group.getOrderIndex());
-	                treeNode.setPId("gid_" + group.getParentId().toString());
-	                treeNode.setIcon(path + "/images/group.png");
-	                treeNodes.add(treeNode);
-	            }
-	            // 需要显示人员
-	            if (showType == 3)
-	            {
+	public List<TreeNode> selectUserByGroup(UserInfo adminUser,GroupInfo forkGroup,String moduleName,int showType,int key,String path,int groupType) 
+	{
+		List<TreeNode> treeNodes = new ArrayList<TreeNode>();
+      	CompanyInfo companyInfo = companyDao.findOne(adminUser.getCompanyId());
+        List<GroupInfo> groupList = new ArrayList<GroupInfo>();
+        if(companyInfo!=null)
+        {
+            if(forkGroup==null){
+            	TreeNode treeHead = new TreeNode();
+            	treeHead.setId("gid_0");//部门ID前加gid表示类型为部门
+            	treeHead.setName(StringUtils.isBlank(companyInfo.getShortName())?companyInfo.getCompanyName():companyInfo.getShortName());
+              	treeHead.setTitle(StringUtils.isBlank(companyInfo.getShortName())?companyInfo.getCompanyName():companyInfo.getShortName());
+            	treeHead.setPId("gid_-1");
+            	treeHead.setIcon(path + "/images/company.png");
+            	treeHead.setOpen(true);
+            	treeNodes.add(treeHead);
+            	groupList = groupService.getGroupList(companyInfo.getCompanyId(), groupType);
+            }else{
+            	//add by jiayq
+            	TreeNode treeHead = new TreeNode();
+            	treeHead.setId("gid_"+forkGroup.getGroupId());
+            	treeHead.setName(forkGroup.getGroupName());
+            	treeHead.setTitle(forkGroup.getGroupName());
+            	treeHead.setPId("gid_-1");
+            	treeHead.setIcon(path + "/images/group.png");
+            	treeHead.setOpen(true);
+            	treeNodes.add(treeHead);
+            	groupList = groupService.getSubGroupList(forkGroup.getGroupId());
+            }
+        }
+       
+        if (groupList != null)
+        {
+            String ids = "";
+            // 遍历部门
+            for (GroupInfo group : groupList)
+            {
+                ids += group.getGroupId() + ",";
+               // String groupName = StringUtils.substring(group.getGroupName(), 0, 8);
+                TreeNode treeNode = new TreeNode();
+                treeNode.setId("gid_" + group.getGroupId().toString());// 部门ID前加gid表示类型为部门
+                treeNode.setName(group.getGroupName());
+                treeNode.setTitle(group.getGroupName());
+                treeNode.setObj(group.getOrderIndex());
+                treeNode.setPId("gid_" + group.getParentId().toString());
+                treeNode.setIcon(path + "/images/group.png");
+                treeNodes.add(treeNode);
+            }
+            // 需要显示人员
+            if (showType == 3)
+            {
+
+                if (ids.endsWith(","))
+                {
+                    // 移除后面的,
+                    ids = ids.substring(0, ids.length() - 1);
+                }
+                
+                //add by jiayq，把二级局单位下面的人员也添加上
+                if(forkGroup!=null){
+                	ids+=","+forkGroup.getGroupId();
+                }
+                
+                // 遍历人员
+                List<UserInfo> userList = this.findUsersByGroupId(ids);
+               // List<GroupUser> groupUsers = groupUserService.findAll();
+                if (userList != null)
+                {
+                    for (UserInfo user : userList)
+                    {
+                        if ("roleManager".equals(moduleName) && user.getUserState()!=null && user.getUserState().intValue() == UserInfo.USERSTATE_UNLOGIN){
+                            continue;
+                        }
+                        TreeNode treeNode = new TreeNode();
+                        treeNode.setId("uid_" + user.getUserId());// 部门ID前加gid表示类型为部门
+                        treeNode.setName(user.getUserName());
+                        if(!"userTree".equals(moduleName)  && user.getIsVirtual() != null && user.getIsVirtual().intValue() == 1){
+                        	 treeNode.setId("uid_" + user.getLinkId());// 部门ID前加gid表示类型为部门
+                        }
+                        
+                        treeNode.setObj(user.getPhone()); // 把号码存放到node里面，js里面调用
+                        treeNode.setPId("gid_"
+                                + user.getGroupId());
+                        if (null != user.getSex() && 0 == user.getSex())
+                            {
+                                treeNode.setIcon(path + "/images/woman.png");
+                            }
+                            else
+                            {
+                                treeNode.setIcon(path + "/images/man.png");
+                            }
+                        treeNodes.add(treeNode);
+                    }
+                }
+            }
+        }
+        return treeNodes;
+	}
+	@Override
+//	@Cacheable(value="userTreeCache",key="#key+#moduleName+#showType+#groupType+'usergroup'")
+	public List<TreeNode> selectUserByGroup(UserInfo adminUser,
+			GroupInfo forkGroup,String moduleName,int showType,int key,
+			String path,String groupTypeList) 
+	{
+		List<TreeNode> treeNodes = new ArrayList<TreeNode>();
+      	CompanyInfo companyInfo = companyDao.findOne(adminUser.getCompanyId());
+        List<GroupInfo> groupList = new ArrayList<GroupInfo>();
+        if(companyInfo!=null)
+        {
+            if(forkGroup==null)
+            {
+            	TreeNode treeHead = new TreeNode();
+            	treeHead.setId("gid_0");//部门ID前加gid表示类型为部门
+            	treeHead.setName(StringUtils.isBlank(companyInfo.getShortName())?companyInfo.getCompanyName():companyInfo.getShortName());
+              	treeHead.setTitle(StringUtils.isBlank(companyInfo.getShortName())?companyInfo.getCompanyName():companyInfo.getShortName());
+            	treeHead.setPId("gid_-1");
+            	treeHead.setIcon(path + "/images/company.png");
+            	treeHead.setOpen(true);
+            	treeNodes.add(treeHead);
+            	groupList = groupService.getGroupList(companyInfo.getCompanyId(), groupTypeList);
+            }
+            else
+            {
+            	//add by jiayq
+            	TreeNode treeHead = new TreeNode();
+            	treeHead.setId("gid_"+forkGroup.getGroupId());
+            	treeHead.setName(forkGroup.getGroupName());
+            	treeHead.setTitle(forkGroup.getGroupName());
+            	treeHead.setPId("gid_-1");
+            	treeHead.setIcon(path + "/images/group.png");
+            	treeHead.setOpen(true);
+            	treeNodes.add(treeHead);
+            	groupList = groupService.getSubGroupList(forkGroup.getGroupId());
+            }
+        }
+       
+        if (groupList != null)
+        {
+            String ids = "";
+            // 遍历部门
+            for (GroupInfo group : groupList)
+            {
+                ids += group.getGroupId() + ",";
+               // String groupName = StringUtils.substring(group.getGroupName(), 0, 8);
+                TreeNode treeNode = new TreeNode();
+                treeNode.setId("gid_" + group.getGroupId().toString());// 部门ID前加gid表示类型为部门
+                treeNode.setName(group.getGroupName());
+                treeNode.setTitle(group.getGroupName());
+                treeNode.setObj(group.getOrderIndex());
+                treeNode.setPId("gid_" + group.getParentId().toString());
+                treeNode.setIcon(path + "/images/group.png");
+                treeNodes.add(treeNode);
+            }
+            
+        }
+        return treeNodes;
+	}
 	
-	                if (ids.endsWith(","))
-	                {
-	                    // 移除后面的,
-	                    ids = ids.substring(0, ids.length() - 1);
-	                }
-	                
-	                //add by jiayq，把二级局单位下面的人员也添加上
-	                if(forkGroup!=null){
-	                	ids+=","+forkGroup.getGroupId();
-	                }
-	                
-	                // 遍历人员
-	                List<UserInfo> userList = this.findUsersByGroupId(ids);
-	               // List<GroupUser> groupUsers = groupUserService.findAll();
-	                if (userList != null)
-	                {
-	                    for (UserInfo user : userList)
-	                    {
-	                        if ("roleManager".equals(moduleName) && user.getUserState()!=null && user.getUserState().intValue() == UserInfo.USERSTATE_UNLOGIN){
-	                            continue;
-	                        }
-	                        TreeNode treeNode = new TreeNode();
-	                        treeNode.setId("uid_" + user.getUserId());// 部门ID前加gid表示类型为部门
-	                        treeNode.setName(user.getUserName());
-	                        if(!"userTree".equals(moduleName)  && user.getIsVirtual() != null && user.getIsVirtual().intValue() == 1){
-	                        	 treeNode.setId("uid_" + user.getLinkId());// 部门ID前加gid表示类型为部门
-	                        }
-	                        
-	                        treeNode.setObj(user.getPhone()); // 把号码存放到node里面，js里面调用
-	                        treeNode.setPId("gid_"
-	                                + user.getGroupId());
-	                        if (null != user.getSex() && 0 == user.getSex())
-	                            {
-	                                treeNode.setIcon(path + "/images/woman.png");
-	                            }
-	                            else
-	                            {
-	                                treeNode.setIcon(path + "/images/man.png");
-	                            }
-	                        treeNodes.add(treeNode);
-	                    }
-	                }
-	            }
-	        }
-	        return treeNodes;
-		}
 	
 	/* (non-Javadoc)
 	 * 根据二级局查找二级局下属的部门-人员树，如果二级局为空则查询所有的部门-人员树

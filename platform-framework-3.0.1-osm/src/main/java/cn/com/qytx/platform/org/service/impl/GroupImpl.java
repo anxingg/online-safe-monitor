@@ -81,6 +81,11 @@ public class GroupImpl extends BaseServiceImpl<GroupInfo> implements IGroup {
     public List<GroupInfo> getGroupList(int companyId, int groupType) {
         return groupDao.getGroupList(companyId,groupType);
     }
+    @SuppressWarnings("unchecked")
+    @Transactional(readOnly=true)
+    public List<GroupInfo> getGroupList(int companyId, String groupTypeList) {
+        return groupDao.getGroupList(companyId,groupTypeList);
+    }
     /**
      * 判断部门下面是否有子部门
      * @param companyId

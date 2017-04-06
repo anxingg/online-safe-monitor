@@ -83,7 +83,7 @@
         });
         //删除部门
         $("#groupDelete").click(function(){
-             art.dialog.confirm("确定删除部门！",function(){
+             art.dialog.confirm("确定删除机构！",function(){
                  groupDelete();
              },function(){
              });
@@ -130,6 +130,8 @@
         var functions= $.trim($("#functions").val());
         //是否分支机构
         var isForkGroup = $("input[name='isForkGroup']:checked").val();
+        //机构类型
+        var groupType = $("input[name='groupType']:checked").val();
         //改为验证框架
 //        if(functions.length>200){
 //            artDialog.alert("部门职能字数不能大于200");
@@ -138,7 +140,7 @@
         
         var paramData={
             'group.groupId':groupId,
-            'group.groupType':1,
+            'group.groupType':groupType,
             'group.groupState':0,
             'group.orderIndex':groupOrder,
             'group.groupName':groupName,
@@ -161,8 +163,8 @@
                 if(data==1)
                 {             
                 	var mainWindow=window.parent;
-                    mainWindow.openSelectTreeUser(mainWindow.zTreeOnCheckResult, null, "gid_"+groupId);
-                    art.dialog.tips('更新部门信息成功！');
+                    mainWindow.openSelectTreeOrganize(mainWindow.zTreeOnCheckResult, null, "gid_"+groupId);
+                    art.dialog.tips('更新机构信息成功！');
                   //更新部门is_fork_group字段
 //                	var paramDataName = {
 //                			"groupName":groupName
@@ -179,11 +181,11 @@
 //                        }
 //                	});
                 } else if (data==2){
-                    art.dialog.alert('部门名称已存在！');
+                    art.dialog.alert('机构名称已存在！');
                 }else if(data==3){
-                	 art.dialog.alert('您没有修改该部门的权限！');
+                	 art.dialog.alert('您没有修改该机构的权限！');
                 } else {
-                    art.dialog.alert('更新部门信息失败！');
+                    art.dialog.alert('更新机构信息失败！');
                 }
             }});
     }
@@ -192,13 +194,13 @@
         //是否有子组
         var isHasChild=$("#isHasChild").val();
         if(isHasChild==1){
-             art.dialog.alert('含有子部门不能删除！');
+             art.dialog.alert('含有子机构不能删除！');
              return;
         }
         //组下是否有人
         var isHasGroupUser=$("#isHasGroupUser").val();
         if(isHasGroupUser==1){
-             art.dialog.alert('部门包含人员不能删除！');
+             art.dialog.alert('机构包含人员不能删除！');
              return;
         }
         //得到部门id
@@ -216,12 +218,12 @@
                 {             
                     var timer;
                     art.dialog({
-                        content: '删除部门成功！',
+                        content: '删除机构成功！',
                         height : 109,
                         width : 317,
                         init: function () {
                             var mainWindow=window.parent;
-                            mainWindow.openSelectTreeUser(mainWindow.zTreeOnCheckResult); 
+                            mainWindow.openSelectTreeOrganize(mainWindow.zTreeOnCheckResult); 
                             var that = this, i = 2;
                             var fn = function () {
                                 //that.title('提示');
@@ -236,7 +238,7 @@
                         }
                     }).show();                   
                 } else {
-                    art.dialog.alert('删除部门失败！');
+                    art.dialog.alert('删除结构失败！');
                 }
             }});
     }

@@ -51,7 +51,7 @@ function getGroupTree() {
         callback: {onClick: onTreeNodeClick}
     };
     var dataParam = {
-            'type' : 1,
+            'typeList' : '0,1',
             'showType' :1
 	};
 	$.ajax({
@@ -120,7 +120,7 @@ function getGroupTree() {
             if(groupId==parentId){
                 $("#parentId").val("");
                 $("#groupSel").val("");
-                art.dialog.alert("不能选择本部门作为上级部门！");
+                art.dialog.alert("不能选择本机构作为上级机构！");
                 return;
             }
         }
@@ -133,7 +133,6 @@ function getGroupTree() {
             if($.inArray(parentId, childrenArr)!=-1){
                 $("#parentId").val("");
                 $("#groupSel").val("");
-                art.dialog.alert("不能选择子部门作为上级部门！");
                 return;
             }
         }
