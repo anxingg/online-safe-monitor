@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 
@@ -80,6 +81,9 @@ public class CompanyAction extends BaseActionSupport{
 	
 	private Integer groupId;
 	
+	//上级部门ID
+	private Integer parentId;
+	
 	private String loginName;//登录用户名
 	
 	private String companyName;//公司名称
@@ -136,8 +140,42 @@ public class CompanyAction extends BaseActionSupport{
 		
 		try {
 			LOGGER.info("企业保存saveOrUpdateCpy   begin");
-
-			WHCompany whcompany = companyImpl.findByGroupId(groupId);
+			WHCompany whcompany=null;
+			if(groupId==null){
+				UserInfo userInfo = this.getSessionSupport().getCurrentLoginUser();
+				//父部门path
+				String path="";
+				GroupInfo parentGroup=groupService.findOne(parentId);
+				path=parentGroup.getPath();
+				//保存部门
+				GroupInfo group = new GroupInfo();
+				group.setCompanyId(1);
+				group.setGroupName(companyName);
+				group.setGroupType(2);
+				group.setIsDelete(0);
+				group.setParentId(parentId);
+				group.setGrade(parentGroup.getGrade()+1);
+				group.setGroupState(0);
+				group.setUserId(userInfo.getUserId());
+				groupService.saveOrUpdate(group);
+				group.setIsForkGroup(group.getGroupId());
+				group.setPath(path+","+group.getGroupId());
+				group.setOrderIndex(group.getGroupId());
+				groupService.saveOrUpdate(group);
+				
+				//保存公司扩展表
+				whcompany =new WHCompany();
+				whcompany.setCompanyName(companyName);
+				whcompany.setGroupId(group.getGroupId());
+				whcompany.setIsForkGroup(group.getGroupId());
+				whcompany.setIsDelete(0);
+				whcompany.setCreateUserId(userInfo.getUserId());
+				whcompany.setLinkId(UUID.randomUUID().toString());
+				whcompany.setCreateTime(new Timestamp(System.currentTimeMillis()));
+			}
+			else{
+				whcompany = companyImpl.findByGroupId(groupId);
+			}
 			//LOGGER.info("saveOrUpdateCpy 值： ");
 			whcompany.setRegistrationAddress(cpy.getRegistrationAddress());
 			whcompany.setCompanyCode(cpy.getCompanyCode());
@@ -147,7 +185,10 @@ public class CompanyAction extends BaseActionSupport{
 			whcompany.setBusinessLicence(cpy.getBusinessLicence());
 			whcompany.setProductionScope(cpy.getProductionScope());
 			whcompany.setLegalRepresentative(cpy.getLegalRepresentative());
-			whcompany.setEconomicType(cpy.getEconomicType());
+			String economicType = cpy.getEconomicType();//经济类型  需要修改为String类型 
+			if(!economicType.equals("-1")){			
+				whcompany.setEconomicType(economicType);
+			}
 			whcompany.setUnitCode(cpy.getUnitCode());
 			whcompany.setProductAddress(cpy.getProductAddress());
 			whcompany.setWebsite(cpy.getWebsite());
@@ -158,7 +199,7 @@ public class CompanyAction extends BaseActionSupport{
 			whcompany.setEnterpriseScale(cpy.getEnterpriseScale());
 			whcompany.setIsIn(cpy.getIsIn());
 			whcompany.setWorkersNum(cpy.getWorkersNum());
-			whcompany.setEstablishmentTime(cpy.getEstablishmentTime());			
+			whcompany.setEstablishmentTime(Timestamp.valueOf(establishmentTime));			
 			companyImpl.saveOrUpdate(whcompany);
 			
 			//记录日志
@@ -185,7 +226,7 @@ public class CompanyAction extends BaseActionSupport{
 	public String getCompanyNameList(){
 		
 		try {
-			List<WHCompany> list = companyImpl.unDeleted().findAll();
+			List<WHCompany> list = companyImpl.findWHCompany(parentId);
 			Gson json = new Gson();
 			String jsons = json.toJson(list);
 			PrintWriter writer = new PrintWriter(this.getResponse().getWriter());
@@ -209,7 +250,7 @@ public class CompanyAction extends BaseActionSupport{
 			int pageNum = (int) (Math.ceil((double) this.getIDisplayStart()
 					/ (double) this.getIDisplayLength())) + 1;
 			Sort sort = new Sort(new Sort.Order(Direction.ASC, "NLSSORT(companyName, 'NLS_SORT=SCHINESE_PINYIN_M')"));
-			Page<WHCompany> pageInfo = companyImpl.findWHCompanyByPage(this.getPageable(sort),groupId);
+			Page<WHCompany> pageInfo = companyImpl.findWHCompanyByPage(this.getPageable(sort),groupId,parentId);
 			List<WHCompany> list = pageInfo.getContent();
 			List<Map<String, Object>> mapList = new ArrayList<Map<String, Object>>();
 			int i = (pageNum - 1) * this.getIDisplayLength() + 1;
@@ -236,8 +277,12 @@ public class CompanyAction extends BaseActionSupport{
 					String economicType = wHCompany.getEconomicType();
 					map.put("economicType", economicType == null ? "-" : economicType);
 					
-					//成立时间
-					String establishmentTime = DateTimeUtil.timestampToString(wHCompany.getEstablishmentTime(), "yyyy-mm-dd HH:MM:dd");
+					String establishmentTime ="-";
+					if(wHCompany.getEstablishmentTime()!=null)
+					{
+						//成立时间
+						establishmentTime = DateTimeUtil.timestampToString(wHCompany.getEstablishmentTime(), "yyyy-mm-dd HH:MM:dd");
+					}
 					map.put("establishmentTime", establishmentTime == null ? "-" : establishmentTime);
 					
 					//企业简介
@@ -320,129 +365,7 @@ public class CompanyAction extends BaseActionSupport{
 		return null;
 	}
 	
-	/**
-	 * 注册企业
-	 * @return
-	 */
-	public String addCompany(){
-		try {
-			UserInfo userInfo = this.getSessionSupport().getCurrentLoginUser();
-			//保存部门
-			GroupInfo group = new GroupInfo();
-			group.setCompanyId(1);
-			group.setGroupName(companyName);
-			group.setGroupType(1);
-			group.setIsDelete(0);
-			groupService.saveOrUpdate(group);
-			group.setIsForkGroup(group.getGroupId());
-			groupService.saveOrUpdate(group);
-			
-			//保存登录用户
-			UserInfo user = new UserInfo();
-			user.setCompanyId(1);
-			user.setGroupId(group.getGroupId());
-			user.setGroupName(companyName);
-			user.setLoginName(loginName);
-			MD5 md5 = new MD5();
-			user.setLoginPass(md5.encrypt(loginPass));
-			user.setPhone(phone);
-			user.setUserName(userName);
-			user.setIsDelete(0);
-			user.setIsDefault(1);
-			user.setOrderIndex(1);
-			user.setUserState(0);
-			user.setOfficeWidget(0);
-			user.setPartitionCompanyId(1);
-			user.setIsForkGroup(group.getGroupId());
-			userService.saveOrUpdate(user);
-			
-			//保存用户权限表
-			RoleUser roleUser = new RoleUser();
-			roleUser.setCompanyId(1);
-			roleUser.setType(1);
-			roleUser.setRoleId(2);
-			roleUser.setUserId(user.getUserId());
-			roleUserService.saveOrUpdate(roleUser);
-			
-			//保存公司扩展表
-			WHCompany wHCompany = new WHCompany();
-			wHCompany.setGroupId(group.getGroupId());
-			wHCompany.setIsForkGroup(group.getGroupId());
-			wHCompany.setCompanyName(companyName);
-			if(hylx!=null && !hylx.equals("")){				
-				wHCompany.setIndustryClassification(hylx.substring(0, hylx.length()-1));
-			}
-			wHCompany.setIsDelete(0);
-			wHCompany.setCreateUserId(userInfo.getUserId());
-			wHCompany.setCreateTime(new Timestamp(System.currentTimeMillis()));
-			wHCompany.setMemo(memo);
-			companyImpl.saveOrUpdate(wHCompany);
-			
-			//记录日志
-			logService.saveOrUpdate( Tool.generateLog(getLoginUser(), 
-					this.getRequest().getRemoteAddr(), 
-					"注册企业成功", 
-					LogType.LOG_QYXX_ADD, 
-					wHCompany, 
-					wHCompany.getCompanyId()) );
-			
-			//刷新全局公司名称MAP
-			DataInitUtil.flush();
-			
-			SafetyInstitutions sis = new SafetyInstitutions();
-			sis.setGroupId(group.getGroupId());
-			sis.setGroupName(group.getGroupName());
-			sis.setCreateUserId(userInfo.getUserId());
-			sis.setCreateTime(new Timestamp(System.currentTimeMillis()));
-			sis.setIsDelete(0);
-			sis.setIsForkGroup(group.getGroupId());
-			sisService.saveOrUpdate(sis);
-			
-			PrintWriter writer = new PrintWriter(this.getResponse().getWriter());
-			writer.print(1);
-			writer.flush();
-			writer.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
 	
-	public String resetPass(){
-		try {
-			Integer whroletype = ((SessionSupport)this.getSessionSupport()).getCurrentWHRoleType();
-			if(whroletype!=null && whroletype==1){//政府用户
-				//保存登录用户
-				List<UserInfo> list = userService.findUsersByGroupId(groupId.toString());
-				if(list!=null && list.size()>0){
-					UserInfo user = list.get(0);
-					MD5 md5 = new MD5();
-					user.setLoginPass(md5.encrypt(loginPass));
-					userService.saveOrUpdate(user);
-					LOGGER.info("重置密码成功，"+user.getLoginName()+",groupId="+groupId);
-					//记录日志
-					logService.saveOrUpdate( Tool.generateLog(getLoginUser(), 
-							this.getRequest().getRemoteAddr(), 
-							"修改密码成功", 
-							LogType.LOG_COMPANYPASS_RESET, 
-							user, 
-							user.getUserId()) );
-					ajax(1);
-				}else{
-					ajax(0);
-					LOGGER.info("重置密码失败，没有查到用户,groupId="+groupId);
-				}
-			}else{
-				ajax(0);
-				LOGGER.info("重置密码失败，企业端非法登录,userid="+getLoginUser().getUserId());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			ajax(0);
-			LOGGER.info("重置密码失败，异常。e="+e.getMessage());
-		}
-		return null;
-	}
 	
 	
 	/**
@@ -485,7 +408,12 @@ public class CompanyAction extends BaseActionSupport{
 	 * @return
 	 */
 	public String toUpdateCompany(){
-		cpy = companyImpl.findByGroupId(groupId);
+		if(groupId!=null)
+			cpy = companyImpl.findByGroupId(groupId);
+		else  //新增单位
+		{
+			cpy = new WHCompany();
+		}
 		return "success";
 	}
 	
@@ -497,40 +425,7 @@ public class CompanyAction extends BaseActionSupport{
 		cpy = companyImpl.findByGroupId(groupId);
 		return "success";
 	}
-	/**
-	 * 删除用户
-	 * @author wuzhou 
-	 * @return
-	 */
-	public String deleteLoginUser(){
-		if (StringUtils.isNotBlank(userIds)) {
-			if (userIds.startsWith(",")) {
-				userIds = userIds.substring(1);
-			}
-			if (userIds.endsWith(",")) {
-				userIds = userIds.substring(0, userIds.length()-1);
-			}
-			companyImpl.deleteCompanyByUserIds(userIds, getLoginUser().getCompanyId());
-			
-			for(String str: userIds.split(",")){
-				try{
-					//记录日志
-					logService.saveOrUpdate( Tool.generateLog(getLoginUser(), 
-							this.getRequest().getRemoteAddr(), 
-							"人员删除成功", 
-							LogType.LOG_USER_DELETE, 
-							null, 
-							Integer.parseInt(str)) );
-				}catch(NumberFormatException e){
-					LOGGER.error("人员删除操作，传过来的人员ID不是数字哦！", e);
-				}
-			}
-			ajax("1");
-		}
-		return null;
-	}
-
-
+	
 	public WHCompany getCpy() {
 		return cpy;
 	}
@@ -642,6 +537,10 @@ public class CompanyAction extends BaseActionSupport{
 	public void setProductTypeName(String productTypeName) {
 		this.productTypeName = productTypeName;
 	}
-	
-	
+	public Integer getParentId() {
+		return parentId;
+	}
+	public void setParentId(Integer parentId) {
+		this.parentId = parentId;
+	}
 }

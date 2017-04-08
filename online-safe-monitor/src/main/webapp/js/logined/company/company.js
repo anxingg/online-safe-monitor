@@ -5,15 +5,14 @@ $(document).ready(function() {
 	// 初始化区域树
 	openSelectTreeArea(zTreeOnCheckResult);
 
-	$("#page").attr("src", basePath + "logined/company/companyList.jsp");
+	//默认选择乌海市所有企业
+	$("#page").attr("src", basePath + "logined/company/companyList.jsp?parentId=1");
 	
 });
 
-var tempGroupId = '';
 function zTreeOnCheckResult(data) {
 	var groupId = data.Id;
-	tempGroupId = groupId;
 	if (groupId != 0) {
-		$("#page").attr("src", basePath + "logined/company/companyList.jsp?groupId=" + groupId);
+		$("#page").attr("src", basePath + "logined/company/companyList.jsp?parentId=" + groupId);
 	}
 }

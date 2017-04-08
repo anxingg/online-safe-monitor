@@ -18,7 +18,7 @@ public class WHCompanyDao extends BaseDao<WHCompany, Serializable> implements Se
 	private static final long serialVersionUID = 1580954590142207584L;
 	
 
-	public Page<WHCompany> findWHCompanyByPage(Pageable pageable, Integer groupId) {
+	public Page<WHCompany> findWHCompanyByPage(Pageable pageable, Integer groupId, String groupIds) {
 		String hql = " isDelete = 0 ";
         List<Object> params = new ArrayList<Object>();
         
@@ -28,8 +28,23 @@ public class WHCompanyDao extends BaseDao<WHCompany, Serializable> implements Se
             params.add(groupId);
         }
        
+        if (groupIds!=null)
+        {	
+            hql += " and groupId in ("+groupIds+")";
+        }
         return super.findAll(hql, pageable, params.toArray());        	
         
+	}
+	public List<WHCompany> findWHCompany(String groupIds)
+	{
+		String hql = " isDelete = 0 ";
+        List<Object> params = new ArrayList<Object>();
+        
+        if (groupIds!=null)
+        {	
+            hql += " and groupId in ("+groupIds+")";
+        }
+        return this.findAll(hql);
 	}
 	
 	/**

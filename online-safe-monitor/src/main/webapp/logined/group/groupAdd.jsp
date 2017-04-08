@@ -17,14 +17,14 @@
 <!-- 这个js用来统计textarea 文本框中的字符数 -->
 <script type="text/javascript" src="${ctx}common/js/CheckTextarea.js?version=${version}"></script>
 
+<script type="text/javascript" src="${ctx}js/common/hashmap.js"></script>
+<script type="text/javascript" src="${ctx}js/common/treeNode.js"></script>
+
 <script type="text/javascript" src="${ctx }flat/plugins/tree/skins/jquery.ztree.all-3.2.min.js"></script>
 <script type="text/javascript" src="${ctx}js/logined/group/groupAdd.js"></script>
-<script type="text/javascript" src="${ctx}js/common/treeNode.js"></script>
 <script type="text/javascript" src="${ctx}js/logined/group/userTree.js"></script>
 <!-- 人员选择  start-->
 <script type="text/javascript" src="${ctx}js/logined/group/selectUser.js"></script>
-<script type="text/javascript" src="${ctx}js/common/hashmap.js"></script>
-<script type="text/javascript" src="${ctx}js/common/treeNode.js"></script>
 <script type="text/javascript" src="${ctx}js/logined/group/selectGroup.js"></script>
 
 </head>
@@ -35,13 +35,8 @@
 <input type="hidden" id="topChangeId"/>
 <!-- 乌海机构不需要电话 -->
 <input name="" type="hidden"  id="groupPhone" value=""/>
-<%
-	int parentId = 0;
- 	if(!SystemContextHolder.getSessionContext().getRelationIds().contains("role_26")){
- 		parentId = SystemContextHolder.getSessionContext().getUser().getIsForkGroup();
- 	}
-%>
-<input type="hidden" id="parentId"  value="<%=parentId%>"/>
+<input type="hidden" id="parentId"  value="${paramValues.parentId[0]}"/>
+
 		<div class="formPage">
   			<div class="formbg">
 				<div class="big_title">新增机构</div>

@@ -12,7 +12,7 @@ $(document).ready(function() {
 	$("#page").attr("src", basePath + "logined/group/groupAdd.jsp");
 	// 单击新增部门按钮
 	$("#addDiv").click(function() {
-		$("#page").attr("src", basePath + "logined/group/groupAdd.jsp");
+		$("#page").attr("src", basePath + "logined/group/groupAdd.jsp?parentId="+tempGroupId);
 		return false;
 	});
 

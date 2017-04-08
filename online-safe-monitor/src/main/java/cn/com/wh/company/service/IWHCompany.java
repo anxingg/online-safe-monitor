@@ -1,5 +1,7 @@
 package cn.com.wh.company.service;
 
+import java.util.List;
+
 import cn.com.qytx.platform.base.query.Page;
 import cn.com.qytx.platform.base.query.Pageable;
 import cn.com.qytx.platform.base.service.BaseService;
@@ -13,8 +15,15 @@ public interface IWHCompany extends BaseService<WHCompany>{
 	 * @param groupId 部门
 	 * @return Page 分页结果数据
 	 */
-	public Page<WHCompany> findWHCompanyByPage(Pageable pageable,Integer groupId);
+	public Page<WHCompany> findWHCompanyByPage(Pageable pageable,Integer groupId,Integer parentId);
 
+	/**
+	 * 根据某部门的所有下级单位
+	 * @param parentId
+	 * @return
+	 */
+	public List<WHCompany> findWHCompany(Integer parentId);
+	
 	
 	/**
 	 * 根据分组id 查询所属公司信息

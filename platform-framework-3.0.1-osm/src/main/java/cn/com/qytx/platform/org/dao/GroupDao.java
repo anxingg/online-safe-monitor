@@ -547,32 +547,30 @@ public class GroupDao <T extends GroupInfo>  extends BaseDao<GroupInfo,Integer> 
 	
 	
 	public List<GroupInfo> getSubGroupList(int parentGroupId) {
-		List<GroupInfo> result = new ArrayList<GroupInfo>();
-		iteratorSubGroup(parentGroupId, result);
-		return result;
+		GroupInfo parentGroup = this.findOne(parentGroupId);
+		String path=parentGroup.getPath().trim();
+		if(!path.endsWith(","))
+			path=path+",";
+		String hql=" path like '%"+path+"%'";
+		return this.findAll(hql);
 	}
-	
-
 	/**
-	 * 功能：迭代获取子部门
-	 * @param
+	 * 获得父部门的子部门ID 列表
+	 * @param parentId
 	 * @return
-	 * @throws   
 	 */
-	private void iteratorSubGroup(int parentGroupId,List<GroupInfo> result){
-		List<GroupInfo> temp = this.getGroupInfoByParentId(parentGroupId);
-		if(temp!=null){
-			result.addAll(temp);
-			for(int i=0; i<temp.size(); i++){
-				GroupInfo gi = temp.get(i);
-				int gid = gi.getGroupId();
-				iteratorSubGroup(gid, result);
-			}
-		}else{
-			return;
+	public String getSubGroupIds(Integer parentId)
+	{
+		List<GroupInfo> groupInfoList=this.getSubGroupList(parentId);
+		StringBuilder inStr=new StringBuilder();
+		for(GroupInfo groupInfo  : groupInfoList){
+			inStr.append(",");
+			inStr.append(groupInfo.getGroupId());
 		}
+		if(inStr.length()>0)
+			inStr.delete(0, 1);
+		return inStr.toString();
 	}
-	
 	/**
 	 * 根据部门类型获得部门的信息，用于手机端接口
 	 * @param groupType

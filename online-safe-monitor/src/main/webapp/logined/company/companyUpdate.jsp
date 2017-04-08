@@ -7,33 +7,61 @@
 <head>
 	<jsp:include page="../../common/osmHead.jsp" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>企业信息修改</title>
+	<title>企业信息设置</title>
+	<link href="${ctx }flat/plugins/tree/skins/tree_default.css" rel="stylesheet" type="text/css" />
 	<!-- 验证start -->
 	<script type="text/javascript" src="${ctx}js/common/validate_form.js?version=${version}"></script>
 	<script type="text/javascript" src="${ctx}common/js/js_lang_cn.js?version=${version}"></script>
 	<script type="text/javascript" src="${ctx}js/common/showError.js?version=${version}"></script>
 	<!-- 验证end -->
 	<script type="text/javascript" src="${ctx}/js/logined/company/companyUpdate.js?version=${version}"></script>
+	<!-- 上级组织  start-->
+	<script type="text/javascript" src="${ctx }flat/plugins/tree/skins/jquery.ztree.all-3.2.min.js"></script>
+	<script type="text/javascript" src="${ctx}js/common/hashmap.js"></script>
+	<script type="text/javascript" src="${ctx}js/common/treeNode.js"></script>
+	<script type="text/javascript" src="${ctx}js/logined/group/selectArea.js"></script>
+	<!-- 上级组织  end-->
 </head>
 <body>
 <div class="bread-line">
-  <label>当前位置：</label><a href="#">首页</a>&gt;&nbsp;<a href="#">企业信息修改</a>
+  <label>当前位置：</label><a href="#">首页</a>&gt;&nbsp;<a href="#">企业信息设置</a>
 </div>
 <input type="hidden" id="groupId" value='${paramValues.groupId[0]}'/>
+<input type="hidden" id="parentId" value='${paramValues.parentId[0]}'/>
+<input type="hidden" id="action" value='${paramValues.action[0]}'/>
+<input type="hidden" id="ssx" value="${cpy.cityId }" />
    <div class="formPage">
    <div class="formbg">
       <form id="form1">
-        <div class="big_title">企业信息修改</div>
+        <div class="big_title" id="title">
+        	<c:choose>
+			   <c:when test="${paramValues.action[0] == 'add'}">  
+			  		企业信息新增
+			   </c:when>
+			   <c:otherwise> 
+			   		企业信息修改
+			   </c:otherwise>
+			</c:choose>
+        </div>
         <div class="content_form">
                 <table width="100%" cellspacing="0" cellpadding="0" border="0" class="inputTable">
                     <tbody>
                         <tr>
-                        	
-                            <th>企业名称(不可更改)：</th>
-                            <td>
-                            <input type="hidden"  id="qymc" value="${cpy.companyName }"/>
-                            <lable>${cpy.companyName }</lable>
-                            </td>
+	                            <c:choose>
+								   <c:when test="${paramValues.action[0] == 'add'}">  
+								  		<th><em class="requireField">*</em>企业名称：</th>
+      									<td><input type="text" class="formText" id="companyName" maxlength="32"
+                            					valid="required" errmsg="comreg.name_not_null"/></td>
+								   </c:when>
+								   <c:otherwise> 
+								   		<th>企业名称：</th>
+                            			<td>
+										   	<input type="hidden"  id="qymc" value="${cpy.companyName }"/>
+			                            	<lable>${cpy.companyName }</lable>
+		                            	</td>
+								   </c:otherwise>
+								</c:choose>
+                            
                             <th>工商注册地址：</th>
                             <td><input id="gszcdz" type="text" class="formText" value="${cpy.registrationAddress }" maxlength="100"/></td>
                         </tr>
@@ -41,10 +69,16 @@
                             <th><em class="requireField">*</em>单位代码：</th>
                             <td><input type="text" id="dwdm" class="formText" value="${cpy.companyCode }" maxlength="32"
                             	valid="required" errmsg="wuhaicom.dwdm_not_null"/></td>
-                            <th><em class="requireField">*</em>省市县：</th>
+                            <th><em class="requireField">*</em>区域：</th>
                             <td>
-                            	<input type="text" id="ssx" class="formText" value="${cpy.cityId }" maxlength="100"
-                            	valid="required" errmsg="wuhaicom.ssx_not_null"/>
+                            	<div id="treeContent" style="z-index:66;position:relative">
+								<input id="groupSel" type="text" readonly="readonly" class="formText iconTree" style="width:100%" valid="required" errmsg="group.parent_group_not_null" />
+								<!-- <a class="icon_clear" href="#" id="parentRemove">清空</a> 
+								<span class="selectdot" id="groupSel_div"></span> -->
+								<div id="menuContent" style="position: absolute;display: none;">
+									<ul id="groupTree" class="ztree" style="position: absolute; margin-top: 0; width: 375px;height:150px;overflow:auto; background: #ffffff;  border: 1px solid #8a9ba5"></ul>
+								</div>
+							</div>
                             </td>
                         </tr>
                          <tr>

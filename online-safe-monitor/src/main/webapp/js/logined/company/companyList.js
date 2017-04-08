@@ -20,6 +20,11 @@ $(document).ready(function(){
 			return false;
 		}
 	});
+	// 保存按钮绑定事件
+	$("#add").bind("click", function() {
+		addCompany();
+		return false;
+	});
 	//加载列表
 	getTableList();
 	
@@ -31,6 +36,7 @@ function getSelectCompany(){
 		type : "post",
 		dataType : 'json',
 		data : {
+			parentId:$('#parentId').val()
 		},
 		success : function(data) {
 			if (data != null && data!="") {
@@ -79,19 +85,27 @@ function deleteCompany(groupId){
 	});
 	
 }
+/**
+ * 新增操作
+ */
+function addCompany() {
+	window.location.href = basePath + "companywh/toUpdateCompany.action?action=add&parentId="+$('#parentId').val();
+}
 function getTableList(){
 	var companName = $.trim($('#companName').val());
-	
+	var parentId = $('#parentId').val();
 	$('#myTable').dataTable({
 		"bDestroy" : true,
 		"bProcessing" : true,
 		"bStateSave" : true, // 状态保存
 		'bServerSide' : true,
 		'fnServerParams' : function(aoData) {
-
 			aoData.push({
 					"name" : "groupId",
 					"value" : companName
+				}, {
+					"name" : "parentId",
+					"value" : parentId
 				});
 		},
 		"sAjaxSource" : basePath + "companywh/getWHCompanyList.action",
@@ -144,8 +158,9 @@ function getTableList(){
 				"aTargets" : [5], //操作
 				"fnRender" : function(oObj) {
 					var groupId = oObj.aData.groupId;
+					var parentId = $('#parentId').val();
 					var html = '<a href="'+basePath+'companywh/toCompanyView.action?groupId='+groupId+'">查看</a>';
-					html += '<a href="'+basePath+'companywh/toUpdateCompany.action?groupId='+groupId+'">修改</a>';
+					html += '<a href="'+basePath+'companywh/toUpdateCompany.action?action=edit&groupId='+groupId+'&parentId='+parentId+'">修改</a>';
 					html += '<a href="javascript:void(0);" onclick="deleteCompany('+groupId+');">删除</a>';
 					return html;
 				}

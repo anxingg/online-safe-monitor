@@ -174,7 +174,9 @@ function submit(){
 	var sczk = $.trim($("#sczk").val());
 	
 	var parmas = {
-			"groupId" : $("#groupId").val()
+			"parentId" : $('#parentId').val(),
+			"groupId" : $('#groupId').val(),
+			"companyName" ： $('#companyName').val(),
 			"cpy.registrationAddress" : gszcdz,
 			"cpy.companyCode" : dwdm,
 			"cpy.cityId" : ssx,

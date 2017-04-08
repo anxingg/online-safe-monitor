@@ -33,7 +33,7 @@
                             	<s:property value="cpy.precision"/>&nbsp;&nbsp;
                             	<s:property value="cpy.dimension"/>
                             </td>
-                            <th>省市县：</th>
+                            <th>区域：</th>
                             <td>
                             	<s:property value="cpy.cityId"/>
                             </td>

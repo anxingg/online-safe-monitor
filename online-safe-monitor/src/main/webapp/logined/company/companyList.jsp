@@ -11,6 +11,7 @@
 	<script type="text/javascript" src="${ctx}js/logined/company/companyList.js?version=${version}"></script>
 </head>
 <body>
+	<input type="hidden" id="parentId" value='${paramValues.parentId[0]}'/>
 	<div class="list">
 		<div class="searchArea">
 			<ul>
@@ -20,6 +21,7 @@
 					</select>
 				</li>
 				<li><input type="button" class="searchButton" value="查询" id="searchCompany"/>
+				<div class="fButton greenBtn"> <span class="add" id="add">新增</span></div>
 				</li>
 				<li></li>
 			</ul>
