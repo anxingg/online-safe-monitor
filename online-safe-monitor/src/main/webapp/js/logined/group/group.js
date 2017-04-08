@@ -2,8 +2,8 @@
 $(document).ready(function() {
 //	// 重置iframe高度
 //	window.parent.frameResize();
-	// 初始化部门树
-	openSelectTreeUser(zTreeOnCheckResult);
+	// 初始化组织树
+	openSelectTreeOrganize(zTreeOnCheckResult);
 
 	// 部门列表
 	$("#groupList").click(function() {

@@ -185,7 +185,8 @@ public class LogType{
     
     
     /* ==================================================================== */
-    /**
+    public static final int LOG_QYXX_DELETE = 61;
+   /**
      * 企业注册
      */
     public static final int LOG_QYXX_ADD = 62;

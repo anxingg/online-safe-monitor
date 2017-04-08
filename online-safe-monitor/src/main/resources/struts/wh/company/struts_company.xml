@@ -47,14 +47,17 @@
         
         <!--跳转到企业信息修改页面-->
         <action name="toUpdateCompany" class="cn.com.wh.company.action.CompanyAction" method="toUpdateCompany">
-       		<result name="success">/wh/logined/company/companyUpdate.jsp</result>
+       		<result name="success">/logined/company/companyUpdate.jsp</result>
         </action>
         
         <!--跳转到企业信息详情页面-->
         <action name="toCompanyView" class="cn.com.wh.company.action.CompanyAction" method="toCompanyView">
-       		<result name="success">/wh/logined/company/companyView.jsp</result>
+       		<result name="success">/logined/company/companyView.jsp</result>
         </action>
         
+        <!-- 删除企业信息 -->
+        <action name="deleteCompany" class="cn.com.wh.company.action.CompanyAction" method="deleteCompany">
+        </action>
         
         <!--保存企业信息-->
         <action name="saveOrUpdateCpy" class="cn.com.wh.company.action.CompanyAction" method="saveOrUpdateCpy">

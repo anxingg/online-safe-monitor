@@ -229,6 +229,24 @@ a {
 	background-color: #FFFFFF;
 }
 
+/*详情*/
+.inputTable{ border:none; font-size:14px;}
+.inputTable table{}
+.inputTable th{color: #888;padding: 5px 0 5px 10px; position: relative; text-align: right; line-height:27px; vertical-align: top; }
+.inputTable td{color: #333;line-height: 30px;padding: 5px 10px;}
+
+
+.enter{overflow:hidden; padding:0 10px;}
+.enter dt{font-size:14px; line-height: 25px; padding: 12px 15px;  word-wrap: break-word; color:#353535;}
+.enter dd{overflow:hidden;font-size:14px; color:#353535; text-indent:40px; line-height:40px; cursor:pointer; position:relative;}
+.enter .formText{ width:78%; border:none !important; border-bottom:1px solid #ebebeb !important; background:none}
+.enter .formTextarea{ float:left; width:79%}
+.enter dd .close{ position:absolute; background:url(../images/close1.png) no-repeat; width:18px; height:18px; right:106px; top:5px;}
+.enter dd .oper{ position:absolute; right:0; top:0px; font-size:14px; color:#0066cc; width:95px; text-indent:0; height:25px; line-height:25px;}
+.enter dd .oper.on{ color:#48990c;}
+.enter dd.operate em {color: #2674d0;cursor:pointer;float:left;padding-left:50px;}
+
+
 .county,
 .park {
 	height: 26px;

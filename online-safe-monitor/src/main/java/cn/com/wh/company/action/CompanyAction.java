@@ -26,6 +26,7 @@ import cn.com.qytx.platform.org.domain.UserInfo;
 import cn.com.qytx.platform.org.service.IGroup;
 import cn.com.qytx.platform.org.service.IRoleUser;
 import cn.com.qytx.platform.org.service.IUser;
+import cn.com.qytx.platform.utils.datetime.DateTimeUtil;
 import cn.com.qytx.platform.utils.encrypt.MD5;
 import cn.com.wh.company.domain.SafetyInstitutions;
 import cn.com.wh.company.domain.WHCompany;
@@ -103,7 +104,31 @@ public class CompanyAction extends BaseActionSupport{
 	
 	private String userIds;//删除的人员id
 	
-	
+	/**
+	 * 删除企业
+	 */
+	public void deleteCompany()
+	{
+		try {
+			LOGGER.info("企业删除deleteCompany   begin");	
+			WHCompany whcompany = companyImpl.findByGroupId(groupId);
+			companyImpl.delete(whcompany.getCompanyId(), false);	
+			//记录日志
+			logService.saveOrUpdate( Tool.generateLog(getLoginUser(), 
+					this.getRequest().getRemoteAddr(), 
+					"删除企业信息成功", 
+					LogType.LOG_QYXX_DELETE, 
+					whcompany, 
+					whcompany.getCompanyId()) );
+			
+			ajax("1");
+			LOGGER.info("企业删除deleteCompany   end");
+		} catch (Exception e) {
+			LOGGER.info("企业删除deleteCompany异常，e:"+e.getMessage());
+			e.printStackTrace();
+			ajax("0");
+		}
+	}
 	/**
 	 * 企业保存
 	 */
@@ -111,74 +136,29 @@ public class CompanyAction extends BaseActionSupport{
 		
 		try {
 			LOGGER.info("企业保存saveOrUpdateCpy   begin");
-			UserInfo userInfo = this.getSessionSupport().getCurrentLoginUser();
-			groupId = userInfo.getGroupId();
+
 			WHCompany whcompany = companyImpl.findByGroupId(groupId);
 			//LOGGER.info("saveOrUpdateCpy 值： ");
-			String companyCode = cpy.getCompanyCode();
-			whcompany.setCompanyCode(companyCode);
-			
-			String product = cpy.getProduct();
-			whcompany.setProduct(product);
-			
-			
-			Integer productType =  cpy.getProductType();
-			whcompany.setProductType(productType);
-			
-			
-			Integer safeManageUserNum = cpy.getSafeManageUserNum();
-			whcompany.setSafeManageUserNum(safeManageUserNum);
-			String safeManageUserName = cpy.getSafeManageUserName();
-			whcompany.setSafeManageUserName(safeManageUserName);
-			
-			String safeManageUserPhone = cpy.getSafeManageUserPhone();
-			whcompany.setSafeManageUserPhone(safeManageUserPhone);
-			String safeManageUserTel = cpy.getSafeManageUserTel();
-			whcompany.setSafeManageUserTel(safeManageUserTel);
-			
-			String safeManageUserEmail = cpy.getSafeManageUserEmail();
-			whcompany.setSafeManageUserEmail(safeManageUserEmail);
-			
-			
-			
-			Integer specialUserNum = cpy.getSpecialUserNum();
-			whcompany.setSpecialUserNum(specialUserNum);
-			Integer safeProductGrade = cpy.getSafeProductGrade();//安全生产标准等级 数据字段维护
-			whcompany.setSafeProductGrade(safeProductGrade);
-			String emergencyPhone = cpy.getEmergencyPhone();
-			whcompany.setEmergencyPhone(emergencyPhone);
-			String safeDutyPhone = cpy.getSafeDutyPhone();
-			whcompany.setSafeDutyPhone(safeDutyPhone);
-			
-			
-			Integer importCompanyQualification = cpy.getImportCompanyQualification();//进口企业资质证明名称 数据字典维护
-			whcompany.setImportCompanyQualification(importCompanyQualification);
-			String importCompanyQualificationNum = cpy.getImportCompanyQualificationNum();
-			whcompany.setImportCompanyQualificationNum(importCompanyQualificationNum);
-			
-			String introduction = cpy.getIntroduction();
-			whcompany.setIntroduction(introduction);
-			
-			
-			Integer workersNum = cpy.getWorkersNum();
-			whcompany.setWorkersNum(workersNum);
-			String outsideSituation = cpy.getOutsideSituation();
-			if(outsideSituation!=null && !outsideSituation.equals("")){
-				outsideSituation = outsideSituation.substring(0,outsideSituation.length()-1);
-			}
-			whcompany.setOutsideSituation(outsideSituation);
-			
-			Integer enterpriseScale = cpy.getEnterpriseScale();
-			whcompany.setEnterpriseScale(enterpriseScale);
-			
-			String industryClassification = cpy.getIndustryClassification();
-			if(industryClassification!=null && !industryClassification.equals("")){
-				industryClassification = industryClassification.substring(0,industryClassification.length()-1);
-			}
-			whcompany.setIndustryClassification(industryClassification);
-			
-			whcompany.setExtractDescription(cpy.getExtractDescription());
-			
+			whcompany.setRegistrationAddress(cpy.getRegistrationAddress());
+			whcompany.setCompanyCode(cpy.getCompanyCode());
+			whcompany.setCityId(cpy.getCityId());	
+			whcompany.setProductType(cpy.getProductType());
+			whcompany.setCompanyProperty(cpy.getCompanyProperty());
+			whcompany.setBusinessLicence(cpy.getBusinessLicence());
+			whcompany.setProductionScope(cpy.getProductionScope());
+			whcompany.setLegalRepresentative(cpy.getLegalRepresentative());
+			whcompany.setEconomicType(cpy.getEconomicType());
+			whcompany.setUnitCode(cpy.getUnitCode());
+			whcompany.setProductAddress(cpy.getProductAddress());
+			whcompany.setWebsite(cpy.getWebsite());
+			whcompany.setPostalcode(cpy.getPostalcode());
+			whcompany.setPrecision(cpy.getPrecision());
+			whcompany.setDimension(cpy.getDimension());
+			whcompany.setSales(cpy.getSales());
+			whcompany.setEnterpriseScale(cpy.getEnterpriseScale());
+			whcompany.setIsIn(cpy.getIsIn());
+			whcompany.setWorkersNum(cpy.getWorkersNum());
+			whcompany.setEstablishmentTime(cpy.getEstablishmentTime());			
 			companyImpl.saveOrUpdate(whcompany);
 			
 			//记录日志
@@ -252,12 +232,23 @@ public class CompanyAction extends BaseActionSupport{
 					String legalRepresentative = wHCompany.getLegalRepresentative();
 					map.put("legalRepresentative", legalRepresentative == null ? "-" : legalRepresentative);
 					
+					//经济类型
+					String economicType = wHCompany.getEconomicType();
+					map.put("economicType", economicType == null ? "-" : economicType);
+					
+					//成立时间
+					String establishmentTime = DateTimeUtil.timestampToString(wHCompany.getEstablishmentTime(), "yyyy-mm-dd HH:MM:dd");
+					map.put("establishmentTime", establishmentTime == null ? "-" : establishmentTime);
+					
 					//企业简介
 					String introduction = wHCompany.getIntroduction();
 					map.put("introduction", introduction == null ? "-" : introduction);
 					
-					//生产状况
+					//生成产场所地址
+					String productAddress = wHCompany.getProductAddress();
+					map.put("productAddress", productAddress == null ? "-" : productAddress);
 					
+					//生产状况
 					Integer productType = wHCompany.getProductType();
 					Map<String, String> dictmapProductType = dictService.findMap("productType", 1);
 					if(productType!=null){
@@ -266,13 +257,6 @@ public class CompanyAction extends BaseActionSupport{
 					}else{
 						map.put("productTypeName", "-" );
 					}
-					
-					//已提取金额
-					map.put("allMoney", wHCompany.getSafetyAllMoney()==null?0:wHCompany.getSafetyAllMoney());
-					//已使用金额
-					map.put("usedMoney", wHCompany.getSafetyConsumerMoney()==null?0:wHCompany.getSafetyConsumerMoney());
-					//余额
-					map.put("remainMoney", wHCompany.getSafetySurplusMoney()==null?0:wHCompany.getSafetySurplusMoney());
 					mapList.add(map);
 					i++;
 				}
@@ -501,8 +485,7 @@ public class CompanyAction extends BaseActionSupport{
 	 * @return
 	 */
 	public String toUpdateCompany(){
-		UserInfo userInfo = this.getSessionSupport().getCurrentLoginUser();
-		cpy = companyImpl.findByGroupId(userInfo.getGroupId());
+		cpy = companyImpl.findByGroupId(groupId);
 		return "success";
 	}
 	
@@ -511,38 +494,7 @@ public class CompanyAction extends BaseActionSupport{
 	 * @return
 	 */
 	public String toCompanyView(){
-		if(groupId==null){
-			groupId = getLoginUser().getGroupId();
-		}
 		cpy = companyImpl.findByGroupId(groupId);
-		
-		Integer spg =cpy.getSafeProductGrade();//安全生产标准等级
-		//map<value,name>
-		Map<String, String> dictmap = dictService.findMap("safeProductType", 1);
-		if(spg!=null){
-			safeProductGrade = dictmap.get(spg.toString());
-		}else{
-			safeProductGrade = "";
-		}
-		
-		Integer productType =cpy.getProductType();//生产状况
-		//map<value,name>
-		Map<String, String> dictmapProductType = dictService.findMap("productType", 1);
-		if(productType!=null){
-			productTypeName = dictmapProductType.get(productType.toString());
-		}else{
-			productTypeName = "";
-		}
-		
-		Integer icq =cpy.getImportCompanyQualification();//进口企业资质证明名称
-		//map<value,name>
-		Map<String, String> icqmap = dictService.findMap("importCertificate", 1);
-		if(icq!=null){
-			importCompanyQualification = icqmap.get(icq.toString());
-		}else{
-			importCompanyQualification = "";
-		}
-		
 		return "success";
 	}
 	/**

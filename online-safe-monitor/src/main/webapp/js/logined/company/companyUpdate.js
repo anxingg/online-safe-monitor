@@ -1,22 +1,27 @@
 $(document).ready(function(){
 	
+	initSelect("safeProductType","bzhdj");
+	initSelect("importCertificate","zmmc");
 	initSelect("productType","sczk");
 	
+	
 	//处理下拉选
-
-	//是否在 工业园区
+	var hibzhdj = $("#hibzhdj").val();
+	$("#bzhdj").val(hibzhdj);
+	
+	var hizmmc = $("#hizmmc").val();
+	$("#zmmc").val(hizmmc);
+	
 	var hizyq = $("#hizyq").val();
 	$("#zyq").val(hizyq);
 	
-	//企业规模
 	var hiqygm = $("#hiqygm").val();
 	$("#qygm").val(hiqygm);
 	
-	//生产状况
 	var hisczk = $("#hisczk").val();
 	$("#sczk").val(hisczk);
 	
-	//行业类型
+	//处理复选框
 	var hihylx = $("#hihylx").val();
 	if(hihylx!=null && hihylx!=""){
 		var check = hihylx.split(',');
@@ -28,23 +33,22 @@ $(document).ready(function(){
 			});
 		}
 	}
-
-	//经济类型
-	$("#jjlx").change(function(){
-		selectJJLX();
-	});
+	
+	var hidwsb = $("#hidwsb").val();
+	if(hidwsb!=null && hidwsb!=""){
+		var check = hidwsb.split(',');
+		for (var i = 0; i < check.length; i++) {
+			$("input[name='dwsb']").each(function(){
+				if($(this).val()==check[i]){
+					$(this).attr("checked",true);
+				}
+			});
+		}
+	}
+	
 	var jjlx = $("#jjlx").val();
 	if(jjlx == -1){
 		$("#jjlxfl").hide();
-	}
-	
-	var economicType = $("#economicType").val().split(",");
-	if(economicType[0]!=""){
-		$("#jjlx").find("option[value='"+economicType[0]+"']").attr("selected",true);
-		selectJJLX();
-		if(economicType[0] == "私营经济" || economicType[0] == "个体经济" || economicType[0] == "股份制" || economicType[0] == "外商投资" || economicType[0] == "港澳台投资"){
-			 $("#jjlxfl").find("option[value='"+economicType[1]+"']").attr("selected",true);
-		 }
 	}
 
 	//保存企业信息
@@ -126,6 +130,7 @@ function selectJJLX(){
 		$("#jjlxfl").hide();
 	}
 	
+	
 }
 
 
@@ -134,68 +139,90 @@ function selectJJLX(){
  * 保存企业信息
  */
 function submit(){
-	var gszcdz = $.trim($("#gszcdz").val());
+	//单位代码
 	var dwdm = $.trim($("#dwdm").val());
-	var ssx = $.trim($("#ssx").val());
-	var dwxz = $.trim($("#dwxz").val());//公司性质
-	var clsj = $.trim($("#clsj").val());//成立时间
-	clsj = clsj+" 00:00:00";
-	var yyzzch = $.trim($("#yyzzch").val());
-	var yyzzscfw = $.trim($("#yyzzscfw").val());
-	var fdr = $.trim($("#fdr").val());
-	var zzjgdm = $.trim($("#zzjgdm").val());
-	//生成场所地址
-	var sccsdz = $.trim($("#sccsdz").val());
-	var qywz = $.trim($("#qywz").val());
-	var yzbm = $.trim($("#yzbm").val());
-	//经纬度
-	var jd = $.trim($("#jd").val());
-	var wd = $.trim($("#wd").val());
+
 	//销售收入
 	var xssr = $.trim($("#xssr").val());
+
 	//职工人数
 	var jgrs = $.trim($("#jgrs").val());
+	
 	//企业规模
 	var qygm = $.trim($("#qygm").val());
-	//是否在工业园区
-	var zyq = $.trim($("#zyq").val());
-	//企业分类
-	var hylx = "";
-	$('input[name="hylx"]:checked').each(function(){ 
-		hylx+=$(this).val()+",";
+	//安全生产管理人员人数
+	var acscrs = $.trim($("#acscrs").val());
+
+	//安全生产负责人
+	var acscfzr = $.trim($("#acscfzr").val());
+
+	//安全生产负责人移动电话
+	var acscyddh = $.trim($("#acscyddh").val());
+
+	//安全生产负责人办公电话
+	var acscbgdh = $.trim($("#acscbgdh").val());
+
+	//安全生产负责人电子邮箱
+	var acscdzyx = $.trim($("#acscdzyx").val());
+	
+	//特种作业人员人数
+	var tzzyrs = $.trim($("#tzzyrs").val());
+
+	//安全生产标准等级
+	var bzhdj = $.trim($("#bzhdj").val());
+
+	//应急咨询服务号码
+	var zxhm = $.trim($("#zxhm").val());
+
+	//安全值班电话
+	var zbdh = $.trim($("#zbdh").val());
+	
+	//进口企业资质证明名称
+	var zmmc = $.trim($("#zmmc").val());
+	//进口企业资质证明编号
+	
+	var zzbh = $.trim($("#zzbh").val());
+	
+	//主要产品及生产规模
+	var zycp = $.trim($("#zycp").val());
+	
+	//企业简介
+	var qyjj = $.trim($("#qyjj").val());
+	
+	//厂区边界外1000米范围内的单位或设备情况
+	var dwsbStr="";
+	$('input[name="dwsb"]:checked').each(function(){ 
+		dwsbStr+=$(this).val()+",";
 	});
 	
-	//经济类型
-	var jjlx = $("#jjlx").val();
-	if(jjlx == "私营经济" || jjlx == "个体经济" || jjlx == "股份制" || jjlx == "外商投资" || jjlx == "港澳台投资"){
-		jjlx = jjlx + "," + $("#jjlxfl").val();
-	}
+	
+	
 	//生产状况
 	var sczk = $.trim($("#sczk").val());
 	
+	//生产投入提取标准
+	var extractDescription = $.trim($("#extractDescription").val());
 	var parmas = {
-			"groupId" : $("#groupId").val()
-			"cpy.registrationAddress" : gszcdz,
 			"cpy.companyCode" : dwdm,
-			"cpy.cityId" : ssx,
-			"cpy.companyProperty" : dwxz,
-			"cpy.businessLicence" : yyzzch,
-			"cpy.productionScope" : yyzzscfw,
-			"cpy.legalRepresentative" : fdr,
-			"cpy.economicType" : jjlx,
-			"cpy.unitCode" : zzjgdm,
-			"cpy.productAddress" : sccsdz,
-			"cpy.website" : qywz,
 			"cpy.productType" : sczk,
-			"cpy.postalcode" : yzbm,
-			"cpy.precision" : jd,
-			"cpy.dimension" : wd,
 			"cpy.sales" : xssr,
 			"cpy.enterpriseScale" : qygm,
-			"cpy.isIn" : zyq,
+			"cpy.safeManageUserNum" : acscrs,
+			"cpy.safeManageUserName" : acscfzr,
+			"cpy.safeManageUserPhone" : acscyddh,
+			"cpy.safeManageUserTel" : acscbgdh,
+			"cpy.safeManageUserEmail" : acscdzyx,
+			"cpy.specialUserNum" : tzzyrs,
+			"cpy.safeProductGrade" : bzhdj,
+			"cpy.emergencyPhone" : zxhm,
+			"cpy.safeDutyPhone" : zbdh,
+			"cpy.importCompanyQualificationNum" : zzbh,
+			"cpy.importCompanyQualification" : zmmc,
+			"cpy.product" : zycp,
+			"cpy.introduction" : qyjj,
 			"cpy.workersNum" : jgrs,
-			//"cpy.establishmentTime" : clsj,
-			"establishmentTime":clsj
+			"cpy.outsideSituation" : dwsbStr,
+			"cpy.extractDescription" : extractDescription
 	};
 	
 	$(".formButton_green").attr("disabled", "disabled");
@@ -206,7 +233,7 @@ function submit(){
 		success : function(data){
 			if (data == 1) {
 				//artDialog.alert("修改成功！");
-				window.location.href = basePath+"companywh/toCompanyView.action?groupId="+$("#groupId").val();
+				window.location.href = basePath+"companywh/toCompanyView.action";
 			}else{
 				artDialog.alert("修改失败！");
 				$(".formButton_green").removeAttr("disabled");
