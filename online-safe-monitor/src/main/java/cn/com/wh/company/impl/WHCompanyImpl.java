@@ -2,7 +2,6 @@ package cn.com.wh.company.impl;
 
 import java.io.Serializable;
 import java.util.List;
-
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,12 +9,10 @@ import cn.com.qytx.platform.base.query.Page;
 import cn.com.qytx.platform.base.query.Pageable;
 import cn.com.qytx.platform.base.service.impl.BaseServiceImpl;
 import cn.com.qytx.platform.org.dao.GroupDao;
-import cn.com.qytx.platform.org.domain.GroupInfo;
 import cn.com.qytx.platform.org.service.IUser;
 import cn.com.wh.company.dao.WHCompanyDao;
 import cn.com.wh.company.domain.WHCompany;
 import cn.com.wh.company.service.IWHCompany;
-import cn.com.wh.util.DataInitUtil;
 
 @Service("companyImpl")
 @Transactional
@@ -39,9 +36,14 @@ public class WHCompanyImpl extends BaseServiceImpl<WHCompany> implements IWHComp
 	 * @return Page 分页结果数据
 	 */
 	@Override
-	public Page<WHCompany> findWHCompanyByPage(Pageable pageable, Integer groupId,Integer parentId) {
-		String inStr=groupDao.getSubGroupIds(parentId);
-		Page<WHCompany> page  = wHCompanyDao.findWHCompanyByPage(pageable, groupId,inStr);
+	public Page<WHCompany> findWHCompanyByPage(Pageable pageable,
+			Integer groupId,Integer parentId,String companyIds) {
+		String inStr=null;
+		if(parentId!=null){
+			inStr=groupDao.getSubGroupIds(parentId);
+		}
+		Page<WHCompany> page  = wHCompanyDao.findWHCompanyByPage(pageable, 
+				groupId,inStr,companyIds);
 		return page;
 	}
 	

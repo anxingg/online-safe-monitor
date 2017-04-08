@@ -300,7 +300,10 @@ public class Tool {
         log.setIsDelete(0);
         log.setLogType(logType);
         log.setRefId(refId);
-        log.setLogContent(gson.toJson(obj));
+        if(obj!=null)
+        	log.setLogContent(gson.toJson(obj));
+        else
+        	log.setLogContent("");
 //        log.setLogContent(cutJson(gson, gson.toJson(obj), 250, "@@@内容过长，已截取@@@"));
         //System.out.println("gson="+gson.toJson(obj));
         log.setRemark(remark/*"登录成功"*/);

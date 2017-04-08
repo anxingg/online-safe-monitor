@@ -10,10 +10,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
-
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import cn.com.qytx.cbb.dict.service.IDict;
 import cn.com.qytx.platform.base.action.BaseActionSupport;
 import cn.com.qytx.platform.base.query.Page;
@@ -22,19 +19,12 @@ import cn.com.qytx.platform.base.query.Sort.Direction;
 import cn.com.qytx.platform.log.service.ILog;
 import cn.com.qytx.platform.log.service.LogType;
 import cn.com.qytx.platform.org.domain.GroupInfo;
-import cn.com.qytx.platform.org.domain.RoleUser;
 import cn.com.qytx.platform.org.domain.UserInfo;
 import cn.com.qytx.platform.org.service.IGroup;
-import cn.com.qytx.platform.org.service.IRoleUser;
 import cn.com.qytx.platform.org.service.IUser;
 import cn.com.qytx.platform.utils.datetime.DateTimeUtil;
-import cn.com.qytx.platform.utils.encrypt.MD5;
-import cn.com.wh.company.domain.SafetyInstitutions;
 import cn.com.wh.company.domain.WHCompany;
-import cn.com.wh.company.service.ISafetyInstitutions;
 import cn.com.wh.company.service.IWHCompany;
-import cn.com.wh.support.SessionSupport;
-import cn.com.wh.util.DataInitUtil;
 import cn.com.wh.util.Tool;
 
 import com.google.gson.Gson;
@@ -58,55 +48,23 @@ public class CompanyAction extends BaseActionSupport{
 	
 	@Resource
 	private IGroup groupService;
-	
-	@Resource
-	private IRoleUser roleUserService;
+
 	
 	@Resource 
 	private IDict dictService;
-	
-	/**
-	 * 安全管理机构接口
-	 */
-	@Autowired
-	private ISafetyInstitutions sisService;
 	
 	/**
 	 * 系统日志接口
 	 */
 	@Resource
 	private ILog logService;
-	
 	private WHCompany cpy ;
-	
 	private Integer groupId;
-	
 	//上级部门ID
 	private Integer parentId;
-	
-	private String loginName;//登录用户名
-	
 	private String companyName;//公司名称
-	
-	private String hylx;//企业类型
-	
-	private String loginPass;//登录密码
-	
-	private String userName;//联系人
-	
-	private String phone;//联系电话
-	
-	private String memo;//备注
-	
-	private String safeProductGrade;
-	
-	private String productTypeName;
-	
-	private String importCompanyQualification;
-	
 	private String establishmentTime;//公司，成立时间
 	
-	private String userIds;//删除的人员id
 	
 	/**
 	 * 删除企业
@@ -250,7 +208,8 @@ public class CompanyAction extends BaseActionSupport{
 			int pageNum = (int) (Math.ceil((double) this.getIDisplayStart()
 					/ (double) this.getIDisplayLength())) + 1;
 			Sort sort = new Sort(new Sort.Order(Direction.ASC, "NLSSORT(companyName, 'NLS_SORT=SCHINESE_PINYIN_M')"));
-			Page<WHCompany> pageInfo = companyImpl.findWHCompanyByPage(this.getPageable(sort),groupId,parentId);
+			Page<WHCompany> pageInfo = companyImpl.findWHCompanyByPage(
+					this.getPageable(sort),groupId,parentId,null);
 			List<WHCompany> list = pageInfo.getContent();
 			List<Map<String, Object>> mapList = new ArrayList<Map<String, Object>>();
 			int i = (pageNum - 1) * this.getIDisplayLength() + 1;
@@ -296,6 +255,7 @@ public class CompanyAction extends BaseActionSupport{
 					//生产状况
 					Integer productType = wHCompany.getProductType();
 					Map<String, String> dictmapProductType = dictService.findMap("productType", 1);
+					String productTypeName="-";
 					if(productType!=null){
 						productTypeName = dictmapProductType.get(productType.toString());
 						map.put("productTypeName", productTypeName == null ? "-" : productTypeName);
@@ -343,29 +303,6 @@ public class CompanyAction extends BaseActionSupport{
 		}
 		return null;
 	}
-	
-	/**
-	 * 验证登录用户名是否重复
-	 * @return
-	 */
-	public String ajaxCheckLoginName(){
-		try {
-			UserInfo user = userService.findByLoginName(loginName);
-			int index = 0;
-			if(user!=null){
-				index=1;
-			}
-			PrintWriter writer = new PrintWriter(this.getResponse().getWriter());
-			writer.print(index);
-			writer.flush();
-			writer.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
-	
 	
 	
 	/**
@@ -442,76 +379,12 @@ public class CompanyAction extends BaseActionSupport{
 		this.groupId = groupId;
 	}
 
-	public String getLoginName() {
-		return loginName;
-	}
-
-	public void setLoginName(String loginName) {
-		this.loginName = loginName;
-	}
-
 	public String getCompanyName() {
 		return companyName;
 	}
 
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
-	}
-
-	public String getHylx() {
-		return hylx;
-	}
-
-	public void setHylx(String hylx) {
-		this.hylx = hylx;
-	}
-
-	public String getLoginPass() {
-		return loginPass;
-	}
-
-	public void setLoginPass(String loginPass) {
-		this.loginPass = loginPass;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public String getMemo() {
-		return memo;
-	}
-
-	public void setMemo(String memo) {
-		this.memo = memo;
-	}
-
-	public String getSafeProductGrade() {
-		return safeProductGrade;
-	}
-
-	public void setSafeProductGrade(String safeProductGrade) {
-		this.safeProductGrade = safeProductGrade;
-	}
-
-	public String getImportCompanyQualification() {
-		return importCompanyQualification;
-	}
-
-	public void setImportCompanyQualification(String importCompanyQualification) {
-		this.importCompanyQualification = importCompanyQualification;
 	}
 
 	public String getEstablishmentTime() {
@@ -522,21 +395,6 @@ public class CompanyAction extends BaseActionSupport{
 		this.establishmentTime = establishmentTime;
 	}
 
-	public String getUserIds() {
-		return userIds;
-	}
-
-	public void setUserIds(String userIds) {
-		this.userIds = userIds;
-	}
-
-	public String getProductTypeName() {
-		return productTypeName;
-	}
-
-	public void setProductTypeName(String productTypeName) {
-		this.productTypeName = productTypeName;
-	}
 	public Integer getParentId() {
 		return parentId;
 	}

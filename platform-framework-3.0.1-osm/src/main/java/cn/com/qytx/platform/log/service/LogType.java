@@ -297,4 +297,8 @@ public class LogType{
     public static final int LOG_YZMB_DELETE = 1003;
     /* ==================================================================== */
     
+    /* ==================================================================== */
+    //组织绑定
+    public static final int LOG_ZZBD_BIND =1101;
+    public static final int LOG_ZZBD_UNBIND =1102;
  }

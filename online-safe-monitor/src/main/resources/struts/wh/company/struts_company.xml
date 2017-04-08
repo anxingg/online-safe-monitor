@@ -71,75 +71,28 @@
         <action name="getWHCompanyList" class="cn.com.wh.company.action.CompanyAction" method="getWHCompanyList">
         </action>
         
-        <!--检测登录用户名是否重复-->
-        <action name="ajaxCheckLoginName" class="cn.com.wh.company.action.CompanyAction" method="ajaxCheckLoginName">
-        </action>
         
         <!--检测企业名称是否重复-->
         <action name="ajaxCheckCompanyName" class="cn.com.wh.company.action.CompanyAction" method="ajaxCheckCompanyName">
         </action>
         
-        <!--添加企业用户-->
-        <action name="addCompany" class="cn.com.wh.company.action.CompanyAction" method="addCompany">
-        </action>
-        
-        <!--重置企业密码-->
-        <action name="resetPass" class="cn.com.wh.company.action.CompanyAction" method="resetPass">
-        </action>
-        
+   
         <!--获取企业信息-->
         <action name="getWHCompanyInfo" class="cn.com.wh.company.action.CompanyAction" method="getWHCompanyInfo">
         </action>
-        
-        <!--保存上传证照-->
-        <action name="saveOrUpdatePhoto" class="cn.com.wh.company.action.CompanyPhotoAction" method="saveOrUpdatePhoto">
+             
+        <!--获取绑定的企业列表-->
+        <action name="getGroupCompanyList" class="cn.com.wh.company.action.GroupCompanyAction" method="getGroupCompanyList">
         </action>
         
-        <!--跳转到企业信息详情页面-->
-        <action name="toPhotoView" class="cn.com.wh.company.action.CompanyPhotoAction" method="toPhotoView">
-       		<result name="success">/wh/logined/company/companyPhotoView.jsp</result>
+        <!--绑定-->
+        <action name="bind" class="cn.com.wh.company.action.GroupCompanyAction" method="bind">
         </action>
         
-        <!--跳转到企业安全管理机构页面-->
-        <action name="sis_*" class="cn.com.wh.company.action.SafetyInstitutionsAction" method="{1}">
-       		<result name="success">/wh/logined/company/safetyInstitutions.jsp</result>
+        <!--解除绑定-->
+        <action name="unBind" class="cn.com.wh.company.action.GroupCompanyAction" method="unBind">
         </action>
         
-        <!--获取企业证照路径-->
-        <action name="getPhonePath" class="cn.com.wh.company.action.CompanyPhotoAction" method="getPhonePath">
-        </action>
-        
-        <!--清除企业证照-->
-        <action name="deleteImg" class="cn.com.wh.company.action.CompanyPhotoAction" method="deleteImg">
-        </action>
-        
-        <!--保存企业产品-->
-        <action name="saveProduct" class="cn.com.wh.company.action.CompanyProductAction" method="saveProduct">
-        </action>
-        
-        <!--修改企业产品-->
-        <action name="updateProduct" class="cn.com.wh.company.action.CompanyProductAction" method="updateProduct">
-        </action>
-        
-        <!--企业产品列表-->
-        <action name="listWHCompanyProduct" class="cn.com.wh.company.action.CompanyProductAction" method="listWHCompanyProduct">
-        </action>
-        
-        <!--删除企业产品-->
-        <action name="ajaxDeleteProductById" class="cn.com.wh.company.action.CompanyProductAction" method="ajaxDeleteProductById">
-        </action>
-        
-        <!--获取企业产品-->
-        <action name="getProductInfo" class="cn.com.wh.company.action.CompanyProductAction" method="getProductInfo">
-        </action>
-       
-       	<!--获取危化品列表-->
-        <action name="findWHPAll" class="cn.com.wh.company.action.CompanyProductAction" method="findWHPAll">
-        </action>
-       
-        <!--人员管理 删除人员-->
-        <action name="deleteLoginUser" class="cn.com.wh.company.action.CompanyAction" method="deleteLoginUser">
-        </action>
         
     </package>
     
