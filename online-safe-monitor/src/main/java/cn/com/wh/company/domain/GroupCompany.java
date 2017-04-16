@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import cn.com.qytx.platform.base.domain.DeleteState;
+
 @Entity
 @Table(name="tb_group_company")
 public class GroupCompany implements java.io.Serializable{
@@ -36,6 +38,24 @@ public class GroupCompany implements java.io.Serializable{
     @Column(name="company_id")
 	private Integer companyId;
 
+    @Column(name="company_group_id")
+	private Integer companyGroupId;
+    
+    /**
+	 * 是否删除
+	 */
+	@DeleteState
+	@Column(name="is_delete")
+	private Integer isDelete;
+	
+	public Integer getIsDelete() {
+		return isDelete;
+	}
+
+	public void setIsDelete(Integer isDelete) {
+		this.isDelete = isDelete;
+	}
+
 	public Integer getVid() {
 		return vid;
 	}
@@ -60,17 +80,19 @@ public class GroupCompany implements java.io.Serializable{
 		this.companyId = companyId;
 	}
 
-	public GroupCompany(Integer vid, Integer groupId, Integer companyId) {
-		super();
-		this.vid = vid;
-		this.groupId = groupId;
-		this.companyId = companyId;
+	
+
+	public Integer getCompanyGroupId() {
+		return companyGroupId;
+	}
+
+	public void setCompanyGroupId(Integer companyGroupId) {
+		this.companyGroupId = companyGroupId;
 	}
 
 	public GroupCompany() {
 		super();
 	}
-    
-    
+
 
 }

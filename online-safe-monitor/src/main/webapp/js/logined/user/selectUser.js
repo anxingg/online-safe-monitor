@@ -97,7 +97,7 @@ function callBackAppointGroup(data) {
 /**
  * 打开人员选择对话框 callback 回调函数，会把选择的人员以json格式返回
  * 
- * @showType 显示类型 1 显示部门 2显示角色 3显示人员
+ * @showType 显示类型 1 显示部门 2显示角色 3显示人员 
  * @callback 回调方法
  */
 function openSelectUser(showType, callback, defaultSelectId) {

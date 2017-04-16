@@ -31,7 +31,7 @@ public class GroupCompanyDao extends BaseDao<GroupCompany, Integer> implements S
 	 * @return
 	 */
 	public List<GroupCompany> findGroupCompany(Integer groupId){
-		String hql = " isDelete = 0 ";
+		String hql = " 1 = 1 ";
 		List<Object> params = new ArrayList<Object>();
         hql += " and groupId = ?";
         params.add(groupId);

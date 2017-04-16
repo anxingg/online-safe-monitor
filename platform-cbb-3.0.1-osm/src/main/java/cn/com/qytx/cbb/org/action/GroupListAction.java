@@ -118,7 +118,7 @@ public class GroupListAction  extends BaseActionSupport{
      * @return
      */
     public String getGroupList() {
-        List<GroupInfo> groupList = groupService.getGroupList(getLoginUser().getCompanyId(), groupType);  //获取部门列表
+        List<GroupInfo> groupList = groupService.getGroupList(getLoginUser().getCompanyId(), groupType,null,null);  //获取部门列表
         Map<Integer,Integer> groupUserNumList=userService.getUserNumByGroup(getLoginUser().getCompanyId());//获取部门人员数
         if (groupUserNumList==null)
         {

@@ -32,7 +32,7 @@
 <div class="mainpage">
   <div class="leftMenu">
     <div class="service-menu">
-      <h1>企业绑定</h1>
+      <h1>区域列表</h1>
    	  <div class="zTreeDemoBackground">
       	<ul id="groupUserTree" class="ztree" style="margin-top:0px;width:auto;overflow:auto"></ul>
       </div>

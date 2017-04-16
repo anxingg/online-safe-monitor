@@ -24,9 +24,6 @@
 <input type="hidden" id="SysTypeId" />
 <input type="hidden" id="SystypeValue" />
 <input type="hidden" id="sid" />
-<div class="bread-line">
-	<label>当前位置：</label><a href="#">首页</a>&gt;<a href="#">系统管理</a>&gt;&nbsp;数据字典
-</div>
 <div class="mainpage">
   <div class="leftMenu">
     <div class="service-menu">

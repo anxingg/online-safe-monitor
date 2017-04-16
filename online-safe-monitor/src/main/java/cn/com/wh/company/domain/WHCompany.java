@@ -52,6 +52,12 @@ public class WHCompany implements java.io.Serializable {
 	 */
     @Column(name="city_id")
 	private String cityId;
+    /**
+	 * 城市名称
+	 */
+
+    @Column(name="CITYNAME")
+	private String cityName;
 	/**
 	 * 企业性质
 	 */
@@ -287,6 +293,7 @@ public class WHCompany implements java.io.Serializable {
 	 */
 	@Column(name="linkId")
 	private String linkId;
+	
 	
 
 	// Constructors
@@ -707,5 +714,14 @@ public class WHCompany implements java.io.Serializable {
 	public void setLinkId(String linkId) {
 		this.linkId = linkId;
 	}
+
+	public String getCityName() {
+		return cityName;
+	}
+
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+	
 
 }

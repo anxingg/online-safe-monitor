@@ -47,7 +47,7 @@ public class GroupExtDao extends BaseDao<UserInfo, Integer>{
 		String condation = " isDelete = 0 and companyId="+companyId;
 		//根据父部门ID获取所有的子部门
 		if(groupId!=0){
-			List<GroupInfo>  groupInfoList  = groupDao.getSubGroupList(groupId);
+			List<GroupInfo>  groupInfoList  = groupDao.getSubGroupList(groupId,"1");
 			StringBuffer sb = new StringBuffer(groupId+",");
 			String groupIds = "";
 			if(groupInfoList!=null&&groupInfoList.size()>0){

@@ -19,7 +19,7 @@
 <link href="${ctx}flat/plugins/Accormenus/skins/Accormenus_default.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="${ctx}plugins/tree/ztree/jquery.ztree.all-3.5.min.js"></script>
 <script type="text/javascript" src="${ctx}js/common/treeNode.js"></script>
-<script type="text/javascript" src="${ctx}js/logined/user/userTree.js"></script>
+<script type="text/javascript" src="${ctx}js/logined/group/userTree.js"></script>
 <script type="text/javascript" src="${ctx}js/logined/user/importuserFather.js"></script>
 <script type="text/javascript" src="${ctx}js/common/ajaxfileupload.js"></script>
 <script type="text/javascript" src="${ctx}js/common/validate_form.js"></script>
@@ -71,30 +71,22 @@
     });
     
     function refreshTree(id){
-    	openSelectTreeUser(zTreeOnCheckResult, null, id);
+    	openSelectTreeAll(zTreeOnCheckResult, null, id);
     }
 </script>
 </head>
 <body>
 <input id="type" type="hidden" value="${paramValues.type[0]}" />
 <div class="mainpage">
-<!--左侧begin--><%--
-
-				
-			<c:if test="${paramValues.type[0]=='view'}">
-				--%><div class="leftMenu">
-					<div class="service-menu">
-						<h1>组织结构</h1>
-						<div class="zTreeDemoBackground">
-							<ul id="groupUserTree" class="ztree">
-							</ul>
-						</div>
-					</div>
-				</div><%--
-
-			</c:if>
-		
---%><!--左侧end-->
+	<div class="leftMenu">
+		<div class="service-menu">
+			<h1>组织结构</h1>
+			<div class="zTreeDemoBackground">
+				<ul id="groupUserTree" class="ztree">
+				</ul>
+			</div>
+		</div>
+	</div>
     <iframe frameborder="0" scrolling="auto" border="0" id="page" name="page" class="iframeresize" ></iframe>
 </div>
 </body>

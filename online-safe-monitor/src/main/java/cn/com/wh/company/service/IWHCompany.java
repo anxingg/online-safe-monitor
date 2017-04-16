@@ -14,11 +14,11 @@ public interface IWHCompany extends BaseService<WHCompany>{
 	 * @param pageable 分页信息
 	 * @param groupId 部门
 	 * @param parentId 父ID或祖父ID等等
-	 * @param companyIds 单位ID集合
+	 * @param groupIds 群组ID集合
 	 * @return Page 分页结果数据
 	 */
 	public Page<WHCompany> findWHCompanyByPage(Pageable pageable,
-			Integer groupId,Integer parentId,String companyIds);
+			Integer groupId,Integer parentId,String groupIds);
 
 	/**
 	 * 根据某部门的所有下级单位

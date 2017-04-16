@@ -49,7 +49,7 @@ public class UserGroupAction  extends BaseActionSupport{
         List<Map<String, Object>> userGroupList = pageInfo.getContent();
         List<Map<String, Object>> mapList = new ArrayList<Map<String, Object>>();
         List<GroupInfo> groupList = new ArrayList<GroupInfo>();
-        groupList=groupService.getGroupList(getLoginUser().getCompanyId(), GroupInfo.DEPT);
+        groupList=groupService.getGroupList(getLoginUser().getCompanyId(), GroupInfo.DEPT,null,null);
         if (userGroupList != null) {
         	Integer companyId = getLoginUser().getCompanyId();
         	int uSize=userGroupList.size();
@@ -150,7 +150,9 @@ public class UserGroupAction  extends BaseActionSupport{
     public String checkPower() {
     	boolean flag=userGroupService.checkIsExistPower(getLoginUser().getUserId(), getLoginUser().getCompanyId(), groupId);
     	if (!flag) {
-    		List<GroupInfo> gls =groupService.findGroupTree( getLoginUser().getCompanyId(), 1);
+    		List<GroupInfo> gls =
+    				groupService.findGroupTree( getLoginUser().getCompanyId(), 
+    						(Integer)1,null);
 			UserGroup  ug=userGroupService.findByUserCompany(getLoginUser().getUserId(), getLoginUser().getCompanyId());
 			if(gls.size()==ug.getGroupPower().substring(1).split(",").length){
 				flag=true;

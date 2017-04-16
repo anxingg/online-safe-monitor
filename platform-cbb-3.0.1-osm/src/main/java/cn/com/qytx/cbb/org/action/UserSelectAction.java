@@ -373,7 +373,8 @@ public class UserSelectAction extends BaseActionSupport
     private List<UserInfo> getUsersByForkGroup(GroupInfo forkGroup,CompanyInfo companyInfo){
     	List<GroupInfo> grouplist = new ArrayList<GroupInfo>();
     	if(forkGroup == null){
-    		grouplist = groupService.getGroupList(companyInfo.getCompanyId(), 1);
+    		grouplist = groupService.getGroupList(companyInfo.getCompanyId(), 
+    				(Integer)1,null,null);
     	}else{
     		grouplist = groupService.getSubGroupList(forkGroup.getGroupId());
     		grouplist.add(forkGroup);

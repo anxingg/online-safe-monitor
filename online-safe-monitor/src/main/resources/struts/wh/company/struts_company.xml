@@ -93,6 +93,13 @@
         <action name="unBind" class="cn.com.wh.company.action.GroupCompanyAction" method="unBind">
         </action>
         
+        <!--选择可绑定的树-->
+        <action name="getBindSelectTree" class="cn.com.wh.company.action.GroupCompanyAction" method="getBindSelectTree">
+        </action>
+        
+        <!--企业下拉框-->
+        <action name="getGroupSelect" class="cn.com.wh.company.action.GroupCompanyAction" method="getGroupSelect">
+        </action>
         
     </package>
     

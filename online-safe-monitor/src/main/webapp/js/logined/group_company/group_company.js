@@ -3,10 +3,10 @@ $(document).ready(function() {
 //	// 重置iframe高度
 //	window.parent.frameResize();
 	// 初始化区域树
-	openSelectTreeOrganize(zTreeOnCheckResult);
+	openSelectTreeArea(zTreeOnCheckResult);
 
 	//默认选择乌海市所有企业
-	$("#page").attr("src", basePath + "logined/company/companyList.jsp?groupId=1");
+	$("#page").attr("src", basePath + "logined/group_company/companyList.jsp?groupId=0");
 	
 });
 

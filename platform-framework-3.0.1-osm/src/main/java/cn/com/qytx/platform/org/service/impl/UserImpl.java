@@ -480,7 +480,8 @@ public class UserImpl   extends BaseServiceImpl<UserInfo> implements IUser {
             	treeHead.setIcon(path + "/images/company.png");
             	treeHead.setOpen(true);
             	treeNodes.add(treeHead);
-            	groupList = groupService.getGroupList(companyInfo.getCompanyId(), groupType);
+            	groupList = groupService.getGroupList(companyInfo.getCompanyId(), 
+            			(Integer)groupType,null,null);
             }else{
             	//add by jiayq
             	TreeNode treeHead = new TreeNode();
@@ -583,7 +584,7 @@ public class UserImpl   extends BaseServiceImpl<UserInfo> implements IUser {
             	treeHead.setIcon(path + "/images/company.png");
             	treeHead.setOpen(true);
             	treeNodes.add(treeHead);
-            	groupList = groupService.getGroupList(companyInfo.getCompanyId(), groupTypeList);
+            	groupList = groupService.getGroupList(companyInfo.getCompanyId(), groupTypeList,null,null);
             }
             else
             {
@@ -645,7 +646,7 @@ public class UserImpl   extends BaseServiceImpl<UserInfo> implements IUser {
 	            	treeHead.setOpen(true);
 	            	treeHead.setObj(0);
 	            	treeNodes.add(treeHead);
-	            	groupList = groupService.getGroupList(companyInfo.getCompanyId(), groupType);
+	            	groupList = groupService.getGroupList(companyInfo.getCompanyId(), (Integer)groupType,null,null);
 	            }else{
 	            	//add by jiayq
 	            	TreeNode treeHead = new TreeNode();
@@ -895,7 +896,7 @@ public class UserImpl   extends BaseServiceImpl<UserInfo> implements IUser {
 		List<TreeNode> nodelist = new ArrayList<TreeNode>();
 		
 		//查找群组
-		List<GroupInfo> grouplist = groupService.findGroupTree(companyId, qunzuType);
+		List<GroupInfo> grouplist = groupService.findGroupTree(companyId, (Integer)qunzuType,null);
 		String ids = "";
 		for(int i=0; i<grouplist.size(); i++){
 			GroupInfo gi = grouplist.get(i);
@@ -1053,7 +1054,7 @@ public class UserImpl   extends BaseServiceImpl<UserInfo> implements IUser {
 	              	treeHead.setIcon(path + "/images/company.png");
 	              	treeHead.setOpen(true);
 	              	treeNodes.add(treeHead);
-	              	groupList = groupService.getGroupList(companyInfo.getCompanyId(), groupType);
+	              	groupList = groupService.getGroupList(companyInfo.getCompanyId(), (Integer)groupType,null,null);
 	              	UserGroup ug=userGroupService.findByUserCompany(adminUser.getUserId(), adminUser.getCompanyId());
 	              	List delList = new ArrayList();
 	              	if(ug!=null){

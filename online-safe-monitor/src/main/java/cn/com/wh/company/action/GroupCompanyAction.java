@@ -8,8 +8,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import cn.com.qytx.cbb.dict.service.IDict;
 import cn.com.qytx.platform.base.action.BaseActionSupport;
@@ -18,7 +21,11 @@ import cn.com.qytx.platform.base.query.Sort;
 import cn.com.qytx.platform.base.query.Sort.Direction;
 import cn.com.qytx.platform.log.service.ILog;
 import cn.com.qytx.platform.log.service.LogType;
+import cn.com.qytx.platform.org.domain.CompanyInfo;
+import cn.com.qytx.platform.org.domain.GroupInfo;
+import cn.com.qytx.platform.org.domain.UserInfo;
 import cn.com.qytx.platform.utils.datetime.DateTimeUtil;
+import cn.com.qytx.platform.utils.tree.TreeNode;
 import cn.com.wh.company.domain.GroupCompany;
 import cn.com.wh.company.domain.WHCompany;
 import cn.com.wh.company.impl.GroupCompanyImpl;
@@ -49,11 +56,9 @@ public class GroupCompanyAction extends BaseActionSupport {
 	
 	@Resource 
 	private IDict dictService;
-	/**
-	 * 绑定的单位ID
-	 */
-	private Integer companyId;
 	
+	//需要绑定的企业的groupID列表
+	private String companyGroupIds;
 	private Integer vid;
 	
 	/**
@@ -69,18 +74,35 @@ public class GroupCompanyAction extends BaseActionSupport {
 	}
 	
 	
-	public Integer getCompanyId() {
-		return companyId;
-	}
-	public void setCompanyId(Integer companyId) {
-		this.companyId = companyId;
-	}
+	
 	
 	public Integer getGroupId() {
 		return groupId;
 	}
 	public void setGroupId(Integer groupId) {
 		this.groupId = groupId;
+	}
+	
+	public String getCompanyGroupIds() {
+		return companyGroupIds;
+	}
+	public void setCompanyGroupIds(String companyGroupIds) {
+		this.companyGroupIds = companyGroupIds;
+	}
+	/**
+	 * 获得绑定选择的树
+	 */
+	public String getBindSelectTree()
+	{
+		String contextPath = getRequest().getContextPath();
+        List<TreeNode> treeNodes=groupCompanyImpl.getBindSelectNode(getLoginUser()
+        		, contextPath, groupId, "0,2");
+ 
+        Gson json = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+        String jsons = json.toJson(treeNodes);
+        ajax(jsons);
+        return null;
+		
 	}
 	/**
 	 * 企业列表
@@ -91,9 +113,12 @@ public class GroupCompanyAction extends BaseActionSupport {
 			int pageNum = (int) (Math.ceil((double) this.getIDisplayStart()
 					/ (double) this.getIDisplayLength())) + 1;
 			Sort sort = new Sort(new Sort.Order(Direction.ASC, "NLSSORT(companyName, 'NLS_SORT=SCHINESE_PINYIN_M')"));
-			String companyIds=groupCompanyImpl.getCompanyIds(groupId);
+			String groupIds=groupCompanyImpl.getGroupIds(groupId);
+			if(StringUtils.isEmpty(groupIds)){  //如果没有绑定单位，设置一个固定值，以不获得任何单位
+				groupIds="0";
+			}
 			Page<WHCompany> pageInfo = companyImpl.findWHCompanyByPage(
-					this.getPageable(sort),null,null,companyIds);
+					this.getPageable(sort),null,null,groupIds);
 			List<WHCompany> list = pageInfo.getContent();
 			List<Map<String, Object>> mapList = new ArrayList<Map<String, Object>>();
 			int i = (pageNum - 1) * this.getIDisplayLength() + 1;
@@ -175,18 +200,15 @@ public class GroupCompanyAction extends BaseActionSupport {
 		try{
 			
 			LOGGER.info(log+"开始。。。");
-			GroupCompany groupCompany = new GroupCompany();
-			groupCompany.setCompanyId(companyId);
-			groupCompany.setGroupId(groupId);
-			groupCompanyImpl.saveOrUpdate(groupCompany);
-			LOGGER.info(log+"结束，vid:"+groupCompany.getVid());
+			groupCompanyImpl.bulckInsert(groupId, companyGroupIds);
+			LOGGER.info(log+"结束");
 			//记录日志
 			logService.saveOrUpdate( Tool.generateLog(getLoginUser(), 
 					this.getRequest().getRemoteAddr(), 
 					log+"成功", 
 					LogType.LOG_ZZBD_BIND, 
-					groupCompany, 
-					groupCompany.getVid()) );
+					null, 
+					0) );
 			ajax(1);
 		} catch (Exception e) {
 			e.printStackTrace();

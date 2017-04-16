@@ -989,11 +989,11 @@ public class GenerateDataImpl implements GenerateDataService {
     	String userIdListStr = rc.getDataFromCache(userIdListCacheName);
     	if (userIdListStr==null) {//缓存中没有
     		List<GroupInfo> allGroup = new ArrayList<GroupInfo>();
-			List<GroupInfo> publicGroup = groupService.getGroupList(companyId, 4);
+			List<GroupInfo> publicGroup = groupService.getGroupList(companyId, (Integer)4,null,null);
 			if (publicGroup!=null&&publicGroup.size()>0) {
 				allGroup.addAll(publicGroup);
 			}
-			List<GroupInfo> privateGroup = groupService.getGroupList(companyId, 5);
+			List<GroupInfo> privateGroup = groupService.getGroupList(companyId, (Integer)5,null,null);
 			if (privateGroup!=null&&privateGroup.size()>0) {
 				allGroup.addAll(privateGroup);
 			}

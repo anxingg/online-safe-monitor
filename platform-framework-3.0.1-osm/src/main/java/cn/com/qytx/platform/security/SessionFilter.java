@@ -37,9 +37,9 @@ public class SessionFilter implements Filter
         HttpServletResponse response = (HttpServletResponse) res;
 
         if(StringUtils.equals("wap",request.getParameter("_clientType"))){
-       	 chain.doFilter(req, res);
-           return;
-       }
+       	 	chain.doFilter(req, res);
+       	 	return;
+        }
 
 
         String requestURL = request.getRequestURI().toUpperCase();

@@ -12,4 +12,6 @@ public class Constants {
     public final static String CURRENT_USER_SUBGROUPS = "usersubgroups";
     //用户的角色集合
     public final static String CURRENT_USER_ROLES = "userroles";
+    
+    public final static String SSO_TOKEN ="sso_token";
 }

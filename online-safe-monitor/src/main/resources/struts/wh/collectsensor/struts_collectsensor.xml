@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <!-- 传感器模块 -->
+    <package name="collectsensor" namespace="/collectsensor" extends="struts-default">
+        <!-- 没有返回页面 -->
+        <action name="collectsensor_*" class="cn.com.wh.collectsensor.action.CollectSensorAction" method="{1}">
+        </action>
+  
+    </package>
+    
+</struts>

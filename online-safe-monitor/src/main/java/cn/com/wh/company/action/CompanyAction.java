@@ -64,8 +64,33 @@ public class CompanyAction extends BaseActionSupport{
 	private Integer parentId;
 	private String companyName;//公司名称
 	private String establishmentTime;//公司，成立时间
+	//群组类型
+	private Integer groupType;
 	
-	
+	/**
+	 * 初始化Group 下拉列表
+	 */
+	public void getGroupSelect(){
+		UserInfo user =getLoginUser();
+		if(user!=null){
+			List<GroupInfo> getGroupList =new ArrayList<GroupInfo>();
+			List<Map<String,Object>> mapList = new ArrayList<Map<String,Object>>();
+			if(groupType==0)
+				getGroupList = groupService.getGroupList(1, groupType, 1, null);
+			else if(groupType==2)
+				getGroupList = groupService.getGroupList(1, groupType, null, parentId);
+			if(getGroupList!=null){
+				for(GroupInfo g:getGroupList){
+					Map<String,Object> map =new HashMap<String, Object>();
+					map.put("value", g.getGroupId());
+					map.put("name", g.getGroupName());
+					mapList.add(map);
+				}
+			}
+			Gson json = new Gson();
+			ajax(json.toJson(mapList));
+		}
+	}
 	/**
 	 * 删除企业
 	 */
@@ -129,6 +154,7 @@ public class CompanyAction extends BaseActionSupport{
 				whcompany.setIsDelete(0);
 				whcompany.setCreateUserId(userInfo.getUserId());
 				whcompany.setLinkId(UUID.randomUUID().toString());
+				whcompany.setCityName(parentGroup.getGroupName());
 				whcompany.setCreateTime(new Timestamp(System.currentTimeMillis()));
 			}
 			else{
@@ -401,4 +427,11 @@ public class CompanyAction extends BaseActionSupport{
 	public void setParentId(Integer parentId) {
 		this.parentId = parentId;
 	}
+	public Integer getGroupType() {
+		return groupType;
+	}
+	public void setGroupType(Integer groupType) {
+		this.groupType = groupType;
+	}
+	
 }

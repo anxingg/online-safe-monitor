@@ -122,6 +122,32 @@ public class GroupDao <T extends GroupInfo>  extends BaseDao<GroupInfo,Integer> 
          return this.count(hql);
     }
 
+    @SuppressWarnings("unchecked")
+	public List<GroupInfo> getGroupListNotIn(Integer companyId,
+			String groupTypeIn,String notInStr)
+    {
+        String hql=" isDelete=0 ";
+		Order o = new Order(Direction.ASC,"orderIndex");
+		Order o1 = new Order(Direction.ASC,"groupId");
+		Sort sort = new Sort(o,o1);
+		List<Object> params = new ArrayList<Object>();
+		if (companyId!=null && companyId!=-1)
+		{
+			hql += " and companyId = ?";
+			params.add(companyId);
+		}
+		if(!StringUtils.isEmpty(groupTypeIn))
+		{
+			hql += " and groupType in ("
+				 +groupTypeIn+")";
+		}
+		if (!StringUtils.isEmpty(notInStr))
+		{
+			hql += " and groupId not in ("
+		   		 +notInStr+")";
+		}
+		return this.findAll(hql,sort,companyId);
+    }
     /**
      * 获取部门/群组列表
      * @param companyId  企业ID
@@ -129,14 +155,24 @@ public class GroupDao <T extends GroupInfo>  extends BaseDao<GroupInfo,Integer> 
      * @return
      */
     @SuppressWarnings("unchecked")
-	public List<GroupInfo> getGroupList(int companyId,int groupType)
+	public List<GroupInfo> getGroupList(int companyId,Integer groupType,Integer grade,Integer parentId)
     {
         //根据条件获取未删除的部门/群组列表
-         String hql="companyId=? and groupType=? and isDelete=0 ";
+         String hql="companyId=? and isDelete=0 ";
+         if((groupType!=null)&&(groupType!=-1)){
+        	 hql += "and groupType="+groupType.toString();
+         }
+         if((grade!=null)&&(grade!=-1)){
+        	 hql += " and grade>="+grade.toString();
+         }
+         if((parentId!=null)&&(parentId!=-1)){
+        	 hql += " and parentId="+parentId.toString();
+         }
+         
          Order o = new Order(Direction.ASC,"orderIndex");
          Order o1 = new Order(Direction.ASC,"groupId");
      	 Sort sort = new Sort(o,o1);
-         return this.findAll(hql,sort,companyId,groupType);
+         return this.findAll(hql,sort,companyId);
     }
 
     /**
@@ -146,10 +182,19 @@ public class GroupDao <T extends GroupInfo>  extends BaseDao<GroupInfo,Integer> 
      * @return
      */
     @SuppressWarnings("unchecked")
-	public List<GroupInfo> getGroupList(int companyId,String groupTypeList)
+	public List<GroupInfo> getGroupList(int companyId,String groupTypeList,Integer grade,Integer parentId)
     {
         //根据条件获取未删除的部门/群组列表
-         String hql="companyId=? and groupType in ("+groupTypeList+") and isDelete=0 ";
+         String hql="companyId=? and isDelete=0 ";
+         if(!StringUtils.isEmpty(groupTypeList)){
+        	 hql += "and groupType in ("+groupTypeList.toString()+")";
+         }
+         if((grade!=null)&&(grade!=-1)){
+        	 hql += " and grade>="+grade.toString();
+         }
+         if((parentId!=null)&&(parentId!=-1)){
+        	 hql += " and parentId="+parentId.toString();
+         }
          Order o = new Order(Direction.ASC,"orderIndex");
          Order o1 = new Order(Direction.ASC,"groupId");
      	 Sort sort = new Sort(o,o1);
@@ -545,13 +590,21 @@ public class GroupDao <T extends GroupInfo>  extends BaseDao<GroupInfo,Integer> 
 		return this.findAll(condition,sort,companyId,groupType,0);
 	}
 	
-	
-	public List<GroupInfo> getSubGroupList(int parentGroupId) {
+	/**
+	 * 
+	 * @param parentGroupId
+	 * @param groupTypeList 逗号分割的类型列表
+	 * @return
+	 */
+	public List<GroupInfo> getSubGroupList(int parentGroupId,String groupTypeList) {
 		GroupInfo parentGroup = this.findOne(parentGroupId);
 		String path=parentGroup.getPath().trim();
 		if(!path.endsWith(","))
 			path=path+",";
 		String hql=" path like '%"+path+"%'";
+		if(!StringUtils.isEmpty(groupTypeList)){
+			hql+=" and groupType in ("+groupTypeList+")";
+		}
 		return this.findAll(hql);
 	}
 	/**
@@ -559,9 +612,9 @@ public class GroupDao <T extends GroupInfo>  extends BaseDao<GroupInfo,Integer> 
 	 * @param parentId
 	 * @return
 	 */
-	public String getSubGroupIds(Integer parentId)
+	public String getSubGroupIds(Integer parentId,String groupTypeList)
 	{
-		List<GroupInfo> groupInfoList=this.getSubGroupList(parentId);
+		List<GroupInfo> groupInfoList=this.getSubGroupList(parentId,groupTypeList);
 		StringBuilder inStr=new StringBuilder();
 		for(GroupInfo groupInfo  : groupInfoList){
 			inStr.append(",");
@@ -607,15 +660,7 @@ public class GroupDao <T extends GroupInfo>  extends BaseDao<GroupInfo,Integer> 
         return this.findOne(hql,companyId,groupName);
 	}
 	
-	/**
-	 * 根据部门的级别查找部门列表
-	 * @param companyId
-	 * @return
-	 */
-	public List<GroupInfo> findGroupListByGrade(int grade){
-		String hql = "grade = ? and groupType = 1";
-		return super.unDeleted().findAll(hql, grade);
-	}
+	
 	
 	/**查找指定部门的fork_group
 	 * @param groupId

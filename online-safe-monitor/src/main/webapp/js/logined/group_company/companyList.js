@@ -1,14 +1,97 @@
 $(document).ready(function(){
 	// 新增企业绑定
 	$("#add").bind("click", function() {
-		addBind();
+		bindSelect(bindSelectCallBack);
 		return false;
 	});
 	//加载列表
 	getTableList();
 	
 });
+/**
+ * 绑定选择回调
+ */
+function bindSelectCallBack(data)
+{
+	if (data) {
+		var companyGroupIds = '';
+		data.forEach(function(value, key) {
+			companyGroupIds += value.Id + ',';
+		});
+		console.log("companyGroupIds:"+companyGroupIds);
+		bind(companyGroupIds);
+	}
+}
+/**
+ * 绑定
+ */
+function bindSelect(callback)
+{
+	var groupId = $('#groupId').val();
+	console.log("groupId:"+groupId);
+	if(groupId>0){
+		var url = basePath + "logined/group_company/selectcompany.jsp?groupId="+groupId
+		 + "&defaultSelectId=";
+		var title = "选择部门";
+		art.dialog.open(url, {
+			title : title,
+			width : 360,
+			height : 407,
+			lock : true,
+		    opacity: 0.08,
+			button : [{
+						name : '确定',
+						focus: true,
+						callback : function() {
+//							var iframe = this.iframe.contentWindow;
+//					    	alert(iframe.userMap);		
+							var userMap = art.dialog.data("userMap");
+							callback(userMap);
+							return true;
+						}
+					}, {
+						name : '取消',
+						callback : function() {
+							return true;
+						}
+					}]
+		}, false);
+	}
+	else {
+		art.dialog.alert("请选择区域");
+	}
+	
+}
 
+/**
+ * 绑定企业
+ * @param groupId
+ */
+function bind(companyGroupIds){
+	var groupId = $('#groupId').val();
+	//确认对话框
+	$.ajax({
+		url : basePath + "companywh/bind.action",
+		type : "post",
+		dataType : 'json',
+		data : {
+			companyGroupIds : companyGroupIds,
+			groupId : groupId
+		},
+		success : function(data) {
+			if (data == 1) {
+				//artDialog.alert("删除成功！",function(){						
+					//重新加载列表
+					getTableList();
+				//});
+			} else if (data == 0){
+				artDialog.alert("绑定失败！");
+			}
+		}
+		
+	});
+	
+}
 /**
  * 解除绑定企业
  * @param groupId

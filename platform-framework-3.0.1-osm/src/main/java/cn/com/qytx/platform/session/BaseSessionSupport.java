@@ -44,6 +44,14 @@ public class BaseSessionSupport {
 	{
 		return (String)this.session.getAttribute(Constants.DOWN_PATH);
 	}
+	public void setSSOToken(String ssoToken)
+	{
+		this.session.setAttribute(Constants.SSO_TOKEN,ssoToken);
+	}
+	public String getSSOToken()
+	{
+		return (String)this.session.getAttribute(Constants.SSO_TOKEN);
+	}
 	public HttpSession getSession()
 	{
 		return this.session;

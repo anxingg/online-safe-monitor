@@ -12,5 +12,10 @@
         <action name="flushCache" class="cn.com.wh.login.action.LoginAction" method="flushCache">
         </action>
     </package>
+    <package name="sso" namespace="/sso" extends="struts-default">
+        <!-- 刷新缓存 -->
+        <action name="auth" class="cn.com.wh.login.action.SSOAuthAction" method="auth">
+        </action>
+    </package>
     
 </struts>

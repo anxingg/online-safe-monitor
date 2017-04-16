@@ -230,7 +230,30 @@ qy_lang.dangersourcesgood = {
 qy_lang.wuhaiTemplate = {
 		templateName_not_null : "模板名称不能为空！",
 		range_not_valid : "适用量程格式不正确！",
-}
+};
+
+/**
+ * 乌海 危险源
+ */
+qy_lang.wuhaiDangerSource = {
+		dangerSourceName_not_null : "重大危险源名称不能为空！",
+		rvalue_not_null : "危险源级别不能为空！",
+		rvalue_not_number :"危险源级别必须是数字！",
+		address_not_null : "重大危险源所在地址不能为空！",
+		productScale_not_null : "单元内主要装置、设施及生产（存储）规模不能为空！",
+		minDistance_not_null : "重大危险源与周边重点防护目标最近距离情况不能为空！",
+		minDistance_not_number : "重大危险源与周边重点防护目标最近距离情况必须是数字！",
+		estimatePeopleCount_not_number : "厂区边界外500米范围内人数估算值必须是数字！",
+		accidentDesc_not_null : "近三年内危险化学品事故情况不能为空！",
+};
+
+/**
+ * 乌海 设备
+ */
+qy_lang.wuhaiCollectDevice = {
+		installPosition_not_null : "安装位置不能为空！",
+};
+
 /**
  * 获取格式化后的提示信息
  * 

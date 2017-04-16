@@ -78,13 +78,13 @@ public class GroupImpl extends BaseServiceImpl<GroupInfo> implements IGroup {
     
     @SuppressWarnings("unchecked")
     @Transactional(readOnly=true)
-    public List<GroupInfo> getGroupList(int companyId, int groupType) {
-        return groupDao.getGroupList(companyId,groupType);
+    public List<GroupInfo> getGroupList(int companyId, Integer groupType,Integer grade,Integer parentId) {
+        return groupDao.getGroupList(companyId,groupType,grade,parentId);
     }
     @SuppressWarnings("unchecked")
     @Transactional(readOnly=true)
-    public List<GroupInfo> getGroupList(int companyId, String groupTypeList) {
-        return groupDao.getGroupList(companyId,groupTypeList);
+    public List<GroupInfo> getGroupList(int companyId, String groupTypeList,Integer grade,Integer parentId) {
+        return groupDao.getGroupList(companyId,groupTypeList,grade,parentId);
     }
     /**
      * 判断部门下面是否有子部门
@@ -105,8 +105,8 @@ public class GroupImpl extends BaseServiceImpl<GroupInfo> implements IGroup {
 	 * @return List<Group>    返回类型
 	 */
     @Transactional(readOnly=true)
-	public List<GroupInfo> findGroupTree(Integer companyId,Integer groupType){
-		return groupDao.getGroupList(companyId, groupType);
+	public List<GroupInfo> findGroupTree(Integer companyId,Integer groupType,Integer grade){
+		return groupDao.getGroupList(companyId, groupType,grade,null);
 	}
 
     @Transactional(readOnly=true)
@@ -160,7 +160,7 @@ public class GroupImpl extends BaseServiceImpl<GroupInfo> implements IGroup {
 
 	@Override
 	public List<GroupInfo> getSubGroupList(int parentGroupId) {
-		return groupDao.getSubGroupList(parentGroupId);
+		return groupDao.getSubGroupList(parentGroupId,null);
 	}
 	
 	
@@ -496,7 +496,7 @@ public class GroupImpl extends BaseServiceImpl<GroupInfo> implements IGroup {
 		//不包括子部门
 		Map<Integer,Integer> map = groupDao.getCompanyGroupCountMap(companyId);
 		
-		List<GroupInfo> glist = this.getGroupList(companyId, GroupInfo.DEPT);
+		List<GroupInfo> glist = this.getGroupList(companyId, GroupInfo.DEPT,null,null);
 		Map<Integer,Integer> mapNum = new HashMap<Integer, Integer>();
 		Set<Integer> set = new HashSet<Integer>();
 	    set= map.keySet();
@@ -553,11 +553,7 @@ public class GroupImpl extends BaseServiceImpl<GroupInfo> implements IGroup {
 		return groupDao.getGroupsByUserIds(companyId, userIds);
 	}
 
-	@Override
-	public List<GroupInfo> findGroupListByGrade(int grade) {
-		// TODO Auto-generated method stub
-		return groupDao.findGroupListByGrade(grade);
-	}
+	
 
 	@Override
 	public List<GroupInfo> findForkGroupList() {

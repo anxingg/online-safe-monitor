@@ -187,7 +187,8 @@ public class TreeUserAction extends BaseActionSupport {
         }
         List<GroupInfo> groupList = null;
         if(forkGroup == null){
-        	groupList=groupService.getGroupList(getLoginUser().getCompanyId(),type);
+        	groupList=groupService.getGroupList(getLoginUser().getCompanyId(),
+        			type,null,null);
         }else{
         	groupList = groupService.getSubGroupList(forkGroup.getGroupId());
         	groupList.add(forkGroup);

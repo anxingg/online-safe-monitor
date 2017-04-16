@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <!-- 预警查询 -->
+    <package name="earlyWarning" namespace="/earlyWarning" extends="struts-default">
+        <action name="step_*" class="cn.com.wh.earlywarning.action.EarlyWarningAction" method="{1}">
+        </action>
+        
+    </package>
+</struts>

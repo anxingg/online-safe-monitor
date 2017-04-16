@@ -11,7 +11,7 @@
             + request.getServerName() + ":" + request.getServerPort()
             + path+"/" ;
     request.setAttribute("ctx", basePath);
-    request.setAttribute("version", "3.0.1");
+    request.setAttribute("version", "3.3");
     
     request.setAttribute("workflowName", "工单流转new-1");
 %>

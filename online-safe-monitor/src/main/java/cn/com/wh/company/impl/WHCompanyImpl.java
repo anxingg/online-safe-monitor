@@ -37,20 +37,20 @@ public class WHCompanyImpl extends BaseServiceImpl<WHCompany> implements IWHComp
 	 */
 	@Override
 	public Page<WHCompany> findWHCompanyByPage(Pageable pageable,
-			Integer groupId,Integer parentId,String companyIds) {
+			Integer groupId,Integer parentId,String groupIds) {
 		String inStr=null;
 		if(parentId!=null){
-			inStr=groupDao.getSubGroupIds(parentId);
+			inStr=groupDao.getSubGroupIds(parentId,"2");
 		}
 		Page<WHCompany> page  = wHCompanyDao.findWHCompanyByPage(pageable, 
-				groupId,inStr,companyIds);
+				groupId,inStr,groupIds);
 		return page;
 	}
 	
 	@Override
 	public List<WHCompany> findWHCompany(Integer parentId)
 	{
-		String inStr=groupDao.getSubGroupIds(parentId);
+		String inStr=groupDao.getSubGroupIds(parentId,"2");
 		return wHCompanyDao.findWHCompany(inStr);
 	}
 	@Override

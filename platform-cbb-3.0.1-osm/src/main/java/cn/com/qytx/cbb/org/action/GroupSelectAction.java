@@ -58,7 +58,7 @@ public class GroupSelectAction extends BaseActionSupport{
 	            	treeHead.setIcon(contextPath + "/images/company.png");
 	            	treeHead.setOpen(true);
 	            	treeNodes.add(treeHead);
-	            	groupList = groupService.getGroupList(companyInfo.getCompanyId(), GroupInfo.DEPT);
+	            	groupList = groupService.getGroupList(companyInfo.getCompanyId(), GroupInfo.DEPT,null,null);
 	            }else{
 	            	//add by jiayq
 	            	TreeNode treeHead = new TreeNode();

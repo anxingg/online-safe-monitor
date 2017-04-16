@@ -25,6 +25,11 @@
     <script type="text/javascript" src="${ctx}js/user/selectGroup.js"></script>
     <script type="text/javascript" language="javascript" src="${ctx}plugins/upload/jquery.uploadify.min.js" ></script>
     <script type="text/javascript" src="${ctx}js/logined/user/upload.js"></script>
+    <style type="text/css">
+		.formPage  {
+			width: 900px;
+		}
+	</style>
 </head>
 <body>
  <form action="#" id="userForm">
@@ -141,6 +146,9 @@
         <tr>
           <th><label>职务：</label></th>
           <td><input name="input" type="text" class="formText" size="30" maxlength="10" id="job" value="${requestScope.user.job}"/></td>
+          <th><em class="requireField">*</em><label>登录账号：</label></th>
+            <td><input value="${requestScope.user.loginName}" valid="required" errmsg="user.loginName_not_null" name="input" type="text" class="formText"  maxlength="16" id="loginName"/>
+           </td>
           <th style="display: none;"><label>个性签名：</label></th>
           <td colspan="1" style="display: none;"><select id="userSign" style="float:left">
                         <option value="0" <c:if test="${user.signType == 0}">selected</c:if>>不启用</option>

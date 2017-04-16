@@ -5,7 +5,7 @@
             + request.getServerName() + ":" + request.getServerPort()
             + path+"/" ;
     request.setAttribute("ctx", basePath);
-    request.setAttribute("version", "3.0.1");
+    request.setAttribute("version", "3.3");
     request.setAttribute("workflowName", "工单流转new-1");
 %>
 <link rel="stylesheet" type="text/css" href="${ctx}wh/jquery-easyui-1.4.3/themes/default/easyui.css?version=${version}"/>
@@ -14,6 +14,8 @@
 <link href="${ctx}wh/plugins/datatable/skins/datatable_default.css?version=${version}" rel="stylesheet" type="text/css"/>
 <link href="${ctx}wh/plugins/form/skins/form_default.css?version=${version}" rel="stylesheet" type="text/css"/>
 <link id="skinCss" href="${ctx}skins/green/green.css" rel="stylesheet" type="text/css" />
+<link href="${ctx}flat/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="${ctx}flat/css/main.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="${ctx}js/common/jquery-1.8.0.min.js?version=${version}"></script>
 <script type="text/javascript" src="${ctx}flat/js/qytx-cbb-v1.0.js"></script>
 <!--  dialog -->

@@ -39,11 +39,12 @@ public interface IGroup  extends BaseService<GroupInfo>,Serializable  {
      * 获取部门/群组列表
      * @param companyId  企业ID
      * @param groupType  部门类型: 1.公共部门 2.公共群组 3.外部部门 4.个人群组
+     * @param grade 层级
      * @return
      */
-    public List<GroupInfo> getGroupList(int companyId,int groupType);
+    public List<GroupInfo> getGroupList(int companyId,Integer groupType,Integer grade,Integer parentId);
 
-    public List<GroupInfo> getGroupList(int companyId, String groupTypeList);
+    public List<GroupInfo> getGroupList(int companyId, String groupTypeList,Integer grade,Integer parentId);
 
     /**
      * 获取部门列表
@@ -63,7 +64,7 @@ public interface IGroup  extends BaseService<GroupInfo>,Serializable  {
 	 * @param groupType 组类型
 	 * @return List<Group>    返回类型
 	 */
-	public List<GroupInfo> findGroupTree(Integer companyId,Integer groupType);
+	public List<GroupInfo> findGroupTree(Integer companyId,Integer groupType,Integer grade);
 	
 	/**
 	 * 功能：根据用户ID获取该用户所属分支机构
@@ -228,11 +229,7 @@ public interface IGroup  extends BaseService<GroupInfo>,Serializable  {
 	
 	public List<GroupInfo> getGroupsByUserIds(int companyId,String userIds);
 	
-	/**根据部门级别查找部门列表
-	 * @param grade
-	 * @return
-	 */
-	public List<GroupInfo> findGroupListByGrade(int grade);
+	
 	
 	/**
 	 * 获取所有的分支机构

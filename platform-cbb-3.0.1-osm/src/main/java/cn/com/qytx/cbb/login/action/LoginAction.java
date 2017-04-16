@@ -64,7 +64,7 @@ public class LoginAction extends BaseActionSupport {
 	    //sso单点登录
 	    String sso_token = UUID.randomUUID().toString();
 		SSOCache.getInstance().store(sso_token,userInfo);
-		super.getRequest().getSession().setAttribute("sso_token",sso_token); 
+		this.getSessionSupport().setSSOToken(sso_token);
 		
 		String downPath = filePathConfig.getFileViewPath();
 		this.getSessionSupport().setDownPath(downPath);

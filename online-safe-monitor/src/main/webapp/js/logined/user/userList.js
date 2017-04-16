@@ -9,8 +9,6 @@ $(document).ready(function() {
 //	$.removeTableCookie('SpryMedia_DataTables_userTable_userList.jsp');
 	// 获取人员信息列表
 	getInfo();
-	
-
 	$("#searchButton").click(function(){
 		$.removeTableCookie('SpryMedia_DataTables_userTable_userList.jsp');
 		pd=1;
@@ -314,9 +312,9 @@ function getDataTable() {
 				var sexName = "";
 				if (sex == 1) {
 					sexName = "男";
-				} else {
+				} else if (sex == 0){
 					sexName = "女";
-				}
+				} 
 			 
 				return sexName;
 			}

@@ -26,7 +26,11 @@
 <!-- 人员选择  start-->
 <script type="text/javascript" src="${ctx}js/logined/group/selectUser.js"></script>
 <script type="text/javascript" src="${ctx}js/logined/group/selectGroup.js"></script>
-
+<style type="text/css">
+	.formPage  {
+		width: 900px;
+	}
+</style>
 </head>
 <body>
 <input type="hidden" id="directorId"/>
@@ -119,7 +123,7 @@
 						<th>描述：</th>
 						<td colspan="3">
 							<textarea class="formTextarea2 area area01"  id="functions"  cols="122" rows="4" name=""
-								fmaxlength="200"></textarea>
+								fmaxlength="200" style="width:720px"></textarea>
 							<span class="msg-text" style="float:right">0-200字</span>
 						</td>
 					</tr>

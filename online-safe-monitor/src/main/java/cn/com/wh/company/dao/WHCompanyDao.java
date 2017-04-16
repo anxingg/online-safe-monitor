@@ -19,7 +19,7 @@ public class WHCompanyDao extends BaseDao<WHCompany, Serializable> implements Se
 	
 
 	public Page<WHCompany> findWHCompanyByPage(Pageable pageable,
-			Integer groupId, String groupIds,String  companyIds) {
+			Integer groupId, String subGroupIds,String groupIds) {
 		String hql = " isDelete = 0 ";
         List<Object> params = new ArrayList<Object>();
         
@@ -29,15 +29,16 @@ public class WHCompanyDao extends BaseDao<WHCompany, Serializable> implements Se
             params.add(groupId);
         }
        
+        if (!StringUtils.isEmpty(subGroupIds))
+        {	
+            hql += " and groupId in ("+subGroupIds+")";
+        }
+        
         if (!StringUtils.isEmpty(groupIds))
         {	
             hql += " and groupId in ("+groupIds+")";
         }
-        
-        if(!StringUtils.isEmpty(companyIds))
-        {
-        	hql +=" and companyId in ("+companyIds+")";
-        }
+
         return super.findAll(hql, pageable, params.toArray());        	
         
 	}

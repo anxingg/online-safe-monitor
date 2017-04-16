@@ -118,7 +118,7 @@ public class SelectUserImpl extends BaseServiceImpl<UserInfo> implements ISelect
 		List<TreeNode> nodelist = new ArrayList<TreeNode>();
 		
 		//查找群组
-		List<GroupInfo> grouplist = groupService.findGroupTree(companyId, qunzuType);
+		List<GroupInfo> grouplist = groupService.findGroupTree(companyId, (Integer)qunzuType,null);
 		for(int i=0; i<grouplist.size(); i++){
 			GroupInfo gi = grouplist.get(i);
 			if(gi.getParentId() !=null && gi.getParentId() == 0){

@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+        "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <!-- 危险源模块 -->
+    <package name="dangersource" namespace="/dangersource" extends="struts-default">
+    
+        <!-- 查询列表 -->
+        <action name="findByPage" class="cn.com.wh.dangersource.action.DangerSourceAction" method="findByPage">
+        </action>
+        
+        <!-- 跳转到新增页面 -->
+        <action name="toAddPage">
+        	<result>/wh/logined/dangersource/addDangerSource.jsp</result>
+        </action>
+        
+        <!-- 新增操作 -->
+        <action name="saveDangerSource" class="cn.com.wh.dangersource.action.DangerSourceAction" method="saveDangerSource">
+        	<result>/wh/logined/dangersource/dangerSourceList.jsp</result>
+        </action>
+        
+        <!-- 跳转到修改页面 -->
+        <action name="toUpdatePage" class="cn.com.wh.dangersource.action.DangerSourceAction" method="toUpdatePage">
+        	<result name="success">/wh/logined/dangersource/addDangerSource.jsp</result>
+        </action>
+        
+        <!-- 修改操作 -->
+        <action name="updateDangerSource" class="cn.com.wh.dangersource.action.DangerSourceAction" method="updateDangerSource">
+        	<result>/wh/logined/dangersource/dangerSourceList.jsp</result>
+        </action>
+        
+        <!-- 删除操作 -->
+        <action name="deleteDangerSource" class="cn.com.wh.dangersource.action.DangerSourceAction" method="deleteDangerSource">
+        	<result>/wh/logined/dangersource/dangerSourceList.jsp</result>
+        </action>
+         <!-- 查询列表 -->
+        <action name="getSelectList" class="cn.com.wh.dangersource.action.DangerSourceAction" method="getSelectList">
+        </action>
+    </package>
+</struts>

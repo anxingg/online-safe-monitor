@@ -296,7 +296,34 @@ public class LogType{
     
     public static final int LOG_YZMB_DELETE = 1003;
     /* ==================================================================== */
+    /* ==================================================================== */
+    //传感器12XX
+    public static final int LOG_CGQ_ADD = 1201;
     
+    public static final int LOG_CGQ_UPDATE = 1202;
+    
+    public static final int LOG_CGQ_DELETE = 1203;
+    public static final int LOG_CGQ_ENABLEWARNING = 1203;
+    /* ==================================================================== */
+    //设备13XX
+    public static final int LOG_CJSB_ADD = 1301;
+    
+    public static final int LOG_CJSB_UPDATE = 1302;
+    
+    public static final int LOG_CJSB_DELETE = 1303;
+    
+    public static final int LOG_CJSB_STATUS = 1303;
+    /* ==================================================================== */
+    //通道14XX
+    public static final int LOG_TD_ADD = 1401;
+    
+    public static final int LOG_TD_UPDATE = 1402;
+    
+    public static final int LOG_TD_DELETE = 1403;
+    
+    public static final int LOG_TD_STATUS = 1403;
+    public static final int LOG_TD_BIND = 1404;
+    /* ==================================================================== */
     /* ==================================================================== */
     //组织绑定
     public static final int LOG_ZZBD_BIND =1101;

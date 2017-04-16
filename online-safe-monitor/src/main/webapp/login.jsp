@@ -33,15 +33,15 @@
    <div class="loginForm">
       <h2>用户登录</h2>
            <ul>
-             <li><input class="ipt" placeholder="用户名" type="text"  id="j_username" name="j_username"></li>
-             <li><input class="ipt" placeholder="密码" type="password" id="j_password" name="j_password" onkeyup="value=value.replace(/[^\w\.\*\@\#\%\^\&\(\)\?\/]/ig,'')"></li>
+             <li><input class="ipt" placeholder="用户名" type="text"  id="j_username" name="j_username"/></li>
+             <li><input class="ipt" placeholder="密码" type="password" id="j_password" name="j_password" onkeyup="value=value.replace(/[^\w\.\*\@\#\%\^\&\(\)\?\/]/ig,'')" /></li>
              <li><input class="ipt mr5" style="width:150px;" placeholder="验证码" id="checkCode" name="checkCode" type="text"/>
-             <img alt="点击更换验证码" title="点击更换验证码"  onclick="loadimage()" name="randImage" id="randImage" src="${ctx}common/code.jsp" height="33" width="88">
+             <img alt="点击更换验证码" title="点击更换验证码"  onclick="loadimage()" name="randImage" id="randImage" src="${ctx}common/code.jsp" height="33" width="88" />
              <a href="javascript:void(0);" onclick="loadimage();" class="gray_9"> 换一张</a></li>
-             <li class="operate"><label class="radio"><input id="cb_remember" type="checkbox" checked="checked">记住用户名和密码</label></li>
+             <li class="operate"><label class="radio"><input id="cb_remember" type="checkbox" checked="checked" />记住用户名和密码</label></li>
              <li id="errorLi" class="error" style="display:none;"><em></em><label id="perror" >用户名错误</label>&nbsp;</li>
            </ul>
-           <p class="login_btn"><input id="btnLogin" class="bt_logo" value="登 录" type="button"></p>
+           <p class="login_btn"><input id="btnLogin" class="bt_logo" value="登 录" type="button" /></p>
    </div>
    </form>
    <div class="copy">版权所有：${applicationScope.systemBasisSet.unitInformation}</div>

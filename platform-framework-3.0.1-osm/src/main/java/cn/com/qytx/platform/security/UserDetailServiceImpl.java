@@ -127,6 +127,9 @@ public class UserDetailServiceImpl  implements UserDetailsService {
                     String ip = getIpAddr(request);
                     user.setIp(ip);
                     
+                    //设置用户所在的部门名称
+                    GroupInfo groupInfo=groupService.findOne(user.getGroupId());
+                    user.setGroupName(groupInfo.getGroupName());
                     request.getSession().setAttribute(Constants.CURRENT_LOGIN_USER,user);//登录信息保存在Session
                     request.getSession().setAttribute(Constants.CURRENT_LOING_USERX,user);//登录信息保存在Session
                     userService.updateLastLoginTime(user.getUserId());

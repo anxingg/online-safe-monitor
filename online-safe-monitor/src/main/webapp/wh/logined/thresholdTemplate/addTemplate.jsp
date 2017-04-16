@@ -25,7 +25,7 @@
     </div>
 	<div class="formPage">
 	 <div class="formbg">
-	 	<div class="big_title"><span id="title"><em>新增</em><span/></div>	
+	 	<div class="big_title"><span id="title"><em>新增</em></span></div>	
         <div class="content_form">
                 <form id="form1">
                 	<h2 class="small_title">模板信息</h2>

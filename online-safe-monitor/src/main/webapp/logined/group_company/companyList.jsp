@@ -8,7 +8,7 @@
 	<!-- 清除分页cookie start -->
 	<script type="text/javascript" src="${ctx}js/common/jquery.cookie.js"></script>
 	<!-- 清除分页cookie end -->
-	<script type="text/javascript" src="${ctx}js/logined/company/companyList.js?version=${version}"></script>
+	<script type="text/javascript" src="${ctx}js/logined/group_company/companyList.js?version=${version}"></script>
 </head>
 <body>
 	<input type="hidden" id="groupId" value='${paramValues.groupId[0]}'/>

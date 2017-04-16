@@ -7,7 +7,6 @@ $(document).ready(function(){
 		dataType : 'html',
 		data : 'subSystem='+sys_name,
 		success : function(data) {
-			console.log("success:"+data);
 			$("#leftMenu").html(data);
 		}
 	});

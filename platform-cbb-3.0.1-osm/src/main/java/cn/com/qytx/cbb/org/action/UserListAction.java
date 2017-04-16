@@ -108,7 +108,8 @@ public class UserListAction extends BaseActionSupport {
         List<GroupInfo> groupList = new ArrayList<GroupInfo>();
         List<String> ugPowerList = new ArrayList<String>();
         if ("TXZL".equals(userVo.getProjectName())){
-        	  groupList=groupService.getGroupList(getLoginUser().getCompanyId(), GroupInfo.DEPT);
+        	  groupList=groupService.getGroupList(getLoginUser().getCompanyId(),
+        			  GroupInfo.DEPT,null,null);
         	  UserGroup ug = userGroupService.findByUserCompany(getLoginUser().getUserId(), getLoginUser().getCompanyId());
         	  if(ug!=null){
 	        	  if (StringUtils.isNotBlank(ug.getGroupPower())) {
@@ -399,7 +400,8 @@ public class UserListAction extends BaseActionSupport {
                                                                                             // 文件名问题
             outp = response.getOutputStream();
             
-            List<GroupInfo> allGroupList = groupService.getGroupList(this.getLoginUser().getCompanyId(), 1);
+            List<GroupInfo> allGroupList = groupService.getGroupList(this.getLoginUser().getCompanyId(),
+            		(Integer)1,null,null);
             Map<String,String> groupIdToName=new HashMap<String, String>();
             Map<String,String> groupIdToPath=new HashMap<String, String>();
             if(allGroupList!=null&&allGroupList.size()>0){
@@ -438,7 +440,9 @@ public class UserListAction extends BaseActionSupport {
                                                                                             // 文件名问题
             outp = response.getOutputStream();
 
-            List<GroupInfo> allGroupList = groupService.getGroupList(this.getLoginUser().getCompanyId(), 1);
+            List<GroupInfo> allGroupList = 
+            		groupService.getGroupList(this.getLoginUser().getCompanyId(), 
+            				(Integer)1,null,null);
             Map<String,String> groupIdToName=new HashMap<String, String>();
             Map<String,String> groupIdToPath=new HashMap<String, String>();
             if(allGroupList!=null&&allGroupList.size()>0){

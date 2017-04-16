@@ -10,9 +10,7 @@
 <title>企业信息</title>
 </head>
 <body>
-<div class="bread-line">
-  <label>当前位置：</label><a href="#">首页</a>&gt;&nbsp;<a href="#">企业信息</a>
-</div>
+
 <input type="hidden" id="groupId" value='${paramValues.groupId[0]}'/>
    <div class="formPage">
    <div class="formbg">

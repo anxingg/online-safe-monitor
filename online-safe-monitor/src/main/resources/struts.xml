@@ -70,5 +70,14 @@
     <include file="struts/wh/login/struts_menu_wh.xml"/>
     <include file="struts/wh/company/struts_company.xml"/>
     <include file="struts/wh/thresholdtemplate/struts_thresholdtemplate.xml"/>
+	<include file="struts/wh/dangersource/struts_dangersource.xml"/>
+
+	<include file="struts/wh/earlyWarning/struts_earlyWarning.xml"/>
+
+	
+
+	<include file="struts/wh/collectsensor/struts_collectsensor.xml"/>
+	<include file="struts/wh/collectdevice/struts_collectdevice.xml"/>
+	<include file="struts/wh/devicesensorbind/struts_devicesensorbind.xml"/>
 
 </struts>

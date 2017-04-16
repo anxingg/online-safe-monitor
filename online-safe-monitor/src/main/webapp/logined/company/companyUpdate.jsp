@@ -23,9 +23,6 @@
 	<!-- 上级组织  end-->
 </head>
 <body>
-<div class="bread-line">
-  <label>当前位置：</label><a href="#">首页</a>&gt;&nbsp;<a href="#">企业信息设置</a>
-</div>
 <input type="hidden" id="groupId" value='${paramValues.groupId[0]}'/>
 <input type="hidden" id="parentId" value='${paramValues.parentId[0]}'/>
 <input type="hidden" id="action" value='${paramValues.action[0]}'/>

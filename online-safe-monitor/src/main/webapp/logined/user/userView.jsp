@@ -12,9 +12,15 @@
 <link href="${ctx}flat/css/reset.css" rel="stylesheet" type="text/css" />
 <link href="${ctx}flat/css/main.css" rel="stylesheet" type="text/css" />
 <link href="${ctx }flat/plugins/form/skins/form_default.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+	.formPage  {
+		width: 900px;
+	}
+</style>
 <script type="text/javascript">
 	var basePath = "${ctx}";
 </script>
+
 </head>
 <body>
  <form action="#" id="userForm">

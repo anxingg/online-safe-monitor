@@ -494,7 +494,7 @@ public class BaseDao<T,ID extends Serializable> extends AbstractBaseDao<T,ID> {
     	 applySQLQueryParameter(query,values);
     	 return query.unwrap(SQLQuery.class).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP).list();
     }
-    private Integer totalCountBySql(String sql,Object... values){
+    public Integer totalCountBySql(String sql,Object... values){
     	String driverName="";
     	try {
 	    	SessionImpl sessionImpl = (SessionImpl)entityManager.getDelegate();

@@ -439,40 +439,6 @@ a {
 	background-color: #03817d;
 }
 
-.pretty {
-	width: 98%;
-	table-layout: fixed;
-	border: 1px solid #e1e1e1;
-	border-bottom: none;
-}
-
-.pretty thead {
-	background: #e9ebeb;
-}
-
-.pretty thead tr th {
-	height: 35px;
-	line-height: 35px;
-	text-align: center;
-	border-right: 1px solid #E0E0E0;
-	border-bottom: 1px solid #E0E0E0;
-	border-collapse: collapse;
-	color: #0c0d0d;
-	font-size: 14px;
-	font-weight: normal;
-}
-
-.pretty tbody td {
-	height: 35px;
-	line-height: 35px;
-	color: #0c0d0d;
-	text-align: center;
-	color: #0c0d0d;
-	font-size: 14px;
-	border-right: #ededed 1px solid;
-	border-bottom: #ebebeb 1px solid;
-	word-break: break-all;
-}
 
 .state_ena {
 	color: #78b34b;
@@ -1224,3 +1190,7 @@ a {
     cursor: pointer;
     border-radius: 5px;
 }
+
+.mainpage{padding-right:205px;position:relative;z-index:0;height:100%;}
+.mainpage .leftMenu{ width:200px; position:absolute; top:0px; right:5px; z-index:88}
+.iframeresize{width:100%;}

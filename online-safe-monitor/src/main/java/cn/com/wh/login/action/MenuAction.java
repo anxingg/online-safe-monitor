@@ -12,6 +12,7 @@ import cn.com.qytx.platform.base.action.BaseActionSupport;
 import cn.com.qytx.platform.org.domain.ModuleInfo;
 import cn.com.qytx.platform.session.Constants;
 import cn.com.wh.WHConstant;
+import cn.com.wh.support.SessionSupport;
 /**
  * @ClassName:     MenuAction.java
  * @Description:   TODO(用一句话描述该文件做什么) 
@@ -51,6 +52,16 @@ public class MenuAction extends BaseActionSupport{
 		for(ModuleInfo moduleInfo : moduleList){
 			if((moduleInfo.getModuleLevel()==1) && 
 					(WHConstant.SYS_NAME.equals(moduleInfo.getSysName()))){
+				if(moduleInfo.getModuleCode().equals("269")){//环保在线
+					String url;
+					if(moduleInfo.getUrl().indexOf("?")==-1){
+						url=moduleInfo.getUrl()+"?_clientType=wap&token="+((SessionSupport)this.getSessionSupport()).getSSOToken();
+					}
+					else{
+						url=moduleInfo.getUrl()+"&_clientType=wap&token="+((SessionSupport)this.getSessionSupport()).getSSOToken();
+					}
+					moduleInfo.setUrl(url);
+				}
 				showModuleList.add(moduleInfo);
 			}
 		}

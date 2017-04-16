@@ -74,7 +74,8 @@ public class OnUserSelectAction extends BaseActionSupport {
 				+ path + "/";
 			List onlineUserList = null;
 			String haveP = "";
-			List<GroupInfo> groupList = groupService.getGroupList(getLoginUser().getCompanyId(), 1);
+			List<GroupInfo> groupList = 
+					groupService.getGroupList(getLoginUser().getCompanyId(), (Integer)1,null,null);
 			if (groupList != null) {
 				String ids = "";
 				// 遍历部门
